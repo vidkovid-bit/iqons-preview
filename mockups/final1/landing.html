@@ -1,0 +1,557 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<!-- every link leaves the WHOLE window: the landing also lies in an iframe over the other pages (landing-merge), and a click before that frame is wired must never navigate the frame itself (22 Sep) -->
+<base target="_top">
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="theme-color" content="#000000">
+<title>IQONS — концептуальный бутик, Челябинск</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=PT+Serif:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+/* ------------------------------------------------------------------
+   FONT SLOT — see ../../assets/fonts/README.md
+   ------------------------------------------------------------------ */
+@font-face{font-family:'IQONS Title';font-weight:400;font-style:normal;font-display:swap;
+  src:url('../../assets/fonts/title-regular.woff2') format('woff2'),url('../../assets/fonts/title-regular.woff') format('woff'),
+      url('../../assets/fonts/title-regular.otf') format('opentype'),url('../../assets/fonts/title-regular.ttf') format('truetype');}
+@font-face{font-family:'IQONS Title';font-weight:700;font-style:normal;font-display:swap;
+  src:url('../../assets/fonts/title-bold.woff2') format('woff2'),url('../../assets/fonts/title-bold.woff') format('woff'),
+      url('../../assets/fonts/title-bold.otf') format('opentype'),url('../../assets/fonts/title-bold.ttf') format('truetype');}
+@font-face{font-family:'IQONS Mid';font-weight:400;font-style:normal;font-display:swap;
+  src:url('../../assets/fonts/mid-regular.woff2') format('woff2'),url('../../assets/fonts/mid-regular.woff') format('woff'),
+      url('../../assets/fonts/mid-regular.otf') format('opentype'),url('../../assets/fonts/mid-regular.ttf') format('truetype');}
+@font-face{font-family:'IQONS Mid';font-weight:700;font-style:normal;font-display:swap;
+  src:url('../../assets/fonts/mid-bold.woff2') format('woff2'),url('../../assets/fonts/mid-bold.woff') format('woff'),
+      url('../../assets/fonts/mid-bold.otf') format('opentype'),url('../../assets/fonts/mid-bold.ttf') format('truetype');}
+@font-face{font-family:'IQONS Small';font-weight:400;font-style:normal;font-display:swap;
+  src:url('../../assets/fonts/small-regular.woff2') format('woff2'),url('../../assets/fonts/small-regular.woff') format('woff'),
+      url('../../assets/fonts/small-regular.otf') format('opentype'),url('../../assets/fonts/small-regular.ttf') format('truetype');}
+
+/* ============================================================
+   IQONS +  ·  Template 03 — Product page
+   Cross variant: TANEK  (Best Swashed — тонкий)
+
+/* ============================================================
+   IQONS +  ·  Template 02 — Landing page
+   Cross variant: TANEK  (Best Swashed — тонкий)
+   Layout follows the proposal: centred wordmark, one tracked
+   line, four destinations. Differences: the real logo instead
+   of the typed "IQONS +", the cross lattice from the shop, and
+   the agreed typefaces.
+   ============================================================ */
+:root{
+  --paper:#000000; --ink:#FFFFFF;
+  --ink-55:#FFFFFF; --ink-30:#FFFFFF; --ink-12:#FFFFFF;
+  --t1:clamp(20px,1.8125vw,27.5px);   /* 16 Sep: Title face +25% (was 16/1.45vw/22) */ --t2:clamp(13.75px,1.0625vw,15px);  /* 16 Sep: Title face +25% (was 11/.85vw/12) */
+  --t1m:clamp(16px,1.45vw,22px);        /* the Mid face at the OLD Т1 size — hybrids only */
+  --t2m:clamp(11px,.85vw,12px);         /* the Mid face at the OLD Т2 size — hybrids only */ --t3:clamp(9.5px,.8vw,10.5px);
+  --tr1:.02em; --tr2:-.005em; --tr2p:.01em; --tr3:-.010em;
+  /* EXPERIMENT 23.08.2026 — tiers shifted up one face:
+     Т1 and Т2 both set in Mephisto, Т3 in Century. Corbel is left
+     declared but unused, so this reverts by editing these three lines. */
+  --font-t1:'IQONS Title',"PT Serif",Georgia,serif;
+  --font-t2:'IQONS Title',"PT Serif",Georgia,serif;
+  --font-t3:'IQONS Mid',"PT Serif",Georgia,serif;
+  --margin:clamp(14px,2vw,38px);
+  --cell:60px; --lat-x:center; --lat-y:center;
+  --ease:cubic-bezier(.22,.61,.36,1);
+}
+*,*::before,*::after{box-sizing:border-box}
+html{font-synthesis-weight:none; font-synthesis-style:none;
+     -webkit-text-size-adjust:100%}
+html,body{margin:0;padding:0}
+/* a single still screen: no scroll, no motion. Dynamics arrive with the ASCII layer. */
+html,body{height:100%; overflow:hidden}
+body{background:var(--paper); color:var(--ink); font-size:var(--t2); font-family:var(--font-t2);
+     line-height:1.4; -webkit-font-smoothing:antialiased}
+
+/* lattice sits behind on the landing, as on the shop grid */
+.lattice{position:fixed; inset:0; z-index:0; pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%2760%27%20height%3D%2760%27%20viewBox%3D%270%200%2060%2060%27%3E%3Cg%20transform%3D%27translate%2830%2C30%29%20scale%280.676%29%20translate%28-12%2C-12%29%27%20fill%3D%27none%27%20stroke%3D%27%23ffffff%27%20stroke-opacity%3D%271%27%3E%3Cpath%20d%3D%27M12%203.6C12.15%208.4%2012.15%2015.6%2012%2020.4%27%20stroke-width%3D%27.75%27%20stroke-linecap%3D%27round%27%2F%3E%3Cpath%20d%3D%27M3.6%2012C8.4%2011.85%2015.6%2011.85%2020.4%2012%27%20stroke-width%3D%27.75%27%20stroke-linecap%3D%27round%27%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E"); background-size:var(--cell) var(--cell);
+  background-position:var(--lat-x) var(--lat-y);}
+
+/* ---------- hero ---------- */
+.hero{position:relative; z-index:10; height:100svh; display:flex; flex-direction:column;
+      align-items:center; justify-content:center; padding:var(--margin); text-align:center;
+      transform:translateY(calc(-1 * var(--shift, 0px)))}
+.mark{width:min(18vw,236.25px);   /* 16 Sep: logo +25% (was 14.4vw/189px) */ height:auto; display:block; margin-bottom:38px;
+      filter:invert(1)}   /* LOGO.svg carries a fixed dark fill */
+.mark-text{font-family:var(--font-t1); font-size:clamp(47.5px,7.5vw,105px);   /* 16 Sep: +25% with the logo */ letter-spacing:var(--tr1);
+           display:none; margin:0 0 54px}
+.hero.no-logo .mark{display:none}
+.hero.no-logo .mark-text{display:block}
+
+
+.dest{display:flex; gap:clamp(22px,4vw,64px); flex-wrap:wrap; justify-content:center}
+.dest a{font-size:var(--t2); font-family:var(--font-t2); letter-spacing:calc(var(--tr2) + .16em);
+  text-transform:uppercase; color:var(--ink); text-decoration:none; padding-bottom:1px;
+  border-bottom:1px solid transparent; transition:border-color .2s var(--ease)}
+.dest a:hover{border-bottom-color:var(--ink)}
+
+
+
+@media (max-width:900px){ :root{--margin:20px} .mark{width:42.5vw}
+  footer .rights{margin-left:0} }
+@media (prefers-reduced-motion:reduce){ html{scroll-behavior:auto} *{transition-duration:.01ms !important} }
+
+/* ---------- TEST: ASCII motif on a white plate, type keylined ----------
+   The page is white ink on black, so a black keyline round the letterforms is
+   invisible against the paper and does nothing — until type crosses the white
+   plate the motif sits on, where without it white-on-white would disappear.
+   It is drawn with eight 1px text-shadows rather than -webkit-text-stroke:
+   the stroke property centres on the glyph outline and eats into the letter,
+   which at Т2 sizes closes the counters. The logo is a white image, so it gets
+   the same edge as four drop-shadows chained after the invert.
+
+   The motif is white glyphs on nothing: the SVG carries no background rect, so
+   with the plate's fill removed the black paper and its crosses read straight
+   through the letter gaps. The white comes from a recoloured copy of the file
+   rather than a CSS filter — the master's ink is baked at #16150F and
+   for-mockups/INDEX.md rules out filtering it — so the glyph edges stay as cut.
+   z-index 5: over the lattice at 0, under the hero at 10, so the wordmark and
+   navigation still pass in front of it. */
+:root{
+  --edge:#000;
+  /* KRIZ TIRNICA — 1800x3672, a tall motif, so it is sized by HEIGHT and not
+     by width: it runs from the bottom edge of the screen to 1cm short of the
+     top. 4.4vh is that centimetre on a 1512x860 window and scales with the
+     display, rather than freezing at CSS's fixed 37.8px centimetre. Width
+     follows from the height at the master's ratio, so nothing is distorted. */
+  --asciiTopGap:4.4vh;
+  /* Scaled past 1 the motif is taller than the space it has. The top gap is
+     what must not move, so the box is anchored by its TOP edge and the extra
+     height runs off the bottom of the screen. body is overflow:hidden, so it
+     clips without a scrollbar. */
+  --asciiScale:1;
+  --asciiH:calc(var(--asciiScale) * (100svh - var(--asciiTopGap)));
+  --asciiInset:7.5vw;
+}
+.mark-text, .dest a{
+  text-shadow:
+    4px 0px 0 var(--edge),
+    3.5px 2px 0 var(--edge),
+    2px 3.5px 0 var(--edge),
+    0px 4px 0 var(--edge),
+    -2px 3.5px 0 var(--edge),
+    -3.5px 2px 0 var(--edge),
+    -4px 0px 0 var(--edge),
+    -3.5px -2px 0 var(--edge),
+    -2px -3.5px 0 var(--edge),
+    0px -4px 0 var(--edge),
+    2px -3.5px 0 var(--edge),
+    3.5px -2px 0 var(--edge),
+    2px 0px 0 var(--edge),
+    0px 2px 0 var(--edge),
+    -2px 0px 0 var(--edge),
+    0px -2px 0 var(--edge);
+}
+.mark{filter:invert(1)}   /* LOGO.svg carries a fixed dark fill */
+.ascii-plate{
+  position:fixed; z-index:5; pointer-events:none;
+  /* Left side, held by its TOP edge at the fixed gap, and stepped 4cm in off
+     the left edge so it sits that much closer to the centred wordmark and
+     navigation. 2.5vw is a centimetre on a 1512px-wide window and scales with
+     the display. */
+  left:var(--asciiInset); top:var(--asciiTopGap);
+  height:var(--asciiH); width:auto;
+  /* No fill: the crosses read through the letter gaps, unbroken across the
+     whole screen. z-index 5 keeps it over the lattice at 0 and under the hero
+     at 10, so the wordmark and navigation still pass in front of it. */
+}
+.ascii-plate img{display:block; height:100%; width:auto}
+</style>
+</head>
+<body>
+<!-- Макет 02 — главная страница. Вариант крестика: TANEK (Best Swashed — тонкий).
+     Одна неподвижная страница: без прокрутки, без футера, без анимации.
+     Динамика добавляется вместе с ASCII-слоем.
+     Навигация — из утверждённого списка (Магазин / Коллекции / Публикации / О нас).
+     Шрифт навигации: Т2. -->
+
+<div class="lattice" aria-hidden="true"></div>
+
+<div class="ascii-plate" aria-hidden="true">
+  <img src="../../assets/ascii/kriz-tirnica-white.svg" alt=""
+       width="1575" height="3216">
+</div>
+
+<section class="hero" id="hero">
+  <img class="mark" src="../../assets/logo/LOGO.svg" alt="IQONS">
+  <h1 class="mark-text">IQONS</h1>
+  <nav class="dest">
+    <a href="shop.html">Магазин</a>
+    <a href="../drafts/collections.html?v=202609242027">Коллекции</a>
+    <a href="../drafts/editorial.html?v=202609242027">Публикации</a>
+    <a href="../drafts/about.html?v=202609242027">О нас</a>
+  </nav>
+</section>
+
+
+
+<script>
+/* logo falls back to the typed wordmark if the file is missing */
+(function(){
+  const hero=document.getElementById('hero'), img=hero.querySelector('.mark');
+  const fail=()=>hero.classList.add('no-logo');
+  if(img.complete && img.naturalWidth===0) fail();
+  img.addEventListener('error',fail);
+})();
+
+const root=document.documentElement;
+/* One lattice for the whole site: a fixed 60px cell, phase centred on the
+   viewport. Each page used to register the crosses to its own content — the
+   logo on the landing, the .info column on the product page, the product
+   gutters on the shop grid — so the cell size AND the phase differed on every
+   page, and the shop's changed again with every variant that altered its
+   column pitch. Only colour and stacking differ per page now; the geometry is
+   identical everywhere. */
+const CELL = 60;
+function latticeOrigin(){
+  return { cell:CELL,
+           x:((window.innerWidth  - CELL)/2) % CELL,
+           y:((window.innerHeight - CELL)/2) % CELL };
+}
+
+function alignLattice(){
+  const hero=document.getElementById('hero');
+  /* Measure unshifted. The lattice registers to the logo, so if the block were
+     already displaced the crosses would follow it and the offset below would
+     always come out zero. */
+  hero.style.setProperty('--shift','0px');
+  const o=latticeOrigin();
+  const cell=o.cell;
+  root.style.setProperty('--cell', cell+'px');
+  root.style.setProperty('--lat-x', o.x.toFixed(3)+'px');
+  root.style.setProperty('--lat-y', o.y.toFixed(3)+'px');
+
+  /* Cross centres in a column fall on m.top + n*cell, so the midpoint between
+     two of them is half a cell lower. The block — logo and nav together — is
+     moved so the NAV LETTERS sit centred in that gap.
+
+     The anchor is the glyphs' own middle, not the link's box: the box carries
+     line-height leading, 3px of padding and a border, all of which sit below
+     the letters and would drag the visual centre downwards. Canvas reports
+     the true inked extent, so cap-top and baseline are measured rather than
+     inferred from the layout box. */
+  const a=document.querySelector('.dest a'), st=getComputedStyle(a);
+  const rg=document.createRange(); rg.selectNodeContents(a);
+  const tr=rg.getBoundingClientRect();          // font ascent+descent box
+  const cx=alignLattice._cx || (alignLattice._cx=document.createElement('canvas').getContext('2d'));
+  cx.font=`${st.fontStyle} ${st.fontWeight} ${st.fontSize} ${st.fontFamily}`;
+  const baseline=tr.top + cx.measureText('\u041D').fontBoundingBoxAscent;
+  /* Centre on the cap band — cap-top to baseline — not the full inked box.
+     Ц and Щ carry a descending tail, so КОЛЛЕКЦИИ and ПУБЛИКАЦИИ would
+     otherwise centre ~1px lower than МАГАЗИН and the row would not sit on one
+     line. Н is flat-topped and sits on the baseline, so it gives the cap
+     height cleanly, and every label shares it. */
+  const capH=cx.measureText('\u041D').actualBoundingBoxAscent;
+  const mid=baseline - capH/2;
+
+  const centre0=o.y + cell/2;                   // first cross centre down the column
+  const k=Math.round((mid - centre0 - cell/2)/cell);
+  const target=centre0 + cell/2 + k*cell;       // nearest gutter line
+  hero.style.setProperty('--shift', (mid-target).toFixed(3)+'px');
+}
+alignLattice(); addEventListener('resize',alignLattice); addEventListener('load',alignLattice);
+if(document.fonts) document.fonts.ready.then(alignLattice);   // metrics need the real face
+</script>
+<!-- lattice-vector:start (spliced by _src/lattice_vector.py — do not hand-edit) -->
+<style>
+.lattice{overflow:hidden}
+.latv{position:absolute; display:block; pointer-events:none;
+  width:calc(100% + 2*var(--cell,60px)); height:calc(100% + 2*var(--cell,60px))}
+/* the footer's copy stays registered to the viewport: fixed, and clipped to the footer */
+.latclip{position:absolute; inset:0; z-index:-1; pointer-events:none; clip-path:inset(0)}
+.latclip .latv{position:fixed;
+  width:calc(100vw + 2*var(--cell,60px));
+  height:calc(100vh + 2*var(--cell,60px)); height:calc(100lvh + 2*var(--cell,60px))}
+</style>
+<script>
+/* The lattice as a live vector, snapped to device pixels. See _src/lattice_vector.py. */
+(function(){
+  const NS='http://www.w3.org/2000/svg', root=document.documentElement;
+  const mk=n=>document.createElementNS(NS,n);
+  const layers=[]; let seq=0;
+
+  function tileOf(el){
+    const m=/url\((["']?)(data:image\/svg\+xml[^"')]*)\1\)/.exec(getComputedStyle(el).backgroundImage);
+    if(!m) return null;
+    const cut=m[2].indexOf(','), head=m[2].slice(0,cut); let src=m[2].slice(cut+1);
+    try{ src=/;base64/i.test(head)?atob(src):decodeURIComponent(src); }catch(_){ return null; }
+    const doc=new DOMParser().parseFromString(src,'image/svg+xml').documentElement;
+    return doc&&doc.nodeName.toLowerCase()==='svg'?doc:null;
+  }
+
+  function build(host, inFooter){
+    const tile=tileOf(host); if(!tile) return;
+    const cell=parseFloat(getComputedStyle(root).getPropertyValue('--cell'))||60;
+    const inner=document.importNode(tile,true);
+    inner.setAttribute('width',cell); inner.setAttribute('height',cell);
+    if(!inner.getAttribute('viewBox')) inner.setAttribute('viewBox','0 0 '+(parseFloat(tile.getAttribute('width'))||cell)+' '+(parseFloat(tile.getAttribute('height'))||cell));
+
+    /* measure every stroked shape once, on screen: its width in CSS px is its
+       stroke-width times the scale of everything above it */
+    const probe=mk('svg'); probe.setAttribute('width',cell); probe.setAttribute('height',cell);
+    probe.style.cssText='position:absolute;left:0;top:0;visibility:hidden;pointer-events:none';
+    probe.appendChild(inner); document.body.appendChild(probe);
+    const strokes=[];
+    inner.querySelectorAll('path,line,polyline,polygon,rect,circle,ellipse').forEach(s=>{
+      const cs=getComputedStyle(s), sw=parseFloat(cs.strokeWidth);
+      if(cs.stroke==='none'||!(sw>0)||!s.getScreenCTM) return;
+      const k=s.getScreenCTM(), scale=Math.sqrt(Math.abs(k.a*k.d-k.b*k.c));
+      if(scale>0) strokes.push({el:s, sw, scale});
+    });
+    probe.remove();
+
+    const id='latv-'+(seq++);
+    const svg=mk('svg'); svg.setAttribute('class','latv'); svg.setAttribute('aria-hidden','true'); svg.setAttribute('focusable','false');
+    const defs=mk('defs'), pat=mk('pattern');
+    pat.setAttribute('id',id); pat.setAttribute('patternUnits','userSpaceOnUse');
+    pat.setAttribute('width',cell); pat.setAttribute('height',cell);
+    pat.appendChild(inner); defs.appendChild(pat);
+    const fill=mk('rect'); fill.setAttribute('width','100%'); fill.setAttribute('height','100%'); fill.setAttribute('fill','url(#'+id+')');
+    svg.append(defs, fill);
+
+    if(inFooter){
+      /* z-index:-1 must stay inside the footer: over its paper, under its type */
+      if(getComputedStyle(host).position==='static') host.style.position='relative';
+      if(getComputedStyle(host).zIndex==='auto') host.style.isolation='isolate';
+      const clip=document.createElement('div'); clip.className='latclip'; clip.setAttribute('aria-hidden','true');
+      clip.appendChild(svg); host.insertBefore(clip, host.firstChild);
+    } else host.appendChild(svg);
+    host.style.backgroundImage='none';
+    layers.push({svg, inner, cell, strokes});
+  }
+
+  function place(){
+    const dpr=window.devicePixelRatio||1, cs=getComputedStyle(root);
+    const lx=parseFloat(cs.getPropertyValue('--lat-x'))||0, ly=parseFloat(cs.getPropertyValue('--lat-y'))||0;
+    layers.forEach(L=>{
+      /* whole device pixels, never under one */
+      let odd=false;
+      L.strokes.forEach((s,i)=>{
+        const dev=Math.max(1, Math.round(s.sw*s.scale*dpr));
+        s.el.style.strokeWidth=(dev/dpr/s.scale).toFixed(4);
+        if(i===0) odd=dev%2===1;
+      });
+      /* the motif's centre is the cell's centre: an odd stroke wants it on a
+         pixel's middle, an even one (or a filled heart) on a pixel's edge */
+      const snap=v=>{ const c=(v+L.cell/2)*dpr; return (odd?Math.floor(c)+.5:Math.round(c))/dpr-L.cell/2; };
+      /* the svg itself sits on WHOLE device pixels — a browser may cache the
+         pattern tile as a bitmap, and a bitmap placed at a fraction is
+         resampled soft again — and the remainder (under one device pixel)
+         moves the motif inside its tile instead */
+      const sx=snap(lx), sy=snap(ly), bx=Math.floor(sx*dpr)/dpr, by=Math.floor(sy*dpr)/dpr;
+      L.svg.style.left=(bx-L.cell).toFixed(4)+'px';
+      L.svg.style.top =(by-L.cell).toFixed(4)+'px';
+      L.inner.setAttribute('x',(sx-bx).toFixed(4)); L.inner.setAttribute('y',(sy-by).toFixed(4));
+    });
+  }
+
+  function init(){
+    const lat=document.querySelector('.lattice'); if(lat) build(lat,false);
+    document.querySelectorAll('footer').forEach(f=>build(f,true));
+    if(!layers.length) return;
+    place();
+    /* registered after the page's own alignLattice(), so --lat-x/y are already new */
+    addEventListener('resize',place); addEventListener('load',place);
+    (function watch(){ matchMedia('(resolution: '+(window.devicePixelRatio||1)+'dppx)')
+      .addEventListener('change',()=>{ place(); watch(); },{once:true}); })();
+  }
+  init();
+})();
+</script>
+<!-- lattice-vector:end -->
+<!-- mobile:start (spliced by _src/mobile.py — do not hand-edit) -->
+<style>
+@media (max-width:900px){
+  a, button{ -webkit-tap-highlight-color:transparent }
+  .ascii-fx, .ascii-gl, .ascii-st{ display:block }
+  /* THE FLOOR — see SHARED. The landing does not scroll (html,body overflow
+     hidden), so its layers need no sticky: absolute from the top of the
+     page, past the layout viewport's end to the screen's bottom edge. Inside
+     the landing-merge frame the frame itself is already --floor tall (the
+     parent page's rule), so there the bar's zone is NOT added again:
+     LANDING_JS marks the framed document. */
+  :root{ --bar:0px; --floor:max(100lvh, calc(var(--inT,0px) + 100svh + var(--inB,var(--bar)))) }
+  @supports (-webkit-touch-callout:none){ :root{ --bar:89px } }
+  html.framed{ --bar:0px }
+  /* Opened on its own (contents.html, a typed address): the same runway as
+     every other page (SHARED, THE RUNWAY AND THE BLEED) but with no spacer —
+     the composition IS the screen, --floor tall from the document's top, so
+     the page is scrolled to --inT and held there (LANDING_JS): the top strip
+     shows its first --inT px, the bar its last --inB. Its own html,body
+     {height:100%; overflow:hidden} would forbid that scroll. */
+  html:not(.framed){ height:auto; overflow:visible }
+  /* ---------- the crosses are STILL here too (23 Sep, the user) ----------
+     Fixed to the screen, bled two WHOLE cells past every edge (the pattern
+     repeats every cell, so every cross stays where it was and
+     lattice_vector.py's phase still lands on it); a fixed box past the
+     viewport adds no scroll. The body is the floor tall, so the runway
+     scroll (LANDING_JS) still has its document. */
+  body{ height:var(--floor); overflow:visible }
+  /* the one still layer, exactly as in SHARED: half wide so Safari never reads
+     the box for its chrome's colour, bled two whole cells top and bottom so it
+     keeps covering the window while the bar grows and shrinks; the phase is
+     pinned to the screen by LATTICE_STILL_JS */
+  .lattice{ position:fixed; top:calc(-2 * var(--cell,60px)); left:0; right:auto; bottom:auto;
+            width:50%; height:calc(100lvh + 4 * var(--cell,60px)); overflow:visible }
+  .lattice .latv{ width:calc(100vw + 2 * var(--cell,60px)); height:calc(100lvh + 6 * var(--cell,60px)) }
+}
+
+@media (max-width:900px){
+  .hero{ padding:var(--margin) }
+  .mark{ width:min(46vw,200px); margin-bottom:30px }
+  .mark-text{ font-size:clamp(52px,15.6vw,94px); margin-bottom:34px }   /* 23 Sep: +30%, the user */
+
+  /* THE FOUR DESTINATIONS STAY ON ONE ROW.
+     МАГАЗИН КОЛЛЕКЦИИ ПУБЛИКАЦИИ О НАС is 35 Russian capitals and Russian
+     capitals are wide: at the desktop's .16em tracking the row needs about
+     640px and it broke into two lines on every phone. Tracking down to .045em
+     and a size that follows the width is what buys it back — 360px is the
+     narrowest screen the row is cut for. */
+  .dest{ flex-wrap:nowrap; justify-content:center; width:100%;
+         gap:clamp(7px,2.4vw,26px) }
+  .dest a{ font-size:clamp(14.3px,4.29vw,25.35px);   /* 23 Sep: +30% twice, the user (the wordmark stays) */
+           letter-spacing:.045em; white-space:nowrap; padding-bottom:0 }
+
+  /* the keyline behind the type is cut to match: the desktop's 4px ring is a
+     blob at 9px and closes the counters */
+  .dest a{
+    text-shadow:
+       2px 0 0 var(--edge), 1.7px 1px 0 var(--edge), 1px 1.7px 0 var(--edge),
+       0 2px 0 var(--edge), -1px 1.7px 0 var(--edge), -1.7px 1px 0 var(--edge),
+      -2px 0 0 var(--edge), -1.7px -1px 0 var(--edge), -1px -1.7px 0 var(--edge),
+       0 -2px 0 var(--edge), 1px -1.7px 0 var(--edge), 1.7px -1px 0 var(--edge);
+  }
+  /* KRIZ TIRNICA, as in the user's phone comp of 21 Sep 2026 (final1__landing.png,
+     see THE PHONE in _src/ascii_place.py): full height after all — its letters run
+     from 47px under the top of the screen down to the floor, pinned to the LEFT
+     edge with 4% of its width past it (the comp's cut; pinned to the edge, not the
+     centre line, so other phone widths keep the same cut — 22 Sep, the user). It is
+     the phone cut (120 columns = the site's 3.3px letter at 390x844; the desktop
+     file is 105), swapped in with `content`. 1.0133 = the box over its letters'
+     height (ink starts 1.3% down the file), .4902 = width/height. */
+  /* Its floor is the bottom of the SCREEN, under Safari's bar (22 Sep, the user,
+     twice: 100lvh still ended on the bar's top edge, see THE FLOOR in SHARED):
+     held from the top at --floor minus its height, so its letters start 47px
+     under the top of the screen as before and reach the screen's bottom edge.
+     Absolute, not fixed — a fixed box is cut on the bar; and the body is the
+     floor tall with its own overflow:hidden lifted (SHARED_NO_CHROME) so the
+     body does not cut it either: html's overflow:hidden keeps the page still. */
+  .ascii-plate{ position:absolute; --h:calc((var(--floor) - 47px) * 1.0133); left:calc(var(--h) * -.0200);
+                top:calc(var(--floor) - var(--h)); bottom:auto; height:var(--h); width:calc(var(--h) * .4902) }
+  .ascii-plate img{ width:100%; height:100%; content:url(../../assets/ascii/m/kriz-tirnica-white.svg) }
+}
+
+@media (max-width:900px){ .ascii-fx, .ascii-gl, .ascii-st, .ascii-plate{ display:none } }
+</style>
+
+<script>
+/* Inside the landing-merge frame the frame is the screen already (its box is
+   --floor tall in the page that holds it), so the bar's zone must not be added
+   a second time: see SHARED_NO_CHROME. Set before the first paint — this
+   script is in the body, the plate's size follows from the class. */
+(function(){ try{ if(window.top!==window) document.documentElement.classList.add('framed'); }catch(_){ document.documentElement.classList.add('framed'); } })();
+/* On its own, on an iPhone: the runway (see SHARED_NO_CHROME) — --inT from the
+   iPhone table, --inB measured, the page scrolled to --inT and held there. */
+(function(){
+  var rt=document.documentElement;
+  if(rt.classList.contains('framed') || !matchMedia('(max-width:900px)').matches) return;
+  /* THE HOME SCREEN (see _src/mobile.py): iOS's standalone web-app shell gives
+     the page the whole screen, so there is no runway and no bleed — --inT and
+     --inB are 0 and --floor is the window. Safari never takes this branch. */
+  if(navigator.standalone === true){
+    rt.style.setProperty('--inT','0px'); rt.style.setProperty('--inB','0px');
+    var fl=function(){ rt.style.setProperty('--floor', innerHeight+'px'); };
+    fl(); addEventListener('load', fl); addEventListener('resize', fl);
+    return;
+  }
+  if(!((window.CSS && CSS.supports('-webkit-touch-callout','none')) || /[?&]runway/.test(location.search))) return;
+  var W=Math.min(screen.width,screen.height), H=Math.max(screen.width,screen.height);
+  var TOP={'402x874':62,'440x956':62,'420x912':62,'393x852':59,'430x932':59,
+           '390x844':47,'428x926':47,'375x812':44,'414x896':44,
+           '375x667':20,'414x736':20,'320x568':20};
+  var T=TOP[W+'x'+H]; if(T==null) T=H>=874?62:H>=852?59:H>=812?47:20;
+  var m=document.createElement('div'); m.style.cssText='position:absolute;visibility:hidden;height:100svh;pointer-events:none';
+  document.body.appendChild(m); var S=m.getBoundingClientRect().height||innerHeight; m.remove();
+  var B=Math.max(0, Math.round(H-S-T));
+  rt.style.setProperty('--inT',T+'px'); rt.style.setProperty('--inB',B+'px');
+  var touching=false;
+  function hold(){ if(!touching && Math.abs(window.scrollY-T)>0.5) window.scrollTo(0,T); }
+  addEventListener('touchstart', function(){ touching=true; }, {passive:true});
+  addEventListener('touchmove', function(e){ if(e.cancelable && e.touches.length===1) e.preventDefault(); }, {passive:false});
+  function up(){ touching=false; hold(); }
+  addEventListener('touchend', up, {passive:true}); addEventListener('touchcancel', up, {passive:true});
+  addEventListener('scroll', hold, {passive:true});
+  addEventListener('load', hold);
+  window.scrollTo(0,T);
+})();
+</script>
+
+<script>
+/* THE CROSSES (and the hearts) ARE STILL — 23 Sep, the user: "everything disrupts
+   them". Every page's own alignLattice() centres the tile's phase on the WINDOW
+   (innerWidth/innerHeight) and re-runs on every resize, and on a phone the window
+   resizes all the time: Safari's bar collapses and grows with every scroll, the
+   keyboard comes up, the address bar minimises — and each time the phase jumped by
+   half the change in height. On a phone the phase is pinned to the SCREEN instead
+   (its width, and on iOS its full height — the floor; elsewhere the height seen
+   first), constant for the device, rotation aside. An !important rule beats the
+   inline values the page keeps writing, and lattice_vector.py's place() reads the
+   computed value, so the vector tile follows. The landing's hero shift — its nav
+   letters sit centred in a gutter — is re-derived against the pinned phase, from
+   the page's own result (it runs after the page's handler on the same events). */
+(function(){
+  var mq=matchMedia('(max-width:900px)'), CELL=60, st=null, W=0, Y=0;
+  var ios=(window.CSS && CSS.supports('-webkit-touch-callout','none')) || /[?&]runway/.test(location.search);
+  function ph(v){ return ((v-CELL)/2)%CELL; }
+  function pin(){
+    if(!mq.matches){ if(st){ st.remove(); st=null; W=0; } return; }
+    var w=innerWidth; if(st && w===W) return; W=w;
+    var H=ios ? Math.max(screen.width,screen.height) : innerHeight;
+    Y=ph(H);                                          /* the phase wanted on the SCREEN */
+    if(!st){ st=document.createElement('style'); st.id='latstill'; document.head.appendChild(st); }
+    st.textContent=':root{--lat-x:'+ph(w).toFixed(3)+'px !important; --lat-y:'+Y.toFixed(3)+'px !important}';
+  }
+  var hero=document.getElementById('hero');
+  function shift(){
+    if(!mq.matches || !hero || !st) return;
+    var s=parseFloat(hero.style.getPropertyValue('--shift'))||0;
+    var d=s + ph(innerHeight) - Y;                    /* the page's shift, moved to the pinned phase */
+    d=((d%CELL)+CELL)%CELL; if(d>CELL/2) d-=CELL;
+    hero.style.setProperty('--shift', d.toFixed(3)+'px');
+  }
+  function run(){ pin(); shift(); }
+  run(); addEventListener('resize', run); addEventListener('load', run);
+  if(document.fonts && document.fonts.ready) document.fonts.ready.then(run);
+})();
+</script>
+
+<script>
+/* Safari 26 colours its status bar and the space round its address bar from
+   <meta name="theme-color">: black while the landing or the Меню panel covers
+   the page, the paper otherwise. See _src/mobile.py. */
+(function(){
+  const rt = document.documentElement;
+  let meta = document.querySelector('meta[name="theme-color"]');
+  if(!meta){ meta = document.createElement('meta'); meta.name = 'theme-color'; document.head.appendChild(meta); }
+  function paint(){
+    const dark = rt.classList.contains('landing-on') || rt.classList.contains('menu-lock');
+    const c = dark ? '#000000' : (getComputedStyle(document.body).backgroundColor || '#FFFFFF');
+    if(meta.content !== c) meta.content = c;
+  }
+  new MutationObserver(paint).observe(rt, {attributes:true, attributeFilter:['class']});
+  addEventListener('load', paint);
+  paint();
+})();
+</script>
+<!-- mobile:end -->
+</body>
+</html>

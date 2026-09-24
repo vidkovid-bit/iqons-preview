@@ -1,0 +1,1988 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="theme-color" content="#FFFFFF">
+<title>Личный архив — IQONS +</title>
+<script src="../../assets/products/original/grail-archive/manifest.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=PT+Serif:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+/* ------------------------------------------------------------------
+   FONT SLOT — see ../../assets/fonts/README.md
+   ------------------------------------------------------------------ */
+@font-face{font-family:'IQONS Title';font-weight:400;font-style:normal;font-display:swap;
+  src:url('../../assets/fonts/title-regular.woff2') format('woff2'),url('../../assets/fonts/title-regular.woff') format('woff'),
+      url('../../assets/fonts/title-regular.otf') format('opentype'),url('../../assets/fonts/title-regular.ttf') format('truetype');}
+@font-face{font-family:'IQONS Title';font-weight:700;font-style:normal;font-display:swap;
+  src:url('../../assets/fonts/title-bold.woff2') format('woff2'),url('../../assets/fonts/title-bold.woff') format('woff'),
+      url('../../assets/fonts/title-bold.otf') format('opentype'),url('../../assets/fonts/title-bold.ttf') format('truetype');}
+@font-face{font-family:'IQONS Mid';font-weight:400;font-style:normal;font-display:swap;
+  src:url('../../assets/fonts/mid-regular.woff2') format('woff2'),url('../../assets/fonts/mid-regular.woff') format('woff'),
+      url('../../assets/fonts/mid-regular.otf') format('opentype'),url('../../assets/fonts/mid-regular.ttf') format('truetype');}
+@font-face{font-family:'IQONS Mid';font-weight:700;font-style:normal;font-display:swap;
+  src:url('../../assets/fonts/mid-bold.woff2') format('woff2'),url('../../assets/fonts/mid-bold.woff') format('woff'),
+      url('../../assets/fonts/mid-bold.otf') format('opentype'),url('../../assets/fonts/mid-bold.ttf') format('truetype');}
+@font-face{font-family:'IQONS Small';font-weight:400;font-style:normal;font-display:swap;
+  src:url('../../assets/fonts/small-regular.woff2') format('woff2'),url('../../assets/fonts/small-regular.woff') format('woff'),
+      url('../../assets/fonts/small-regular.otf') format('opentype'),url('../../assets/fonts/small-regular.ttf') format('truetype');}
+
+/* ============================================================
+   IQONS +  ·  Template 03 — Product page
+   Cross variant: TANEK  (Best Swashed — тонкий)
+   Text left, photography right. The right half is pinned; only
+   the left column scrolls. Edge taps change frame, wheel zooms
+   the photograph without moving the page, a plain click does
+   nothing on purpose.
+   ============================================================ */
+:root{
+  --paper:#FFFFFF; --ink:#000000;
+  --ink-55:#000000; --ink-30:#000000; --ink-12:#000000;
+  --t1:clamp(20px,1.8125vw,27.5px);   /* 16 Sep: Title face +25% (was 16/1.45vw/22) */ --t2:clamp(13.75px,1.0625vw,15px);  /* 16 Sep: Title face +25% (was 11/.85vw/12) */
+  --t1m:clamp(16px,1.45vw,22px);        /* the Mid face at the OLD Т1 size — hybrids only */
+  --t2m:clamp(11px,.85vw,12px);         /* the Mid face at the OLD Т2 size — hybrids only */ --t3:clamp(9.5px,.8vw,10.5px);
+  /* tracking — one knob per tier. Every uppercase interface string in a
+     tier shares its tier's value; the few deliberate variations are
+     expressed as offsets so one change still moves them together. */
+  --tr1:.02em;      /* Т1 headings            */
+  --tr2:-.005em;    /* Т2 interface, capitals — Illustrator −5 */
+  --tr2p:.01em;     /* Т2 paragraphs          */
+  --tr3:-.010em;    /* Т3 small capitals — Illustrator −10 */
+  /* EXPERIMENT 23.08.2026 — tiers shifted up one face:
+     Т1 and Т2 both set in Mephisto, Т3 in Century. Corbel is left
+     declared but unused, so this reverts by editing these three lines. */
+  --font-t1:'IQONS Title',"PT Serif",Georgia,serif;
+  --font-t2:'IQONS Title',"PT Serif",Georgia,serif;
+  --font-t3:'IQONS Mid',"PT Serif",Georgia,serif;
+  --logo-h:clamp(26.25px,2.625vw,42.5px);   /* 16 Sep: logo +25% (was 21/2.1vw/34) */
+  --margin:clamp(14px,2vw,38px); --gap:clamp(14px,2vw,38px);
+  --padT:var(--margin); --padB:14px;
+  --headerH:calc(var(--margin) + var(--logo-h) + 14px);
+  --cell:60px; --lat-x:center; --lat-y:center;
+  --shotRatio:1.5;                                   /* 1200x1800 on every frame */
+  --stageH:calc(100svh - var(--headerH) - var(--gapBottom));
+  --stageW:min(calc(var(--stageH) / var(--shotRatio)), 50vw);
+  --gapBottom:19px;           /* ≈0.5cm under the preview, at all times */
+  --ease:cubic-bezier(.22,.61,.36,1);
+  --snap:cubic-bezier(.2,.9,.25,1);
+}
+@media (max-height:820px){ :root{--margin:clamp(12px,1.4vw,22px); --gap:clamp(12px,1.6vw,26px)} }
+*,*::before,*::after{box-sizing:border-box}
+/* ₽ as artwork rather than a font glyph — it renders identically whatever
+   face Т2 ends up being, and takes its colour and size from the text */
+.rub{height:.72em; width:auto; display:inline-block; vertical-align:-.005em; fill:currentColor}
+/* no faked bold/italic — if a weight is missing, show what exists */
+html{font-synthesis-weight:none; font-synthesis-style:none}
+html,body{margin:0;padding:0}
+html{-webkit-text-size-adjust:100%; overscroll-behavior-y:none}
+body{overscroll-behavior-y:none}
+body{background:var(--paper); color:var(--ink); font-size:var(--t2); font-family:var(--font-t2);
+  line-height:1.4; -webkit-font-smoothing:antialiased; overflow-x:hidden;}
+
+/* on the product page the lattice sits ABOVE everything, images included */
+.lattice{position:fixed; inset:0; z-index:100; pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%2760%27%20height%3D%2760%27%20viewBox%3D%270%200%2060%2060%27%3E%3Cg%20transform%3D%27translate%2830%2C30%29%20scale%280.676%29%20translate%28-12%2C-12%29%27%20fill%3D%27none%27%20stroke%3D%27%23000000%27%20stroke-opacity%3D%271%27%3E%3Cpath%20d%3D%27M12%203.6C12.15%208.4%2012.15%2015.6%2012%2020.4%27%20stroke-width%3D%27.75%27%20stroke-linecap%3D%27round%27%2F%3E%3Cpath%20d%3D%27M3.6%2012C8.4%2011.85%2015.6%2011.85%2020.4%2012%27%20stroke-width%3D%27.75%27%20stroke-linecap%3D%27round%27%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E"); background-size:var(--cell) var(--cell);
+  background-position:var(--lat-x) var(--lat-y);}
+
+/* ---------- header ---------- */
+header{
+  position:fixed; top:0; left:0; right:0; z-index:200;
+  display:flex; align-items:center;
+  padding:var(--padT) var(--margin) var(--padB);
+  pointer-events:none;
+  /* No band at all — the page runs straight underneath, the way SSENSE does it.
+     The header never changes size and nothing in it answers the pointer: it is
+     a fixed set of marks that the photographs pass behind. --headerH still
+     reserves its height, so the page starts below it and only slides under
+     once you scroll. */
+  background:none;
+}
+header > *{pointer-events:auto}
+.seg{display:flex; border:1px solid var(--ink); background:none}
+.seg a{font-size:var(--t2); font-family:var(--font-t2); letter-spacing:var(--tr2); text-transform:uppercase;
+  color:var(--ink); text-decoration:none; padding:7px 15px 6px; white-space:nowrap;
+  border-right:1px solid var(--ink); transition:background .2s var(--ease);}
+.seg a:last-child{border-right:0}
+.seg a[aria-current]{background:var(--ink); color:var(--paper)}
+.wordmark{position:absolute; left:50%; top:var(--padT); transform:translateX(-50%);
+  font-size:var(--t1); font-family:var(--font-t1); font-weight:400; letter-spacing:calc(var(--tr1) + .10em);
+  line-height:1.2; white-space:nowrap; padding:2px 14px;
+  display:flex; align-items:center;}
+.wordmark img{display:block; height:var(--logo-h); width:auto; max-width:42vw}
+.wordmark .wm-text{display:none}
+.wordmark.no-logo img{display:none}
+.wordmark.no-logo .wm-text{display:inline}
+.wordmark .cross{font-weight:400; opacity:.7; margin-left:.14em}
+.right{margin-left:auto; display:flex; gap:10px}
+
+/* ---------- split: text left, photography right ---------- */
+.pshell{position:relative; z-index:10; display:grid;
+  grid-template-columns:minmax(0,1fr) var(--stageW); gap:var(--gap);
+  padding:var(--headerH) 0 var(--gapBottom) var(--margin); align-items:start}
+.left{min-width:0; padding-top:10px}
+
+.crumb{display:flex; gap:14px; align-items:baseline; margin-bottom:26px}
+.crumb a{font-size:var(--t2); letter-spacing:var(--tr2); text-transform:uppercase;
+  color:var(--ink-55); text-decoration:none; border-bottom:1px solid transparent}
+.crumb a:hover{color:var(--ink); border-bottom-color:var(--ink)}
+.crumb span{font-size:var(--t3); font-family:var(--font-t3); color:var(--ink-30); font-style:italic}
+
+.info{min-width:0; max-width:520px; padding-bottom:8vh}
+.info .brand{font-size:var(--t2); font-family:var(--font-t2); letter-spacing:calc(var(--tr2) + .04em);
+  text-transform:uppercase; color:var(--ink-55); display:block; margin-bottom:8px}
+.info h1{font-size:var(--t1); font-family:var(--font-t1); font-weight:400; letter-spacing:var(--tr1);
+  margin:0 0 10px; line-height:1.25}
+.info .price{font-size:var(--t2); display:block; margin-bottom:4px}
+.info .stock{font-size:var(--t3); font-family:var(--font-t3); color:var(--ink-30); font-style:italic}
+.block{margin-top:26px}
+.block .lbl{font-size:var(--t3); font-family:var(--font-t3); letter-spacing:calc(var(--tr3) + .02em);
+  text-transform:uppercase; color:var(--ink-55); display:block; margin-bottom:9px}
+.sizes{display:flex; gap:8px; flex-wrap:wrap}
+.sizes button{font:inherit; font-size:var(--t2); letter-spacing:var(--tr2); padding:9px 18px;
+  border:1px solid var(--ink-12); background:var(--paper); color:var(--ink); cursor:pointer;
+  transition:border-color .2s var(--ease), background .2s var(--ease)}
+.sizes button:hover:not(.out){border-color:var(--ink)}
+.sizes button[aria-pressed="true"]{background:var(--ink); color:var(--paper); border-color:var(--ink)}
+.sizes button.out{color:var(--ink-30); text-decoration:line-through; cursor:not-allowed; border-style:dashed}
+.sizehint{font-size:var(--t3); font-family:var(--font-t3); color:var(--ink-30); font-style:italic;
+  margin-top:9px; display:block}
+.sizelink{font-size:var(--t3); font-family:var(--font-t3); letter-spacing:var(--tr3); text-transform:uppercase;
+  color:var(--ink-55); text-decoration:none; border-bottom:1px solid var(--ink-12);
+  margin-top:10px; display:inline-block}
+.sizelink:hover{color:var(--ink); border-bottom-color:var(--ink)}
+.buy{width:100%; margin-top:22px; padding:15px 18px; border:1px solid var(--ink);
+  background:var(--ink); color:var(--paper); cursor:pointer; font:inherit; font-size:var(--t2);
+  letter-spacing:calc(var(--tr2) + .02em); text-transform:uppercase; transition:background .2s var(--ease), color .2s var(--ease)}
+.buy:hover{background:var(--paper); color:var(--ink)}
+.buy[disabled]{background:var(--paper); color:var(--ink-30); border-color:var(--ink-12); cursor:not-allowed}
+.ask{display:inline-block; margin-top:14px; font-size:var(--t3); font-family:var(--font-t3);
+  letter-spacing:var(--tr3); text-transform:uppercase; color:var(--ink-55); text-decoration:none;
+  border-bottom:1px solid var(--ink-12)}
+.ask:hover{color:var(--ink); border-bottom-color:var(--ink)}
+.acc{margin-top:30px; border-top:1px solid var(--ink-12)}
+details{border-bottom:1px solid var(--ink-12)}
+summary{list-style:none; cursor:pointer; padding:13px 0; display:flex; align-items:center;
+  font-size:var(--t2); letter-spacing:var(--tr2); text-transform:uppercase}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+"; margin-left:auto; color:var(--ink-55)}
+details[open] summary::after{content:"–"}
+details .body{font-size:var(--t2m); font-family:var(--font-t3); letter-spacing:var(--tr2p); line-height:1.75; color:var(--ink-55);
+  padding:0 0 16px; max-width:44ch}
+details .body dl{margin:0; display:grid; grid-template-columns:auto 1fr; gap:4px 14px}
+details .body dt{color:var(--ink-30)}
+details .body dd{margin:0}
+.art{margin-top:20px; font-size:var(--t3); font-family:var(--font-t3); color:var(--ink-30); font-style:italic}
+
+/* ---------- pinned photography ---------- */
+.stage.zoomed{cursor:grab}
+.stage.zoomed.dragging{cursor:grabbing}
+.stage{position:fixed; top:var(--headerH); right:0; width:var(--stageW); height:var(--stageH);
+  overflow:hidden; background:var(--paper); user-select:none; touch-action:pan-y}
+.frame{position:absolute; inset:0; overflow:hidden}
+.frame img{position:absolute; inset:0; width:100%; height:100%;
+  object-fit:contain;
+  transform-origin:0 0; will-change:transform; display:block; pointer-events:none}
+
+/* edge zones — the middle is deliberately inert */
+.zone{position:absolute; top:0; bottom:0; width:22%; z-index:3; cursor:pointer;
+  display:grid; place-items:center; background:none; border:0; padding:0}
+.zl{left:0} .zr{right:0}
+.stage.zoomed .zone{pointer-events:none}
+.zone .mark{font-size:var(--t2); font-family:var(--font-t2); letter-spacing:var(--tr2); color:var(--ink);
+  background:var(--paper); border:1px solid var(--ink); padding:8px 12px 7px; line-height:1;
+  opacity:0; transform:translateY(4px); transition:opacity .18s var(--ease), transform .18s var(--ease)}
+.zone:hover .mark{opacity:1; transform:none}
+.zone:disabled{cursor:default}
+.zone:disabled .mark{display:none}
+
+.hud{position:absolute; left:0; bottom:0; z-index:4; display:flex; gap:0; pointer-events:none}
+.hud span{font-size:var(--t3); font-family:var(--font-t3); letter-spacing:var(--tr3); text-transform:uppercase;
+  background:var(--paper); color:var(--ink-55); padding:5px 10px 4px; border-right:1px solid var(--ink-12)}
+.hud span:last-child{border-right:0}
+.zoomtag{position:absolute; right:0; bottom:0; z-index:4; pointer-events:none;
+  font-size:var(--t3); font-family:var(--font-t3); letter-spacing:var(--tr3); background:var(--paper);
+  color:var(--ink-55); padding:5px 10px 4px; opacity:0; transition:opacity .2s var(--ease)}
+.zoomtag.on{opacity:1}
+
+/* ---------- related ---------- */
+.related{position:relative; z-index:10; padding:0 0 0}
+.related h2{font-size:var(--t1); font-family:var(--font-t1); font-weight:400; letter-spacing:var(--tr1);
+  margin:0 0 var(--gap); padding-top:34px; border-top:1px solid var(--ink-12); max-width:520px}
+.rgrid{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:var(--gap)}
+.rcard{display:flex; flex-direction:column; text-decoration:none; color:inherit}
+.rtile{position:relative; width:100%; aspect-ratio:1/1.5; min-height:0; overflow:hidden}
+.rtile img{position:absolute; inset:0; width:100%; height:100%; object-fit:cover;
+  object-position:center 42%; display:block; transition:opacity .4s var(--ease)}
+.rcard:hover .rtile img{opacity:.86}
+.rmeta{padding:13px 0 0; display:flex; flex-direction:column; gap:4px}
+.rmeta .nm{font-size:var(--t2); letter-spacing:var(--tr2); text-transform:uppercase; line-height:1.45}
+.rmeta .pr{font-size:var(--t2); color:var(--ink-55)}
+
+/* out of the layout until stage two, so the page can never scroll past
+   the content and cannot bounce */
+footer{
+  display:none;
+  margin:var(--gapBottom) 0 0; padding:0;   /* nothing under the closing rule: the page ends with the footer */
+  border-top:1px solid var(--ink);
+  flex-wrap:wrap; align-items:baseline;
+  position:relative;
+  z-index:200;
+  background-color:var(--paper);
+  background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%2760%27%20height%3D%2760%27%20viewBox%3D%270%200%2060%2060%27%3E%3Cg%20transform%3D%27translate%2830%2C30%29%20scale%280.676%29%20translate%28-12%2C-12%29%27%20fill%3D%27none%27%20stroke%3D%27%23000000%27%20stroke-opacity%3D%271%27%3E%3Cpath%20d%3D%27M12%203.6C12.15%208.4%2012.15%2015.6%2012%2020.4%27%20stroke-width%3D%27.75%27%20stroke-linecap%3D%27round%27%2F%3E%3Cpath%20d%3D%27M3.6%2012C8.4%2011.85%2015.6%2011.85%2020.4%2012%27%20stroke-width%3D%27.75%27%20stroke-linecap%3D%27round%27%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E");
+  background-size:var(--cell) var(--cell);
+  background-position:var(--lat-x) var(--lat-y);
+  background-attachment:fixed;   /* register to the viewport, like .lattice */
+}
+footer.revealed{display:flex}
+footer nav{
+  flex:1 1 100%; display:flex; flex-wrap:wrap; justify-content:space-between; gap:6px 20px;
+  padding:5px var(--margin) 0;
+}
+footer a{
+  font-size:var(--t2); font-family:var(--font-t2); letter-spacing:var(--tr2); text-transform:uppercase;
+  color:var(--ink-55); text-decoration:none;
+}
+footer a:hover{color:var(--ink)}
+footer .rights{
+  flex:1 1 100%; text-align:center; font-size:var(--t3); font-family:var(--font-t3); color:var(--ink-30);
+  padding:34px var(--margin) 5px; border-bottom:1px solid var(--ink);
+}
+
+@media (min-width:1700px){ .rgrid{grid-template-columns:repeat(3,minmax(0,1fr))} }
+@media (max-width:900px){
+  header{position:static; flex-wrap:wrap; gap:14px; justify-content:center; padding-bottom:6px}
+  .wordmark{position:static; transform:none; order:-1}
+  .right{margin-left:0}
+  /* photography first, then the text — nothing is pinned on a phone */
+  .pshell{grid-template-columns:1fr; padding:var(--margin) var(--margin) 0}
+  .left{display:contents}
+  .stage{position:relative; top:auto; right:auto; width:auto; height:auto; aspect-ratio:1 / 1.5;
+         transform:none !important;
+         order:0; margin-bottom:26px}
+  .info{max-width:none; padding-bottom:40px; order:1}
+  .related{order:2}
+  .rgrid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  footer nav{justify-content:flex-start}
+}
+@media (prefers-reduced-motion:reduce){ *{transition-duration:.01ms !important; animation-duration:.01ms !important} }
+/* the wordmark is the way home; it inherits everything and adds nothing */
+.home{display:contents; color:inherit; text-decoration:none}
+
+/* ---------- site sections in the header --------------------------------------
+   The landing's four destinations, standing at the top of the header slot on
+   every page. What the page used to keep there — the gender filter, its own
+   heading — now sits one row below, inside the same .slot column. The
+   underlined one is the section you are in; a page outside the four
+   (cart, checkout, the text pages) underlines nothing. */
+.sitenav{display:flex; gap:18px; white-space:nowrap; padding-top:8px}
+.sitenav a{font-size:var(--t2); font-family:var(--font-t2); letter-spacing:var(--tr2);
+  text-transform:uppercase; color:var(--ink-55); text-decoration:none;
+  padding-bottom:0; border-bottom:1px solid transparent;
+  transition:color .2s var(--ease), border-color .2s var(--ease)}
+.sitenav a[aria-current]{color:var(--ink); border-bottom-color:var(--ink)}
+.sitenav a:hover{color:var(--ink)}
+
+/* The header's left slot is now a column: the four sections on top, the page's
+   own row (gender filter or heading) beneath. Search and cart on the right
+   drop to that second row so the boxed controls all stand on one line. The
+   band is measured, not computed, so --headerH follows the taller slot. */
+header{align-items:flex-start}
+.slot{display:flex; flex-direction:column; align-items:flex-start; gap:10px; min-width:0; flex:0 1 auto}
+header .right{align-self:flex-end}
+
+/* the shop grid's tightened band — applied by the reserve script below */
+header.tight{--padT:8px; --padB:8px; --logo-h:30px}
+header.tight .seg a{padding:4px 12px 3px}
+
+/* ---------- archive piece (spliced in by _src/grail_product.py) ----------
+   The side column of grail.html, set ragged-right in the product page's info
+   column. Same fields, same order, same type tiers. */
+.info .req{font-family:var(--font-t2); letter-spacing:var(--tr2);
+  text-transform:uppercase; margin-bottom:22px}
+.info .facts{margin:0; display:grid; grid-template-columns:auto 1fr; gap:7px 18px;
+  font-size:var(--t2m); font-family:var(--font-t3); letter-spacing:var(--tr2p);
+  line-height:1.6; color:var(--ink-55)}
+.info .facts dt{color:var(--ink-30); text-transform:uppercase;
+  font-size:var(--t3); letter-spacing:var(--tr3)}
+.info .facts dd{margin:0}
+.info .desc{font-size:var(--t2m); font-family:var(--font-t3); letter-spacing:var(--tr2p);
+  line-height:1.75; color:var(--ink-55); margin:22px 0 0; max-width:44ch}
+/* the archive's button — grail.html's .btn, which product.html does not carry */
+.btn{font:inherit; font-size:var(--t2); font-family:var(--font-t2);
+  letter-spacing:calc(var(--tr2) + .02em); text-transform:uppercase;
+  border:1px solid var(--ink); background:var(--ink); color:var(--paper);
+  padding:15px 18px; cursor:pointer; display:inline-block; text-decoration:none;
+  text-align:center}
+.info .offer{width:100%; margin-top:22px}
+.info .offer[disabled]{background:var(--paper); color:var(--ink-30);
+  border-color:var(--ink-12); cursor:not-allowed}
+/* the archive's placeholder flag, over the top-left of the photograph */
+.stage .flag{position:absolute; left:0; top:0; z-index:4; font-size:var(--t3);
+  font-family:var(--font-t3); letter-spacing:var(--tr3); font-style:italic;
+  color:var(--ink); border:1px dotted var(--ink-30); padding:3px 7px 2px}
+</style>
+<!-- landing-everywhere:head (spliced by _src/landing_everywhere.py — do not hand-edit) -->
+<script>
+/* No arrival decision here (that is the shop's alone): the landing covers this
+   page only when asked for, by the header logo or #landing. */
+if(location.hash==='#landing'){
+  document.documentElement.classList.add('landing-on');
+  if('scrollRestoration' in history) history.scrollRestoration='manual';
+}
+</script>
+<style>
+/* the landing, laid over the shop: z-index over the header (200/400) and the
+   phone's filter pane (500) */
+.landing{position:fixed; inset:0; z-index:1000; background:#000;
+  visibility:hidden; pointer-events:none}
+html.landing-on .landing{visibility:visible; pointer-events:auto}
+.landing iframe{display:block; width:100%; height:100%; border:0; background:#000}
+/* the shop's scrollbar is NOT hidden under the landing: on a system with classic
+   scrollbars that changes the layout width, and the shop's header reserve
+   (--headerH) is measured at load and never again without a resize */
+</style>
+<!-- landing-everywhere:head-end -->
+</head>
+<body>
+<!-- landing-everywhere:layer (spliced by _src/landing_everywhere.py — do not hand-edit) -->
+<div class="landing" id="landing" role="region" aria-label="Главная">
+  <iframe src="landing.html" title="IQONS — главная" tabindex="-1"></iframe>
+</div>
+<!-- landing-everywhere:layer-end -->
+
+<div class="lattice" aria-hidden="true"></div>
+
+<header>
+    <div class="slot">
+    <nav class="sitenav" aria-label="Разделы сайта">
+      <a href="shop.html" aria-current="page">Магазин</a>
+      <a href="../drafts/collections.html?v=202609242027">Коллекции</a>
+      <a href="../drafts/editorial.html?v=202609242027">Публикации</a>
+      <a href="../drafts/about.html?v=202609242027">О нас</a>
+    </nav>
+  <nav class="seg" aria-label="Пол">
+    <a href="shop.html" aria-current="page">Мужское</a><a href="#">Женское</a><a href="#">Унисекс</a>
+  </nav>
+  </div>
+  <a class="home" href="shop.html#landing" aria-label="На главную"><div class="wordmark" id="wordmark">
+    <a href="shop.html" style="display:block"><img src="../../assets/logo/LOGO.svg" alt="IQONS +"></a>
+    <span class="wm-text">IQONS<span class="cross">+</span></span>
+  </div></a>
+  <div class="right">
+    <nav class="seg"><a href="shop.html?search">Поиск</a></nav>
+    <nav class="seg"><a href="../drafts/cart.html?v=202609242027">Корзина (0)</a></nav>
+  </div>
+</header>
+
+<main class="pshell">
+
+  <div class="left">
+  <div class="info">
+    <!-- Filled from the archive manifest by the script below: the piece is
+         picked by ?i=N, N being its place in window.GRAIL. -->
+    <span class="brand" id="g-brand"></span>
+    <h1 id="g-name"></h1>
+    <span class="price req">Цена по запросу</span>
+
+    <dl class="facts">
+      <dt>Состояние</dt><dd id="g-cond"></dd>
+      <dt>Сезон</dt><dd id="g-season"></dd>
+      <dt>Страна производства</dt><dd id="g-country"></dd>
+    </dl>
+    <p class="desc" id="g-desc"></p>
+
+    <button class="btn offer" id="offer">Предложить цену</button>
+  </div>
+  </div>
+
+  <div class="stage" id="stage">
+    <div class="frame" id="frame"></div>
+    <button class="zone zl" id="prev" aria-label="Предыдущее изображение"><span class="mark">←</span></button>
+    <button class="zone zr" id="next" aria-label="Следующее изображение"><span class="mark">→</span></button>
+    <div class="hud"><span id="counter">1 / 7</span><span id="caption">Общий вид</span></div>
+    <div class="zoomtag" id="zoomtag">100%</div>
+  </div>
+
+</main>
+
+<footer>
+  <nav>
+    <a href="shop.html">Магазин</a><a href="../drafts/collections.html?v=202609242027">Коллекции</a><a href="../drafts/editorial.html?v=202609242027">Публикации</a><a href="../drafts/about.html?v=202609242027">О нас</a><a href="../drafts/text-page.html?v=202609242027">Обслуживание клиентов</a><a href="../drafts/text-page.html?v=202609242027">Правовая информация</a><a href="https://www.instagram.com/iqonschelyabinsk/">Подписаться на нас</a><a href="https://www.instagram.com/iqonschelyabinsk/">IG:@iqonschelyabinsk</a>
+  </nav>
+  <span class="rights">© 2026 IQONS + · Все права защищены</span>
+</footer>
+
+<script>
+/* The piece, from the archive manifest — the same list grail.html draws, so a
+   piece is edited in one place. ?i=N picks it; anything else falls back to the
+   first. The photograph is the piece's one archive shot: the stage keeps every
+   gesture of the product page, and takes more frames the day a piece has them. */
+const DIR  = '../../assets/products/original/grail-archive/';
+const url  = f => DIR + String(f).split('/').map(encodeURIComponent).join('/');
+const LIST = Array.isArray(window.GRAIL) ? window.GRAIL : [];
+const PICK = +new URLSearchParams(location.search).get('i') || 0;
+const G    = LIST[PICK] || LIST[0] || {};
+/* the wording almost every piece carries — grail.html's own */
+const DESC = 'Редкая вещь из личного архива владельца. Продаётся в текущем '
+           + 'состоянии; следы носки соответствуют возрасту вещи. Возврат не предусмотрен.';
+
+(function(){
+  const put = (id, t) => { document.getElementById(id).textContent = t || '—'; };
+  put('g-brand',   G.br || 'Ann Demeulemeester');
+  put('g-name',    G.nm);
+  put('g-cond',    G.cond);
+  put('g-season',  G.season);
+  put('g-country', G.country);
+  put('g-desc',    G.desc || DESC);
+  if(G.nm) document.title = G.nm + ' — Личный архив — IQONS +';
+  /* sold: the piece is gone, or an offer on it is already being dealt with */
+  document.getElementById('offer').disabled = !!G.sold;
+  if(G.placeholder){
+    const f = document.createElement('span');
+    f.className = 'flag'; f.textContent = 'заполнитель';
+    document.getElementById('stage').appendChild(f);
+  }
+})();
+
+const SHOTS = G.file ? [{id:G.file, cap:''}] : [];
+const IMG = f => url(f);
+
+const frame=document.getElementById('frame'), stage=document.getElementById('stage');
+const counter=document.getElementById('counter'), caption=document.getElementById('caption');
+const zoomtag=document.getElementById('zoomtag');
+let idx=0, busy=false, cur=null;
+let scale=1, tx=0, ty=0;
+
+SHOTS.forEach(s=>{ const im=new Image(); im.src=IMG(s.id); });   // warm the cache
+
+function makeImg(i){
+  const im=document.createElement('img');
+  im.src=IMG(SHOTS[i].id); im.alt=G.nm||'';
+  im.decoding='async';
+  return im;
+}
+function applyTransform(){
+  if(!cur) return;
+  cur.style.transform = `translate(${tx}px,${ty}px) scale(${scale})`;
+  zoomtag.textContent = Math.round(scale*100)+'%';
+  zoomtag.classList.toggle('on', scale>1.01);
+  stage.classList.toggle('zoomed', scale>1.001);
+}
+function resetZoom(){ scale=1; tx=0; ty=0; applyTransform(); }
+
+function setHud(){ if(!SHOTS.length) return; counter.textContent=(idx+1)+' / '+SHOTS.length; caption.textContent=SHOTS[idx].cap; }
+
+/* crisp push: the new frame slides over the old one, no fade */
+function go(dir){
+  if(busy || SHOTS.length < 2) return; busy=true;
+  const from=cur;
+  idx=(idx+dir+SHOTS.length)%SHOTS.length;
+  const to=makeImg(idx);
+  to.style.transform='translateX('+(dir>0?100:-100)+'%)';
+  frame.appendChild(to);
+  cur=to; resetZoom();
+  const anim=to.animate(
+    [{transform:'translateX('+(dir>0?100:-100)+'%)'},{transform:'translate(0px,0px) scale(1)'}],
+    {duration:230, easing:'cubic-bezier(.2,.9,.25,1)', fill:'forwards'});
+  anim.onfinish=()=>{
+    to.style.transform='translate(0px,0px) scale(1)';
+    anim.cancel();
+    if(from && from.parentNode) from.remove();
+    busy=false;
+  };
+  setHud();
+}
+
+document.getElementById('next').addEventListener('click',()=>go(1));
+document.getElementById('prev').addEventListener('click',()=>go(-1));
+addEventListener('keydown',e=>{
+  if(e.key==='ArrowRight') go(1);
+  if(e.key==='ArrowLeft')  go(-1);
+});
+
+/* wheel zooms the photograph only — the page must not move */
+stage.addEventListener('wheel',e=>{
+  e.preventDefault();
+  if(!cur) return;
+  const r=frame.getBoundingClientRect();
+  const cx=e.clientX-r.left, cy=e.clientY-r.top;
+  const prev=scale;
+  scale=Math.min(3,Math.max(1, scale*(1 - e.deltaY*0.0016)));
+  if(scale===prev) return;
+  /* keep the point under the cursor still */
+  tx = cx - (cx - tx) * (scale/prev);
+  ty = cy - (cy - ty) * (scale/prev);
+  if(scale<=1.001){ scale=1; tx=0; ty=0; }
+  else {
+    tx=Math.min(0,Math.max(r.width  - r.width  * scale, tx));
+    ty=Math.min(0,Math.max(r.height - r.height * scale, ty));
+  }
+  applyTransform();
+},{passive:false});
+
+
+/* ------------------------------------------------------------------
+   Touch: pinch to zoom. A wheel never fires on a phone, so the two
+   gestures are separate — one finger still scrolls the page (the CSS
+   sets touch-action:pan-y), two fingers zoom the photograph in place.
+   ------------------------------------------------------------------ */
+(function(){
+  let pinching=false, startDist=0, startScale=1, startTx=0, startTy=0, anchor={x:0,y:0};
+  const dist=(a,b)=>Math.hypot(a.clientX-b.clientX, a.clientY-b.clientY);
+
+  stage.addEventListener('touchstart',e=>{
+    if(e.touches.length!==2) return;
+    const r=frame.getBoundingClientRect();
+    pinching=true;
+    startDist=dist(e.touches[0],e.touches[1]);
+    startScale=scale; startTx=tx; startTy=ty;
+    anchor={ x:(e.touches[0].clientX+e.touches[1].clientX)/2 - r.left,
+             y:(e.touches[0].clientY+e.touches[1].clientY)/2 - r.top };
+  },{passive:true});
+
+  stage.addEventListener('touchmove',e=>{
+    if(!pinching || e.touches.length!==2) return;
+    e.preventDefault();                       // the page must not pinch-zoom with it
+    const r=frame.getBoundingClientRect();
+    const next=Math.min(3,Math.max(1, startScale * (dist(e.touches[0],e.touches[1])/startDist)));
+    /* hold the point between the fingers still */
+    tx = anchor.x - (anchor.x - startTx) * (next/startScale);
+    ty = anchor.y - (anchor.y - startTy) * (next/startScale);
+    scale = next;
+    if(scale<=1.001){ scale=1; tx=0; ty=0; }
+    else {
+      tx=Math.min(0,Math.max(r.width  - r.width  * scale, tx));
+      ty=Math.min(0,Math.max(r.height - r.height * scale, ty));
+    }
+    applyTransform();
+  },{passive:false});
+
+  const end=e=>{ if(e.touches.length<2) pinching=false; };
+  stage.addEventListener('touchend',end,{passive:true});
+  stage.addEventListener('touchcancel',end,{passive:true});
+})();
+
+/* ------------------------------------------------------------------
+   Drag to pan once zoomed. Reaching the edges by cursor position alone
+   was fiddly, so above 1x the photograph can simply be pushed around.
+   Below 1x the edge zones take over again for next/previous.
+   ------------------------------------------------------------------ */
+(function(){
+  let dragging=false, sx=0, sy=0, ox=0, oy=0, moved=0;
+  const bounds=()=>{ const r=frame.getBoundingClientRect();
+    return {minx:r.width - r.width*scale, miny:r.height - r.height*scale}; };
+  const clampPan=()=>{ const b=bounds();
+    tx=Math.min(0,Math.max(b.minx,tx)); ty=Math.min(0,Math.max(b.miny,ty)); };
+
+  stage.addEventListener('pointerdown', e=>{
+    if(scale<=1.001 || e.button!==0) return;
+    dragging=true; moved=0; sx=e.clientX; sy=e.clientY; ox=tx; oy=ty;
+    stage.classList.add('dragging');
+    stage.setPointerCapture(e.pointerId);
+    e.preventDefault();
+  });
+  stage.addEventListener('pointermove', e=>{
+    if(!dragging) return;
+    const dx=e.clientX-sx, dy=e.clientY-sy;
+    moved=Math.max(moved, Math.abs(dx)+Math.abs(dy));
+    tx=ox+dx; ty=oy+dy; clampPan(); applyTransform();
+  });
+  const stop=e=>{
+    if(!dragging) return;
+    dragging=false; stage.classList.remove('dragging');
+    try{ stage.releasePointerCapture(e.pointerId); }catch(_){}
+    /* a drag must never read as a click on an edge zone */
+    if(moved>4){ const swallow=ev=>{ev.stopPropagation();ev.preventDefault();};
+      stage.addEventListener('click',swallow,{capture:true,once:true}); }
+  };
+  stage.addEventListener('pointerup',stop);
+  stage.addEventListener('pointercancel',stop);
+})();
+
+if(SHOTS.length){ cur=makeImg(0); frame.appendChild(cur); applyTransform(); setHud(); }
+if(SHOTS.length < 2){
+  stage.querySelectorAll('.zone, .hud').forEach(el => { el.style.display = 'none'; });
+}
+
+
+/* logo fallback */
+(function(){
+  const wm=document.getElementById('wordmark'), img=wm.querySelector('img');
+  const fail=()=>wm.classList.add('no-logo');
+  if(img.complete && img.naturalWidth===0) fail();
+  img.addEventListener('error',fail);
+})();
+
+/* lattice registers to the left column */
+const root=document.documentElement;
+/* One lattice for the whole site: a fixed 60px cell, phase centred on the
+   viewport. Each page used to register the crosses to its own content — the
+   logo on the landing, the .info column on the product page, the product
+   gutters on the shop grid — so the cell size AND the phase differed on every
+   page, and the shop's changed again with every variant that altered its
+   column pitch. Only colour and stacking differ per page now; the geometry is
+   identical everywhere. */
+const CELL = 60;
+function latticeOrigin(){
+  return { cell:CELL,
+           x:((window.innerWidth  - CELL)/2) % CELL,
+           y:((window.innerHeight - CELL)/2) % CELL };
+}
+function alignLattice(){
+  const o=latticeOrigin();
+  root.style.setProperty('--cell', o.cell+'px');
+  root.style.setProperty('--lat-x', o.x.toFixed(3)+'px');
+  root.style.setProperty('--lat-y', o.y.toFixed(3)+'px');
+}
+alignLattice(); addEventListener('resize',alignLattice); addEventListener('load',alignLattice);
+
+/* Header shrink. --headerH stays pinned to the FULL band height so it keeps
+   reserving the same layout slot: the frame on the left and the grid on the
+   right must not move when the band tightens. It is also measured rather than
+   computed — the old calc() underestimated the real band by ~1.6px, which was
+   burying the frame's top border underneath it. */
+(function(){
+  const hdr=document.querySelector('header'), rt=document.documentElement;
+  /* Measured rather than computed: the old calc() underestimated the real band
+     by ~1.6px, which buried the frame's top border beneath it. Nothing toggles
+     any more — the header is a constant. */
+  function measure(){
+    rt.style.setProperty('--headerH', Math.ceil(hdr.getBoundingClientRect().height)+'px');
+  }
+  measure();
+  addEventListener('load', measure);
+  addEventListener('resize', measure);
+  if(document.fonts) document.fonts.ready.then(measure);
+})();
+
+
+
+
+
+/* ------------------------------------------------------------------
+   Two-stage scroll.
+
+   Stage one: the footer is not in the layout at all, so the document
+   simply ends with the content. The page cannot scroll past it and
+   there is nothing to bounce back from — preventDefault is not
+   involved, and compositor-thread momentum cannot outrun it.
+
+   Stage two: once the wheel has been quiet at the stop, the next
+   downward gesture puts the footer into the layout and scrolls to it.
+   ------------------------------------------------------------------ */
+(function(){
+  const pin  = document.querySelector('.stage');
+  const foot = document.querySelector('footer');
+  if(!pin || !foot) return;
+
+  const stacked = () => matchMedia('(max-width:900px)').matches;
+  let open=false;
+  const docMax = () => document.documentElement.scrollHeight - innerHeight;
+
+  function close(){
+    if(!open) return;
+    open=false; blocked=false;
+    foot.classList.remove('revealed');
+    pin.style.transform='none';
+  }
+  function reveal(){
+    if(open) return;
+    open=true; blocked=false;
+    foot.classList.add('revealed');          // now it exists, below the fold
+    requestAnimationFrame(()=> window.scrollTo({top:docMax(), behavior:'smooth'}) );
+  }
+  function syncPin(){
+    if(!open){ pin.style.transform='none'; return; }
+    const rest = document.documentElement.scrollHeight - innerHeight
+               - foot.getBoundingClientRect().height
+               - parseFloat(getComputedStyle(foot).marginTop||0);
+    const past = Math.max(0, window.scrollY - Math.max(0,rest));
+    pin.style.transform = past ? `translateY(${-past}px)` : 'none';
+  }
+
+  /* Momentum decays monotonically, so a delta that grows can only mean the
+     user pushed again. That is what releases the stop — no waiting for the
+     momentum tail to die, and no need to touch the mouse. A time gap covers
+     discrete mouse wheels, whose notches never grow. */
+  let prevAbs=0, lastT=0, blocked=false;
+
+  addEventListener('wheel', e=>{
+    if(stacked()) return;
+    const now=performance.now(), abs=Math.abs(e.deltaY);
+    const gap=now-lastT; lastT=now;
+    const atEnd = window.scrollY >= docMax()-1;
+
+    if(e.deltaY > 0 && !open){
+      if(atEnd){
+        const newPush = abs > prevAbs + 1.5 || gap > 140;
+        if(blocked && newPush){ prevAbs=abs; reveal(); return; }
+        blocked = true;               // this gesture has hit the wall
+      } else {
+        blocked = false;              // still travelling through the content
+      }
+    } else if(e.deltaY < 0){
+      blocked = false;
+      if(open && window.scrollY <= 2 + (docMax() - foot.getBoundingClientRect().height)) close();
+    }
+    prevAbs = abs;
+  }, {passive:true});
+
+  addEventListener('scroll', syncPin, {passive:true});
+  addEventListener('keydown', e=>{
+    if(e.key==='End')  reveal();
+    if(e.key==='Home'){ close(); window.scrollTo({top:0,behavior:'smooth'}); }
+  });
+  addEventListener('resize', syncPin);
+})();
+</script>
+
+<script>
+/* The shop's band, on every page. The reserve is measured with the header at
+   full size and only then is the header shrunk, so --headerH — and with it
+   where the page starts — is exactly what it was before; the sections, the
+   logo and the page's own row simply sit higher inside it, where the shop
+   grid keeps them. Registered after the template's own measure(), so this
+   value is the one that survives. */
+(function(){
+  const hdr=document.querySelector('header'), rt=document.documentElement;
+  if(!hdr) return;
+  function reserve(){
+    hdr.classList.remove('tight');
+    const full=Math.ceil(hdr.getBoundingClientRect().height);
+    hdr.classList.add('tight');
+    rt.style.setProperty('--headerH', full+'px');
+  }
+  reserve();
+  addEventListener('load', reserve);
+  addEventListener('resize', reserve);
+  if(document.fonts) document.fonts.ready.then(reserve);
+})();
+</script>
+<!-- lattice-vector:start (spliced by _src/lattice_vector.py — do not hand-edit) -->
+<style>
+.lattice{overflow:hidden}
+.latv{position:absolute; display:block; pointer-events:none;
+  width:calc(100% + 2*var(--cell,60px)); height:calc(100% + 2*var(--cell,60px))}
+/* the footer's copy stays registered to the viewport: fixed, and clipped to the footer */
+.latclip{position:absolute; inset:0; z-index:-1; pointer-events:none; clip-path:inset(0)}
+.latclip .latv{position:fixed;
+  width:calc(100vw + 2*var(--cell,60px));
+  height:calc(100vh + 2*var(--cell,60px)); height:calc(100lvh + 2*var(--cell,60px))}
+</style>
+<script>
+/* The lattice as a live vector, snapped to device pixels. See _src/lattice_vector.py. */
+(function(){
+  const NS='http://www.w3.org/2000/svg', root=document.documentElement;
+  const mk=n=>document.createElementNS(NS,n);
+  const layers=[]; let seq=0;
+
+  function tileOf(el){
+    const m=/url\((["']?)(data:image\/svg\+xml[^"')]*)\1\)/.exec(getComputedStyle(el).backgroundImage);
+    if(!m) return null;
+    const cut=m[2].indexOf(','), head=m[2].slice(0,cut); let src=m[2].slice(cut+1);
+    try{ src=/;base64/i.test(head)?atob(src):decodeURIComponent(src); }catch(_){ return null; }
+    const doc=new DOMParser().parseFromString(src,'image/svg+xml').documentElement;
+    return doc&&doc.nodeName.toLowerCase()==='svg'?doc:null;
+  }
+
+  function build(host, inFooter){
+    const tile=tileOf(host); if(!tile) return;
+    const cell=parseFloat(getComputedStyle(root).getPropertyValue('--cell'))||60;
+    const inner=document.importNode(tile,true);
+    inner.setAttribute('width',cell); inner.setAttribute('height',cell);
+    if(!inner.getAttribute('viewBox')) inner.setAttribute('viewBox','0 0 '+(parseFloat(tile.getAttribute('width'))||cell)+' '+(parseFloat(tile.getAttribute('height'))||cell));
+
+    /* measure every stroked shape once, on screen: its width in CSS px is its
+       stroke-width times the scale of everything above it */
+    const probe=mk('svg'); probe.setAttribute('width',cell); probe.setAttribute('height',cell);
+    probe.style.cssText='position:absolute;left:0;top:0;visibility:hidden;pointer-events:none';
+    probe.appendChild(inner); document.body.appendChild(probe);
+    const strokes=[];
+    inner.querySelectorAll('path,line,polyline,polygon,rect,circle,ellipse').forEach(s=>{
+      const cs=getComputedStyle(s), sw=parseFloat(cs.strokeWidth);
+      if(cs.stroke==='none'||!(sw>0)||!s.getScreenCTM) return;
+      const k=s.getScreenCTM(), scale=Math.sqrt(Math.abs(k.a*k.d-k.b*k.c));
+      if(scale>0) strokes.push({el:s, sw, scale});
+    });
+    probe.remove();
+
+    const id='latv-'+(seq++);
+    const svg=mk('svg'); svg.setAttribute('class','latv'); svg.setAttribute('aria-hidden','true'); svg.setAttribute('focusable','false');
+    const defs=mk('defs'), pat=mk('pattern');
+    pat.setAttribute('id',id); pat.setAttribute('patternUnits','userSpaceOnUse');
+    pat.setAttribute('width',cell); pat.setAttribute('height',cell);
+    pat.appendChild(inner); defs.appendChild(pat);
+    const fill=mk('rect'); fill.setAttribute('width','100%'); fill.setAttribute('height','100%'); fill.setAttribute('fill','url(#'+id+')');
+    svg.append(defs, fill);
+
+    if(inFooter){
+      /* z-index:-1 must stay inside the footer: over its paper, under its type */
+      if(getComputedStyle(host).position==='static') host.style.position='relative';
+      if(getComputedStyle(host).zIndex==='auto') host.style.isolation='isolate';
+      const clip=document.createElement('div'); clip.className='latclip'; clip.setAttribute('aria-hidden','true');
+      clip.appendChild(svg); host.insertBefore(clip, host.firstChild);
+    } else host.appendChild(svg);
+    host.style.backgroundImage='none';
+    layers.push({svg, inner, cell, strokes});
+  }
+
+  function place(){
+    const dpr=window.devicePixelRatio||1, cs=getComputedStyle(root);
+    const lx=parseFloat(cs.getPropertyValue('--lat-x'))||0, ly=parseFloat(cs.getPropertyValue('--lat-y'))||0;
+    layers.forEach(L=>{
+      /* whole device pixels, never under one */
+      let odd=false;
+      L.strokes.forEach((s,i)=>{
+        const dev=Math.max(1, Math.round(s.sw*s.scale*dpr));
+        s.el.style.strokeWidth=(dev/dpr/s.scale).toFixed(4);
+        if(i===0) odd=dev%2===1;
+      });
+      /* the motif's centre is the cell's centre: an odd stroke wants it on a
+         pixel's middle, an even one (or a filled heart) on a pixel's edge */
+      const snap=v=>{ const c=(v+L.cell/2)*dpr; return (odd?Math.floor(c)+.5:Math.round(c))/dpr-L.cell/2; };
+      /* the svg itself sits on WHOLE device pixels — a browser may cache the
+         pattern tile as a bitmap, and a bitmap placed at a fraction is
+         resampled soft again — and the remainder (under one device pixel)
+         moves the motif inside its tile instead */
+      const sx=snap(lx), sy=snap(ly), bx=Math.floor(sx*dpr)/dpr, by=Math.floor(sy*dpr)/dpr;
+      L.svg.style.left=(bx-L.cell).toFixed(4)+'px';
+      L.svg.style.top =(by-L.cell).toFixed(4)+'px';
+      L.inner.setAttribute('x',(sx-bx).toFixed(4)); L.inner.setAttribute('y',(sy-by).toFixed(4));
+    });
+  }
+
+  function init(){
+    const lat=document.querySelector('.lattice'); if(lat) build(lat,false);
+    document.querySelectorAll('footer').forEach(f=>build(f,true));
+    if(!layers.length) return;
+    place();
+    /* registered after the page's own alignLattice(), so --lat-x/y are already new */
+    addEventListener('resize',place); addEventListener('load',place);
+    (function watch(){ matchMedia('(resolution: '+(window.devicePixelRatio||1)+'dppx)')
+      .addEventListener('change',()=>{ place(); watch(); },{once:true}); })();
+  }
+  init();
+})();
+</script>
+<!-- lattice-vector:end -->
+<!-- ascii-place:start (spliced by _src/ascii_place.py — do not hand-edit) -->
+<style>
+.ascii-fx,.ascii-gl,.ascii-st{pointer-events:none; user-select:none}
+.ascii-fx{position:fixed; inset:0; z-index:5; overflow:hidden}
+.ascii-fx img,.ascii-gl img,.ascii-st img{position:absolute; display:block; max-width:none}
+/* inside the canvas stage: over its paper, under the cards and connectors */
+.ascii-st{position:absolute; inset:0; overflow:hidden; z-index:-1}
+/* spans the host and clips: a motif may overrun the grid's right edge (the
+   tower does, in the comp) without giving the page a sideways scroll */
+.ascii-gl{position:absolute; inset:0; overflow:hidden; z-index:-1}
+@media (max-width:900px){ .ascii-fx,.ascii-gl,.ascii-st{display:none} }
+@media print{ .ascii-fx,.ascii-gl,.ascii-st{display:none} }
+.ascii-fx img.p{display:none}
+@media (max-width:900px){
+  .ascii-fx img.d{display:none}
+  .ascii-fx img.p{display:block}
+  .ascii-fx img.p0{left:-132.95vw; width:437.56vw; aspect-ratio:0.72287}
+}
+</style>
+<div class="ascii-fx" aria-hidden="true">
+  <img class="d" src="../../assets/ascii/krizi.svg" alt="" decoding="async" style="left:34.58vw; top:16.67svh; width:min(52.31vw, 103.32svh); aspect-ratio:0.72266">
+  <img class="p p0" src="../../assets/ascii/m/krizi.svg" alt="" decoding="async" loading="lazy">
+</div>
+<script>
+/* The phone motif that scrolls with the page: the fixed layer becomes an absolute one the
+   height of the document, and the top of the motif's letters sits on an element's top edge
+   (`at` in _src/ascii_place.py). Over 900px nothing is touched. */
+(function(){
+  const CFG = [{"k": 0, "at": "main h1", "ink_t": 0.0112}], fx = document.querySelector('.ascii-fx');
+  if(!fx) return;
+  const imgs = [...fx.querySelectorAll('img.p')];
+  let raf = 0;
+  function place(){
+    raf = 0;
+    if(!matchMedia('(max-width:900px)').matches){ fx.style.position = fx.style.height = fx.style.bottom = ''; return; }
+    fx.style.position = 'absolute'; fx.style.bottom = 'auto';
+    fx.style.height = document.documentElement.scrollHeight + 'px';
+    CFG.forEach(a => {
+      const i = imgs.find(x => x.classList.contains('p' + a.k)), el = document.querySelector(a.at);
+      if(!i || !el) return;
+      const y = el.getBoundingClientRect().top + scrollY;
+      i.style.top = (y - a.ink_t * i.getBoundingClientRect().height).toFixed(1) + 'px';
+    });
+  }
+  const kick = () => { if(!raf) raf = requestAnimationFrame(place); };
+  new ResizeObserver(kick).observe(document.body);
+  addEventListener('resize', kick); addEventListener('load', kick);
+  if(document.fonts && document.fonts.ready) document.fonts.ready.then(kick);
+  kick();
+})();
+</script>
+<!-- ascii-place:end -->
+<!-- ascii-legible:start (spliced by _src/ascii_legible.py — do not hand-edit) -->
+<style>
+@media (max-width:900px){
+/* ASCII legibility: a white outline behind the type that crosses a motif.
+   Measured, not guessed — see _src/ascii_legible.py. Headers are never included. */
+.info .facts,
+#g-desc,
+footer a,
+footer .rights{
+  text-shadow:
+     1.5px 0 0 var(--paper, #fff), -1.5px 0 0 var(--paper, #fff),
+     0 1.5px 0 var(--paper, #fff),  0 -1.5px 0 var(--paper, #fff),
+     1.065px 1.065px 0 var(--paper, #fff), -1.065px 1.065px 0 var(--paper, #fff),
+     1.065px -1.065px 0 var(--paper, #fff), -1.065px -1.065px 0 var(--paper, #fff);
+}
+.info .facts .rub path,
+#g-desc .rub path,
+footer a .rub path,
+footer .rights .rub path{ filter:drop-shadow(0 0 1.5px var(--paper, #fff)) drop-shadow(0 0 1.5px var(--paper, #fff)) }
+@supports (paint-order: stroke){
+  .info .facts,
+#g-desc,
+footer a,
+footer .rights{
+    text-shadow:none;
+    paint-order:stroke fill;
+    -webkit-text-stroke:3px var(--paper, #fff);
+  }
+  .info .facts .rub path,
+#g-desc .rub path,
+footer a .rub path,
+footer .rights .rub path{
+    filter:none;
+    paint-order:stroke fill;
+    stroke:var(--paper, #fff); stroke-width:3px; stroke-linejoin:round;
+    vector-effect:non-scaling-stroke;
+  }
+}
+@media print{
+  .info .facts,
+#g-desc,
+footer a,
+footer .rights{ text-shadow:none; -webkit-text-stroke:0 }
+  .info .facts .rub path,
+#g-desc .rub path,
+footer a .rub path,
+footer .rights .rub path{ filter:none; stroke:none }
+}
+}
+</style>
+<!-- ascii-legible:end -->
+<!-- landing-everywhere:start (spliced by _src/landing_everywhere.py — do not hand-edit) -->
+<script>
+/* The landing sits ABOVE the shop. The first scroll down (wheel, swipe, ↓,
+   PageDown, space, or Магазин) carries the page down on its own until the shop
+   stands exactly where it does when opened directly: the landing leaves the top
+   of the screen and none of it remains. There is no way back up by scrolling —
+   the landing is not in the document, it is a fixed layer over it (#landing,
+   which loads landing.html itself, so the landing's own splices — lattice,
+   motif, phone layout — stay the single source). Only the header logo brings
+   it back, and then the same scroll takes it away again.
+
+   The travel is a real scroll over a spacer that exists only while it runs
+   (see stage()); at rest the shop's layout is untouched, so its own measuring
+   scripts never see an offset. (Translating <html> instead was tried: it makes
+   the root the fixed layers' containing block, and every inset:0 layer —
+   this one, the crosses, the preview — stretches to the document's height.) The momentum left in a trackpad gesture is
+   swallowed until the user pushes again, so the shop does not overshoot. */
+(function(){
+  const rt=document.documentElement, layer=document.getElementById('landing');
+  if(!layer) return;
+  const frame=layer.querySelector('iframe');
+  /* the runway: on a phone the page's origin is --inT down the document
+     (mobile.py, THE RUNWAY AND THE BLEED); every rest position is that, not 0 */
+  const T0=()=>parseFloat(getComputedStyle(rt).getPropertyValue('--inT'))||0;
+  /* the travel is the layer's own height, not innerHeight: on a phone the
+     layer is --floor tall (mobile.py, THE FLOOR) — the screen under Safari's
+     bar, taller than the window — and the landing must leave ALL of it */
+  const layerH=()=>Math.round(layer.getBoundingClientRect().height)||innerHeight;
+  const DUR=950;
+  const ease=t=>t<.5 ? 4*t*t*t : 1-Math.pow(-2*t+2,3)/2;
+  const reduced=matchMedia('(prefers-reduced-motion: reduce)');
+  let state=rt.classList.contains('landing-on') ? 'landing' : 'shop';
+  if(state==='landing') window.scrollTo(0,T0());
+
+  function run(from,to,apply,done){
+    if(reduced.matches){ apply(to); done(); return; }
+    const t0=performance.now();
+    (function step(now){
+      const p=Math.min(1,(now-t0)/DUR), v=from+(to-from)*ease(p);
+      apply(v);
+      if(p<1) requestAnimationFrame(step); else done();
+    })(t0);
+  }
+  /* for the travel only: a spacer the landing's height above the shop, the
+     landing lying in it, and the window really scrolled — so the shop's fixed
+     header, preview and crosses behave exactly as on a scroll */
+  const spacer=document.createElement('div');
+  spacer.setAttribute('aria-hidden','true');
+  function stage(H){
+    /* before <main>, not at the body's start: on a phone the crosses and the
+       standing motif are sticky boxes at the START of the body (mobile.py, THE
+       FLOOR) and must stay registered to the screen while the shop rides up */
+    spacer.style.height=H+'px'; document.body.insertBefore(spacer,document.querySelector('body > main')||document.body.firstChild);
+    layer.style.cssText=`position:absolute; top:0; left:0; right:0; bottom:auto; height:${H}px`;
+  }
+  const to=y=>window.scrollTo({top:y,left:0,behavior:'instant'});
+  function unstage(){ spacer.remove(); layer.style.cssText=''; to(T0()); }
+
+  /* landing -> shop */
+  function go(){
+    if(state!=='landing') return;
+    state='anim'; hold.on=true;
+    const H=layerH();
+    const T=T0();
+    stage(H); to(T);
+    run(T,H+T,to,()=>{
+      rt.classList.remove('landing-on'); unstage(); state='shop';
+      if(location.hash==='#landing') history.replaceState(null,'',location.pathname+location.search);
+      try{ frame.blur(); }catch(_){}
+    });
+  }
+  /* shop -> landing (the header logo). At the top of the shop it is the same
+     travel run backwards; further down the landing comes down over the page
+     and the shop is put back to its top behind it. */
+  function back(){
+    if(state!=='shop') return;
+    state='anim';
+    const H=layerH();
+    rt.classList.add('landing-on');
+    const T=T0();
+    if(window.scrollY<=T+1){
+      stage(H); to(H+T);
+      run(H+T,T,to,()=>{ unstage(); state='landing'; });
+    } else {
+      run(-H,0,v=>{ layer.style.transform=`translateY(${v}px)`; },()=>{ layer.style.transform=''; to(T0()); state='landing'; });
+    }
+  }
+
+  /* ---- input ---- */
+  const hold={on:false, prev:0, t:0};
+  const SCROLL_KEYS=new Set(['ArrowDown','ArrowUp','PageDown','PageUp',' ','Spacebar','End','Home']);
+  const DOWN_KEYS=new Set(['ArrowDown','PageDown',' ','Spacebar','End']);
+  function eat(e){ e.preventDefault(); e.stopImmediatePropagation(); }
+
+  function onWheel(e){
+    const now=performance.now(), abs=Math.abs(e.deltaY), gap=now-hold.t;
+    hold.t=now;
+    if(state==='landing'){ eat(e); if(e.deltaY>0) go(); hold.prev=abs; return; }
+    if(state==='anim'){ eat(e); hold.prev=abs; return; }
+    if(hold.on){
+      /* momentum only decays: a delta that grows, or a pause, is a new push */
+      if(gap>160 || abs>hold.prev+1.5) hold.on=false;
+      else { eat(e); hold.prev=abs; return; }
+    }
+    hold.prev=abs;
+  }
+  let y0=null;
+  function onTouchStart(e){
+    if(state==='shop'){ hold.on=false; return; }
+    y0=e.touches[0].clientY;
+  }
+  function onTouchMove(e){
+    if(state==='shop') return;
+    eat(e);
+    if(state==='landing' && y0!==null && y0-e.touches[0].clientY>12){ y0=null; go(); }
+  }
+  function onKey(e){
+    if(state==='shop') return;
+    if(!SCROLL_KEYS.has(e.key) || e.target.closest?.('input,textarea,select')) return;
+    eat(e);
+    if(state==='landing' && DOWN_KEYS.has(e.key)) go();
+  }
+  function listen(w){
+    w.addEventListener('wheel',onWheel,{capture:true,passive:false});
+    w.addEventListener('touchstart',onTouchStart,{capture:true,passive:true});
+    w.addEventListener('touchmove',onTouchMove,{capture:true,passive:false});
+    w.addEventListener('keydown',onKey,{capture:true});
+  }
+  listen(window);
+
+  /* inside the landing: its own gestures, and its links. Магазин is this page,
+     so it runs the travel; the rest leave the whole window, not the frame.
+     Wired as soon as the frame has a document, with one delegated click
+     handler — NOT on the frame's load event, which waits for every image and
+     font of the landing: a click before it navigated the FRAME to the other
+     page, that page then lay inside the landing layer, and the first scroll
+     after the late load carried it away to reveal the page underneath (the
+     "duplicate collections page", 22 Sep). Should the frame ever hold anything
+     but the landing, it is put back. */
+  const SRC=frame.getAttribute('src'), HOME=new URL(SRC,location.href).pathname;
+  function here(a,d){ return new URL(a.getAttribute('href'), d.baseURI).pathname===location.pathname; }
+  function wire(){
+    let w, d;
+    try{ w=frame.contentWindow; d=frame.contentDocument; }catch(_){ return false; }
+    if(!w || !d || !d.documentElement || w.location.href==='about:blank') return false;
+    if(w.location.pathname!==HOME){ frame.src=SRC; return false; }
+    if(w.__iqonsWired) return true;
+    w.__iqonsWired=true;
+    listen(w);
+    d.addEventListener('click',e=>{
+      const a=e.target.closest?.('a[href]'); if(!a) return;
+      if(here(a,d)){ e.preventDefault(); go(); }
+      else a.target='_top';
+    },true);
+    return true;
+  }
+  frame.addEventListener('load',wire);
+  (function early(){ if(!wire()) requestAnimationFrame(early); })();
+
+  /* the header logo */
+  document.querySelectorAll('a.home').forEach(a=>{
+    a.addEventListener('click',e=>{
+      if(e.metaKey||e.ctrlKey||e.shiftKey||e.button) return;
+      e.preventDefault(); back();
+    });
+  });
+  addEventListener('hashchange',()=>{ if(location.hash==='#landing') back(); });
+})();
+</script>
+<!-- landing-everywhere:end -->
+<!-- mobile:start (spliced by _src/mobile.py — do not hand-edit) -->
+<style>
+/* ============================================================
+   MOBILE — one breakpoint, 900px. See _src/mobile.py.
+   ============================================================ */
+
+/* The two marks the panel script adds are built on every page, at every width,
+   so that a window resized across the breakpoint needs no rebuild. OUTSIDE the
+   query, so they are not on the desktop: without this the header carried a
+   default-styled «Меню» button on a 1440px screen, and --headerH — which is
+   measured, and which positions the preview, the stage and every piece band —
+   grew to fit it. */
+.mbtn, .mcart, .msearch{ display:none }
+
+/* The landing's fixed layer is black even while hidden (visibility:hidden), and
+   Safari 26 reads a hidden fixed box's colour for its chrome (THE CHROME'S
+   COLOUR, in the phone block) — so, off, it is transparent. Outside the query:
+   Safari 26 on a Mac tints its tab bar the same way. Its iframe keeps the
+   black; the class comes off only at the end of the travel, so the layer is
+   black for as long as it is seen. */
+html:not(.landing-on) .landing{ background:transparent }
+
+@media (max-width:900px){
+
+  :root{ --margin:18px; --gap:16px; --gapBottom:14px; }
+
+  /* nothing on a phone answers a hover, so the marks that only appear on one
+     are shown outright; see the product page's edge zones further down */
+  a, button{ -webkit-tap-highlight-color:transparent }
+
+  /* ---------- header: one line, the rest behind Меню ----------
+     Fixed again. The inherited block made it static, which pushed every page
+     down by three stacked rows of navigation; with the rows in a panel the
+     band is one line and the page runs under it, as on the desktop. */
+  header{
+    position:fixed; top:0; left:0; right:0; z-index:400;
+    display:flex; align-items:center; justify-content:space-between;
+    flex-wrap:wrap; row-gap:0; column-gap:12px;
+    padding:calc(9px + env(safe-area-inset-top,0px)) var(--margin) 9px;
+    background:none;
+  }
+  /* --headerH is measured with .tight off and the header drawn with it on; on a
+     phone the padding is written here, so the class has nothing left to do */
+  header.tight{ --padT:0px; --padB:0px }
+  /* every row the header carries, on every template: some pages wrap theirs in
+     a .slot column (shop, product, grail, cart, checkout, text page, states)
+     and some hang the site nav straight off the header (editorial,
+     collections, about, confirmation) */
+  header > .slot, header > .right, header > .sitenav, header > .links{ display:none }
+
+  .wordmark{
+    position:absolute; left:50%; top:50%; transform:translate(-50%,-50%);
+    order:0; padding:0; margin:0;
+  }
+  .wordmark img{ height:26px; max-width:44vw }
+
+  .mbtn, .mcart{
+    display:block; order:0; position:relative; z-index:1;
+    font:inherit; font-size:var(--t2); font-family:var(--font-t2);
+    letter-spacing:var(--tr2); text-transform:uppercase; line-height:1.4;
+    color:var(--ink); background:none; border:0; padding:4px 0; margin:0;
+    cursor:pointer; text-decoration:none; white-space:nowrap;
+  }
+  .mbtn{ margin-right:auto }
+  .mcart{ margin-left:auto }
+  /* The menu mark (assets/icons/menu.svg) stands where the word «Меню» stood,
+     measured off it: as tall as its capitals — .7em in IQONS Title, which is
+     what `1cap` resolves to — standing on the same baseline, and starting
+     where the ink of the М started, .01em inside the button's edge. The button
+     keeps its type metrics, so its line box and --headerH are what they were. */
+  .mbtn svg{
+    display:inline-block; vertical-align:baseline;
+    height:.7em; height:1cap; width:auto; aspect-ratio:8.4 / 9.71;
+    margin-left:.01em; fill:currentColor;
+    /* 75% bigger (22 Sep, user's call), grown up and to the right from its
+       bottom-left corner, so its foot stays on the baseline Корзина stands on.
+       A transform, so the line box — and the bar — keep their height. */
+    transform:scale(1.75); transform-origin:0 100%;
+  }
+  /* Open, the button is the close mark (22 Sep, user's call: no «Закрыть» left
+     anywhere on the site): one cross of the lattice turned 45°, the same mark
+     the shop's panel and the collections lightbox close with. It is absolute,
+     centred on the line's middle, with a full stop holding the line — so the
+     button's line box, and with it the bar, stay exactly what they were. */
+  .mbtn .xhold{ visibility:hidden }
+  .mbtn .xmark{
+    position:absolute; left:-1px; top:50%; width:18px; height:18px;
+    transform:translateY(-50%); overflow:visible;
+  }
+  .mbtn .xmark path{ vector-effect:non-scaling-stroke; stroke-width:1px }
+  /* the mark is some 8 by 10px; the target a thumb gets is not */
+  .mbtn::after{ content:''; position:absolute; inset:-9px -20px -8px -15px }
+
+  /* ---------- the panel ----------
+     The same header, opened out to the full screen. Its contents are the
+     page's own rows, shown where they were hidden — not copies. */
+  header.menu-open{
+    height:100svh; overflow-y:auto; overscroll-behavior:contain;
+    background:var(--paper); pointer-events:auto;
+    align-content:flex-start; align-items:flex-start;
+    padding-bottom:calc(var(--margin) + env(safe-area-inset-bottom,0px));
+  }
+  header.menu-open .wordmark{
+    top:calc(9px + env(safe-area-inset-top,0px)); transform:translateX(-50%);
+  }
+  /* The panel is white on black (22 Sep, user's call): the ink and the paper
+     swap inside the open header, so every row, rule and box in it follows. */
+  header.menu-open{
+    --paper:#000000; --ink:#FFFFFF; --ink-55:#FFFFFF; --ink-30:#FFFFFF; --ink-12:#FFFFFF;
+    color:var(--ink);
+  }
+  header.menu-open .wordmark img{ filter:invert(1) }
+  html.menu-lock, html.menu-lock body{ background:#000000 }
+  /* and the crosses run on over it: the lattice is lifted above the panel
+     (it already stands above the page's overlays) and drawn in white */
+  html.menu-lock .lattice{ z-index:401; filter:invert(1) }
+  header.menu-open > .slot,
+  header.menu-open > .right,
+  header.menu-open > .sitenav,
+  header.menu-open > .links{
+    display:flex; flex-direction:column; align-items:stretch;
+    flex-basis:100%; width:100%; margin:0;
+  }
+  header.menu-open > .slot,
+  header.menu-open > .sitenav{ order:2; gap:26px; margin-top:12vh }
+  header.menu-open > .links,
+  header.menu-open > .right{ order:3; gap:10px; margin-top:26px }
+  header.menu-open .sitenav,
+  header.menu-open .links{
+    display:flex; flex-direction:column; align-items:flex-start; gap:14px;
+    padding-top:0; white-space:normal;
+  }
+  header.menu-open .sitenav a{
+    font-size:var(--t1); font-family:var(--font-t1); letter-spacing:var(--tr1);
+    color:var(--ink); padding-bottom:2px;
+  }
+  header.menu-open .links a{ font-size:var(--t2) }
+  header.menu-open .seg{ flex-direction:column; align-items:stretch }
+  header.menu-open .seg a{
+    border-right:0; border-bottom:1px solid var(--ink);
+    padding:12px 14px 11px; text-align:left;
+  }
+  header.menu-open .seg a:last-child{ border-bottom:0 }
+  header.menu-open .mcart-src{ display:none }
+  /* nor is the gender filter (21 Sep): the shop moves its own into the head
+     row beside Фильтр and Сортировать — see the script — and a page that
+     cannot, the product page, does not show it on a phone at all. `.slot .seg`
+     is only ever that row; search and cart are in `.right`. */
+  header.menu-open .slot .seg{ display:none }
+  /* SEARCH HAPPENS IN THE PANEL (21 Sep, user's call). Поиск used to call the
+     shop's filter modal, a second full-screen sheet on top of this one. Now
+     the box that says Поиск becomes the line you type in, in the same place
+     and the same box; the count of what matches stands under it, and Показать
+     — or the keyboard's own search key — closes the panel on the narrowed
+     grid. The line is set as the modal's own search line is (the Mid face at
+     16px), which is also the size under which iOS zooms the page on focus. */
+  header.menu-open .msearch-src{ display:none }
+  header.menu-open .msearch.on{ display:block }
+  .msearch input{
+    display:block; width:100%; box-sizing:border-box; margin:0;
+    font:inherit; font-family:var(--font-t3, inherit); font-size:var(--t1m, 16px);
+    line-height:1.4; letter-spacing:0; color:var(--ink); background:none;
+    border:1px solid var(--ink); border-radius:0; padding:9px 14px 8px;
+    outline:0; -webkit-appearance:none; appearance:none;
+  }
+  .msearch input::placeholder{ color:var(--ink-30) }
+  .msearch input::-webkit-search-cancel-button{ -webkit-appearance:none }
+  .msearch-foot{
+    display:flex; align-items:baseline; justify-content:space-between; gap:16px;
+    margin-top:12px;
+  }
+  .msearch-n{
+    font-size:var(--t2); font-family:var(--font-t2); letter-spacing:var(--tr2);
+    text-transform:uppercase; color:var(--ink-55);
+  }
+  .msearch-foot button{
+    font:inherit; font-size:var(--t2); font-family:var(--font-t2);
+    letter-spacing:var(--tr2); text-transform:uppercase; white-space:nowrap;
+    color:var(--ink); background:none; border:1px solid var(--ink);
+    border-radius:0; padding:7px 15px 6px; margin-left:auto; cursor:pointer;
+  }
+  header.menu-open .phead{ flex-direction:column; align-items:flex-start; gap:12px }
+  html.menu-lock, html.menu-lock body{ overflow:hidden }
+
+  /* The shop's filter modal is inside .shell, which is its own stacking
+     context at z-index 10, so no z-index on the pane can lift it over a fixed
+     header at 400 — the Меню button kept its place on top of the open panel.
+     The header steps out of the way while the modal is up; the panel carries
+     its own close mark, so nothing is lost. */
+  /* visibility, not pointer-events: the base stylesheet gives every direct
+     child of the header `pointer-events:auto`, so the button stayed hittable */
+  html.pane-modal header{ visibility:hidden }
+
+  /* ---------- a page's own head row, moved out of the header ---------- */
+  main > .phead{
+    display:flex; flex-wrap:wrap; align-items:baseline; gap:10px 18px;
+    margin:0 var(--margin) 18px 0;
+  }
+  main > .phead .tools{ margin-left:auto }
+  /* Each page's head row is cap-top aligned by a script that writes a
+     translateY onto the heading, the links and the tools — and it assumes the
+     three are on ONE row. Wrapped, it lifted the links back onto the heading
+     and printed one over the other (text page, 19 Sep). The shop's own
+     alignment pass already stops at this breakpoint for the same reason; this
+     one does not, so its inline transform is undone here. */
+  main > .phead > *{ transform:none !important }
+  /* and the row of section links is allowed to wrap: four or five of them are
+     set nowrap for the desktop header and ran off the margin */
+  main > .phead .links{ flex-wrap:wrap; white-space:normal; gap:10px 14px }
+
+  /* ---------- page column ----------
+     Every template but the shop and the product page is
+     `.page{padding:var(--headerH) 0 var(--gapBottom) var(--margin)}` with a
+     560px column hugging the right edge. On a phone the column is the screen. */
+  .narrow, .wide{
+    max-width:none; margin-left:0; padding-right:var(--margin);
+  }
+  .centred{ min-height:calc(100svh - var(--headerH) - var(--gapBottom) - 40px);
+            padding-right:var(--margin) }
+
+  /* ---------- THE FLOOR: the bottom of the SCREEN ----------
+     Safari on iOS 26 (the user's phone, 22 Sep, three screenshots — and the
+     research of 23 Sep: developer.apple.com/forums/thread/800798,
+     1ar.io/updates/safari-26-liquid-glass-web, github.com/andesco/
+     safari-color-tinting): the page's SCROLLING content is drawn on under the
+     floating address bar, but every position:fixed AND position:sticky layer
+     is CUT on the bar's top edge whatever its height — `inset:0`,
+     `height:100lvh`, a 240px bleed, and the sticky boxes of the 22 Sep build
+     all ended on that same line, and the line moved with the bar. No fixed or
+     sticky box can reach the screen's bottom edge there; only ordinary
+     scrolling content can. (yachtie.co, the user's reference, does nothing
+     clever: its body is black, so the flat colour Safari paints past its bars
+     is the page's own. Ours is paper with crosses, so the colour alone shows
+     as a bar.)
+
+     So (23 Sep) every layer that has to reach the floor is ORDINARY SCROLLING
+     CONTENT: position:absolute from the top of the document — the crosses as
+     tall as the whole document (html is their containing block), the standing
+     motif and the landing as tall as the floor. They ride with the page (the
+     crosses no longer stay put on a phone — the user's call: the whole screen
+     covered comes first, the motifs may be cut where they may). The floor is
+     still measured from the cut line: the small viewport's bottom (100svh)
+     plus the bar's zone, 89 CSS px on the user's phone (266 of 2556 device px
+     at 3x). `--bar` is set only on iOS (`-webkit-touch-callout` exists in no
+     other engine); elsewhere the floor is the large viewport as before.
+     FLOOR_JS hoists .ascii-fx (ascii_place.py splices it after the footer),
+     adds the two tint chips (THE CHROME'S COLOUR, below) and pins the landing
+     for the logo's slide. Headless Chrome cannot show any of this (nothing is
+     cut there) — only the phone can; drafts/probe.html is the ruler for it,
+     with every candidate side by side. */
+  :root{ --bar:0px; --floor:max(100lvh, calc(var(--inT,0px) + 100svh + var(--inB,var(--bar)))) }
+  @supports (-webkit-touch-callout:none){ :root{ --bar:89px } }
+  /* ---------- THE RUNWAY AND THE BLEED (23 Sep, the probe on the user's phone) ----------
+     Safari 26 lays the page out in a window SHORTER than the screen — 714 of
+     874px on the user's iPhone: a strip of 62 above (the status bar and the
+     island) and 98 below (the address bar) — with env(safe-area-inset-*) at 0,
+     viewport-fit=cover or not. Content SCROLLED past that window is drawn on
+     under both strips (the user: the site scrolls behind the bar); what is
+     wrong is only the top and the end of every page, where the document
+     simply stops at the window's edge and Safari paints its flat colour. So
+     the document is given a RUNWAY of --inT above its content and a BLEED of
+     --inB below it, and every page starts scrolled to --inT: the screen's top
+     pixel is then the page's own (the crosses run under the island), the
+     runway settles back after an overscroll (FLOOR_JS), and at the end of the
+     page the bleed runs under the bar. --inT comes from a table of iPhone
+     screens (FLOOR_JS: 62px on the 402x874 / 440x956 phones, 59 on 393x852 /
+     430x932, 47 on 390x844 / 428x926, 44 on 375x812 / 414x896, 20 on the
+     home-button phones); --inB is the screen's height minus 100svh minus
+     --inT — the phone measures it. --floor is then the screen's height
+     exactly. Set only on iOS, so nothing changes elsewhere. */
+  .runway{ height:var(--inT,0px); flex:none; pointer-events:none }
+  /* no bleed below: the page ends where the footer ends (23 Sep, the user) */
+  /* the containing block of the absolute layers: the whole document. Only
+     position:relative — never a transform or a filter on the root, which
+     would make it the containing block of the fixed header as well. */
+  html{ position:relative }
+
+  /* ---------- the crosses are STILL (23 Sep, the user) ----------
+     The lattice never scrolls: fixed to the screen, as on the desktop, and
+     bled two WHOLE cells past the top and the bottom so a pull past the top
+     or a bar that slides never shows its end. WHOLE cells: the pattern
+     repeats every cell, so every cross is exactly where it was and
+     lattice_vector.py's snap still lands on it (its svg is absolute inside
+     this box, placed a cell up and left, so it travels with the box — two
+     cells is two tiles, which is no move at all). A fixed box past the
+     viewport adds no scroll.
+     NOT A FULL-WIDTH BOX (23 Sep, the user: "the black in the top is back"):
+     a fixed box within 4px of the top or 3px of the bottom, at least 80%
+     wide, is what Safari 26 reads its chrome's colour from (THE CHROME'S
+     COLOUR, below), and this one is transparent, which Safari paints BLACK.
+     So the box is HALF the screen wide and lets its svg overflow: the svg is
+     sized to the viewport plus a cell to each side and three cells top and
+     bottom, so the crosses cover the whole window as before and the box
+     itself is never sampled.
+     And the tile's PHASE is pinned to the screen, not to the window
+     (LATTICE_STILL_JS): Safari's bar collapses and grows with every scroll,
+     and each resize used to move every cross by half the change in height. */
+  .lattice{
+    position:fixed; top:calc(-2 * var(--cell,60px)); left:0; right:auto; bottom:auto;
+    width:50%; height:calc(100lvh + 4 * var(--cell,60px)); min-height:0;
+    margin:0; flex:none; overflow:visible;
+  }
+  .lattice .latv{ width:calc(100vw + 2 * var(--cell,60px)); height:calc(100lvh + 6 * var(--cell,60px)) }
+  /* ---------- ASCII ----------
+     ascii_place.py hides all three layers under 901px; this turns them back on,
+     and NO_ASCII hides them again on every page but the two ASCII_KEEP holds. */
+  .ascii-fx, .ascii-gl, .ascii-st{ display:block }
+  /* The standing layer: the first screen, top to floor, so every motif that
+     stands on the floor stands on the screen's bottom edge on a still page
+     (their heights are in --floor: ascii_place.py), and rides up with the
+     page when the footer is swiped up. The product page's AT_JS overrides
+     this with an inline position:absolute the height of the document. */
+  .ascii-fx{
+    position:absolute; top:0; left:0; width:100%; height:var(--floor);
+    margin:0; flex:none;
+  }
+  /* The landing, laid over the page (landing-merge / landing_everywhere.py):
+     the same, so its plate reaches the floor. Its travel script writes an
+     inline position:absolute for the length of the animation and measures
+     the layer's own height for it, not innerHeight. When the logo brings it
+     down over a page scrolled away from its top, FLOOR_JS pins it fixed for
+     the slide (cut on the bar for that second) and lets go at the top. */
+  .landing{
+    position:absolute; inset:0 0 auto 0; height:var(--floor);
+    margin:0; flex:none;
+  }
+  /* ---------- THE CHROME'S COLOUR ----------
+     Safari 26 no longer reads <meta name="theme-color"> (andesco/
+     safari-color-tinting, 1ar.io, benfrain.com): its status bar and the
+     surround of its address bar take the background-color of a
+     position:fixed or sticky box within 4px of the top or 3px of the bottom,
+     at least 80% wide and 3px tall — otherwise the body's. A hidden box is
+     still read (visibility:hidden counts; display:none does not), which is
+     where the black bands on a white page came from: the landing's fixed
+     black layer, hidden but there, long after it had gone. Now the layers
+     that reach the floor are absolute and never read, the landing is
+     transparent while it is off (below, outside the query), and the two
+     chips here ARE read and say what the page is: black under the landing
+     and the Меню panel, gone (display:none — the body's paper is read)
+     otherwise (below). */
+  .tint{ position:fixed; left:0; width:100%; height:4px; z-index:2000;
+         pointer-events:none; display:none; background:#000000 }
+  .tint-t{ top:0 } .tint-b{ bottom:0 }
+  /* Under the landing the top chip showed as a black LINE at the bottom of the
+     status strip wherever it crossed the white motif (23 Sep, the user's phone),
+     and Safari does not read it anyway (THE GLOW, below) — so no chips under
+     the landing any more; only under the Меню panel, where they are black on
+     black. Removed at the user's word, 23 Sep. */
+  html.menu-lock .tint{ display:block }
+  /* THE GLOW (23 Sep, parked at the user's word): over the black landing
+     Safari keeps its status icons black and lays a white wash under the
+     island — it reads the page as light. Two attempts, both REVERTED because
+     each turned the landing's strips into black bars on the phone: 12px chips
+     always in the tree (transparent when off), and `html.landing-on header
+     {background:#000}` (the icons do go white in the Меню panel, whose header
+     is black, so the header is what Safari reads). Deal with it last. */
+
+  /* Under the Меню panel and under the shop's filter modal — both fixed, so
+     both cut on the bar — the page beneath would show, faded, in the bar's
+     zone. It is put out of sight there: the panel's zone is then plain black
+     (html.menu-lock paints the body black; the inverted lattice runs on over
+     it), the modal's plain paper. visibility, so nothing is re-laid-out. */
+  html.menu-lock main, html.menu-lock footer, html.menu-lock .ascii-fx{ visibility:hidden }
+  html.pane-modal main > :not(.pane), html.pane-modal footer,
+  html.pane-modal .ascii-fx, html.pane-modal .lattice{ visibility:hidden }
+
+  /* ---------- footer ----------
+     In the layout from the start (22 Sep, the user: the swipe-to-open footer
+     of 21 Sep — a touch handler, a display toggle and a smooth scroll on every
+     swipe — made every still page lag). The desktop's two-stage reveal is a
+     wheel handler that returns early under 901px, so `.revealed` never
+     matters here: the page scrolls into the footer and back, natively, and
+     nothing else moves. `main` is a full screen tall (--floor: the screen's
+     bottom edge under Safari's bar, the same floor the motifs stand on — NOT
+     lvh, which left the footer's first row showing through the bar on a still
+     page, 22 Sep), so on a page that fits the screen the footer begins under
+     the screen's bottom edge — the still page looks as it did, and a swipe
+     brings the footer up OVER the standing motif, which stays where it is. */
+  footer, footer.revealed{ display:flex }
+  main{ min-height:calc(var(--floor) - var(--inT,0px)) }   /* runway + main = the screen */
+  /* See-through: no paper and no tile of its own. The fixed ASCII layer (z 5)
+     shows through it, and the lattice (z 100) runs over it as over the rest
+     of the page — so the footer steps down under the lattice (the desktop's
+     stands above it at 200 with its own copy of the tile). Its type gets the
+     white ring where a motif runs behind it: ascii_legible.py, `phone`. */
+  footer{ background:none; z-index:50 }
+  footer .latclip{ display:none }   /* the page's crosses run over it: no second copy (23 Sep) */
+  footer nav{
+    display:grid; grid-template-columns:1fr 1fr; gap:11px 16px;
+    justify-content:start; padding:12px var(--margin) 0;
+  }
+  footer .rights{ padding:26px var(--margin) 6px }
+}
+
+@media (max-width:560px){
+  :root{ --margin:15px; --gap:13px }
+  .wordmark img{ height:23px }
+  header.menu-open > .slot{ margin-top:9vh; gap:22px }
+}
+
+@media (max-width:900px){
+  /* the photograph runs edge to edge, the way the stage runs to the right edge
+     of the desktop; everything else keeps the page margin */
+  .pshell{ padding:var(--headerH) var(--margin) 0; gap:0 }
+  .stage{
+    position:relative; top:auto; right:auto; order:0;
+    width:calc(100% + 2 * var(--margin)); margin-inline:calc(-1 * var(--margin));
+    height:auto; aspect-ratio:1 / var(--shotRatio);
+    transform:none !important; margin-bottom:24px;
+  }
+  .crumb{ margin-bottom:16px }
+  .info{ max-width:none; padding-bottom:30px; order:1 }
+  .related{ order:2 }
+  .related h2{ max-width:none; padding-top:26px }
+  .rgrid{ grid-template-columns:repeat(2,minmax(0,1fr)); gap:var(--gap) }
+  /* the arrows only appeared on hover, so on a phone they never appeared */
+  .zone{ width:30% }
+  .zone .mark{ opacity:1; transform:none }
+  .zone:disabled .mark{ display:none }
+}
+
+@media (max-width:900px){
+  .info .req{ margin-bottom:18px }
+  .info .desc{ max-width:none }
+  .info{ padding-bottom:0 }
+}
+
+@media (max-width:900px){ .ascii-fx, .ascii-gl, .ascii-st, .ascii-plate{ display:none } }
+</style>
+
+<script>
+/* The Меню panel. Built from what the page's own header already carries: the
+   button is the only thing added, and the rows it shows are the page's own
+   elements, hidden by CSS and shown again — never cloned, so the listeners on
+   the gender filter, the search link and the page's tools all survive.
+   See _src/mobile.py. */
+(function(){
+  const hdr = document.querySelector('header');
+  if(!hdr || hdr.querySelector('.mbtn')) return;
+  const mq = matchMedia('(max-width:900px)');
+
+  const btn = document.createElement('button');
+  btn.type = 'button'; btn.className = 'mbtn';
+  btn.setAttribute('aria-expanded', 'false');
+  /* the menu mark, assets/icons/menu.svg, inline so the page stays one file and
+     the mark takes the ink colour; the word it replaced is its label */
+  const MARK = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 8.4 9.71" aria-hidden="true" focusable="false">'
+    + '<path d="M8.4,3.24h-.02l-.76-1.04H.78L.02,3.24h-.02V0h.02l.72,1h6.91l.72-1h.02v3.24Z"/>'
+    + '<path d="M8.4,6.48h-.02l-.76-1.04H.78L.02,6.48H0v-3.24h.02l.72,1h6.91l.72-1h.02v3.24Z"/>'
+    + '<path d="M8.4,9.71h-.02l-.76-1.04H.78L.02,9.71H0v-3.24h.02l.72,1h6.91l.72-1h.02v3.24Z"/></svg>';
+  /* the close mark: the lattice's cross — the page tile's two bowed strokes —
+     turned 45°. The hidden full stop keeps the button a line of type tall. */
+  const XMARK = '<span class="xhold" aria-hidden="true">.</span>'
+    + '<svg class="xmark" xmlns="http://www.w3.org/2000/svg" viewBox="5.5 5.5 13 13" aria-hidden="true" focusable="false">'
+    + '<g transform="rotate(45 12 12)" fill="none" stroke="currentColor" stroke-linecap="round">'
+    + '<path d="M12 3.6C12.15 8.4 12.15 15.6 12 20.4"/><path d="M3.6 12C8.4 11.85 15.6 11.85 20.4 12"/></g></svg>';
+  btn.innerHTML = MARK;
+  btn.setAttribute('aria-label', 'Меню');
+  hdr.insertBefore(btn, hdr.firstChild);
+
+  /* A cart shortcut in the bar, on EVERY page (21 Sep, user's call: the bar of
+     the shop — mark, wordmark, Корзина — is the bar of the site). Where the
+     desktop header has a cart link the shortcut is read off it; the archive,
+     the cart, the checkout and the editorial pages have none on the desktop,
+     so theirs is made here, counting the cart page's own lines where there
+     are any. */
+  const src = hdr.querySelector('.right a[href*="cart"]');
+  const a = document.createElement('a');
+  a.className = 'mcart';
+  if(src){
+    a.href = src.getAttribute('href');
+    a.textContent = src.textContent.trim();
+    /* the bar now carries the cart, so the row it was copied from is marked
+       and left out of the panel — the same control twice reads as two */
+    (src.closest('.seg') || src).classList.add('mcart-src');
+  } else {
+    a.href = /\/final1\//.test(location.pathname) ? '../drafts/cart.html' : 'cart.html';
+    /* the prototype's cart holds the two lines cart.html draws; the checkout
+       is that same cart one step on, and it lists no lines of its own to count */
+    const n = /checkout/.test(location.pathname) ? 2 : document.querySelectorAll('main .line').length;
+    a.textContent = 'Корзина (' + n + ')';
+  }
+  hdr.appendChild(a);
+
+  /* Search happens IN the panel (21 Sep, user's call): Поиск opened the shop's
+     filter modal, a second sheet over this one. On a phone the Поиск box turns
+     into the line itself. On the shop it drives the page's own search input
+     (#q), so the grid, the count and «Сбросить фильтры» all follow as they do
+     from the modal; on the pages whose Поиск is a link to the shop (product,
+     archive piece, states) it carries the words there as `?q=`, which the
+     shop reads below. The desktop is untouched: over 900px the link is let
+     through to the page's own handler. */
+  const slink = hdr.querySelector('.right a[href*="search"]');
+  const pageQ = document.getElementById('q');
+  let searchState = () => {};
+  if(slink){
+    const sseg = slink.closest('.seg') || slink;
+    const form = document.createElement('form');
+    form.className = 'msearch'; form.setAttribute('role', 'search');
+    form.innerHTML = '<input type="search" placeholder="Найти" aria-label="Поиск"'
+      + ' autocomplete="off" spellcheck="false" enterkeyhint="search">'
+      + '<div class="msearch-foot"><span class="msearch-n" aria-live="polite"></span>'
+      + '<button type="submit">Показать</button></div>';
+    sseg.parentNode.insertBefore(form, sseg.nextSibling);
+    const inp = form.querySelector('input'), cnt = form.querySelector('.msearch-n');
+    const show = on => { form.classList.toggle('on', on); sseg.classList.toggle('msearch-src', on); };
+    const count = () => {
+      const c = document.getElementById('fcount');
+      cnt.textContent = pageQ && c && inp.value.trim() ? c.textContent : '';
+    };
+    /* capture, and stopped here: the shop's own listener on the link would
+       open the modal, and the panel's would close the panel */
+    hdr.addEventListener('click', e => {
+      if(!mq.matches || e.target.closest('a') !== slink) return;
+      e.preventDefault(); e.stopPropagation();
+      show(true); inp.focus();
+    }, true);
+    inp.addEventListener('input', () => {
+      if(!pageQ) return;
+      pageQ.value = inp.value; pageQ.dispatchEvent(new Event('input'));
+      count();
+    });
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+      const v = inp.value.trim();
+      if(pageQ){ inp.blur(); open(false); scrollTo(0, 0); return; }
+      if(!v) return;
+      const u = new URL(slink.href); u.hash = ''; u.search = '';
+      u.searchParams.set('q', v);
+      location.href = u.href;
+    });
+    /* an empty line goes back to being the Поиск box when the panel closes; a
+       line with words in it is still there, and still editable, on the next
+       open — read back off the page's own input, which «Сбросить фильтры»
+       in the filter modal may have emptied in the meantime */
+    searchState = on => {
+      if(on && pageQ && inp.value !== pageQ.value){ inp.value = pageQ.value; count(); }
+      if(!inp.value.trim()) show(false);
+    };
+    const q0 = new URLSearchParams(location.search).get('q');
+    if(pageQ && q0){
+      inp.value = pageQ.value = q0; pageQ.dispatchEvent(new Event('input'));
+      show(true); count();
+    }
+  }
+
+  function open(on){
+    hdr.classList.toggle('menu-open', on);
+    document.documentElement.classList.toggle('menu-lock', on);
+    btn.setAttribute('aria-expanded', on ? 'true' : 'false');
+    if(on){ btn.innerHTML = XMARK; btn.setAttribute('aria-label', 'Закрыть'); }
+    else { btn.innerHTML = MARK; btn.setAttribute('aria-label', 'Меню'); }
+    searchState(on);
+  }
+  btn.addEventListener('click', () => open(!hdr.classList.contains('menu-open')));
+  /* any link inside the panel closes it — a same-page anchor would otherwise
+     leave it standing open. Поиск is the exception, stopped in capture above:
+     it is used inside the panel */
+  hdr.addEventListener('click', e => {
+    if(e.target !== btn && e.target.closest('a')) open(false);
+  });
+  addEventListener('keydown', e => { if(e.key === 'Escape') open(false); });
+  /* and on a rotation: the page's own reserve() re-measures the header on
+     resize, and an open panel is 100svh tall — it would set --headerH, which
+     positions everything, to the whole screen */
+  /* — a rotation, not any resize: a phone's keyboard coming up for the search
+     line resizes the window on some browsers, and changes only its height */
+  let lastW = innerWidth;
+  addEventListener('resize', () => {
+    if(innerWidth === lastW) return;
+    lastW = innerWidth;
+    if(hdr.classList.contains('menu-open')) open(false);
+  });
+
+  /* The page's own head row lives inside the header on the desktop (the cart,
+     the checkout and the text page put their h1 there). Behind the button it
+     would be invisible, so on a phone it moves to the top of <main>. Moved,
+     not copied: .phead carries buttons with listeners on them. */
+  const slot = hdr.querySelector('.slot');
+  const phead = hdr.querySelector('.phead');
+  const main = document.querySelector('main');
+  function place(){
+    if(!phead || !main || !slot) return;
+    if(mq.matches){ if(phead.parentNode !== main) main.insertBefore(phead, main.firstChild); }
+    else if(phead.parentNode !== slot){ slot.appendChild(phead); }
+  }
+  /* The gender filter is not in the panel (21 Sep, user's call). On the shop it
+     stands in the head row with Фильтр and Сортировать, set like them; on
+     every other page that carries it — the product page — it is simply not
+     shown on a phone. Moved, not copied, as above; and back again over 900px.
+     The shop's own click handler clears aria-current through
+     `header .slot .seg a`, which finds nothing once the row has left the
+     header, so the clearing is repeated here on the row itself. */
+  const gseg = hdr.querySelector('.slot .seg');
+  const tools = document.querySelector('.gridhead .tools');
+  function placeGender(){
+    if(!gseg || !tools || !slot) return;
+    if(mq.matches){ if(gseg.parentNode !== tools) tools.insertBefore(gseg, tools.firstChild); }
+    else if(gseg.parentNode !== slot){ slot.appendChild(gseg); }
+  }
+  if(gseg && tools) gseg.addEventListener('click', e => {
+    const hit = e.target.closest('a');
+    if(!hit) return;
+    gseg.querySelectorAll('a').forEach(x => { if(x !== hit) x.removeAttribute('aria-current'); });
+  });
+  function sync(){ if(!mq.matches) open(false); place(); placeGender(); }
+  mq.addEventListener('change', sync);
+  sync();
+
+  /* the shop's filter modal, on the pages that have one */
+  const pane = document.getElementById('pane');
+  if(pane){
+    const flag = () => document.documentElement.classList.toggle(
+      'pane-modal', pane.classList.contains('modal-open'));
+    new MutationObserver(flag).observe(pane, {attributes:true, attributeFilter:['class']});
+    flag();
+  }
+})();
+</script>
+<script>
+/* The fixed ASCII layer used to be lifted by however much of the footer was on
+   screen, so a motif stood on the footer's rule. Since 22 Sep (the user) it is
+   STILL: the footer — see-through, z-index 50 — scrolls up over the layer at
+   5, and nothing here re-places a motif on scroll. Kept as a note; the
+   desktop's own rules are untouched. See _src/mobile.py. */
+</script>
+<script>
+/* The phone footer needs no script (22 Sep, the user). Until then a
+   swipe-to-open handler put it into the layout on a swipe that started at the
+   end of the page — a touch handler, a display toggle and a smooth scroll on
+   every swipe, and every still page lagged under it. Now the footer is in the
+   layout from the start, under a full-screen `main`, and the page simply
+   scrolls into it and back. It is in _versions/2026-09-22-pre-phone-footer-flow/
+   should it ever be wanted again. See _src/mobile.py. */
+</script>
+
+<script>
+(function(){
+  function hoist(){
+    var fx=document.querySelector('body > .ascii-fx');
+    if(fx && fx.previousElementSibling) document.body.prepend(fx);
+  }
+  hoist(); addEventListener('load', hoist);
+  if(document.fonts && document.fonts.ready) document.fonts.ready.then(hoist);
+
+  /* The crosses are FIXED again since later on 23 Sep (the user: still, on
+     every page) — the box no longer follows the document's height. fit()
+     only clears the min-height an earlier build may have left inline. */
+  var mq=matchMedia('(max-width:900px)'), lat=document.querySelector('body > .lattice');
+  function fit(){
+    if(!lat) return;
+    lat.style.minHeight='';
+  }
+  fit(); addEventListener('load', fit); addEventListener('resize', fit); setTimeout(fit, 1200);
+  if(document.fonts && document.fonts.ready) document.fonts.ready.then(fit);
+  if(window.ResizeObserver) new ResizeObserver(fit).observe(document.body);
+
+  /* the two tint chips Safari 26 reads its chrome's colour from (THE CHROME'S
+     COLOUR in _src/mobile.py): fixed, full width, 4px, at the very top and the
+     very bottom; the CSS shows them only under the landing and the Меню panel */
+  if(!document.querySelector('.tint-t')){
+    ['tint-t','tint-b'].forEach(function(c){
+      var d=document.createElement('div'); d.className='tint '+c; d.setAttribute('aria-hidden','true');
+      document.body.prepend(d);
+    });
+  }
+
+  /* The landing layer is absolute at the document's top on a phone (THE
+     FLOOR). When the logo brings it down over a page scrolled away from its
+     top, the merge slides the layer in with a transform and only then puts
+     the page back to its top — so for that slide the layer is pinned fixed
+     (inset:0; cut on the bar, for a second) and let go at scrollY 0, where
+     fixed and absolute coincide. Never while the merge holds its own inline
+     position (the travel at the top of the page writes cssText). */
+  /* THE RUNWAY AND THE BLEED (see the CSS): iOS only — the strips Safari 26
+     keeps above and below its window. --inT from the iPhone table, --inB
+     measured: the screen's height minus the small viewport minus --inT. */
+  var rt=document.documentElement, T=0;
+  var ios=(window.CSS && CSS.supports('-webkit-touch-callout','none')) || /[?&]runway/.test(location.search);
+  var holdall=!!getComputedStyle(rt).getPropertyValue('--holdall').trim();   /* a page that never scrolls (publications) */
+  /* THE HOME SCREEN (see _src/mobile.py): in iOS's standalone web-app shell
+     there is no strip to dodge, so nothing is held off the top. --inT and
+     --inB are 0 (everything keyed to them — the runway box, main's min-height,
+     the publications stage, the landing merge's T0() — then sits flush at the
+     document's top) and --floor is the window, which IS the screen.
+     navigator.standalone is false in Safari and undefined in every other
+     browser, so this branch is the Home Screen's alone. */
+  var standalone = (navigator.standalone === true);
+  if(mq.matches && standalone){
+    rt.style.setProperty('--inT','0px'); rt.style.setProperty('--inB','0px');
+    var floor=function(){ rt.style.setProperty('--floor', innerHeight+'px'); };
+    floor(); addEventListener('load', floor); addEventListener('resize', floor);
+    fit();
+  } else if(mq.matches && ios){
+    var W=Math.min(screen.width,screen.height), H=Math.max(screen.width,screen.height);
+    var TOP={'402x874':62,'440x956':62,'420x912':62,'393x852':59,'430x932':59,
+             '390x844':47,'428x926':47,'375x812':44,'414x896':44,
+             '375x667':20,'414x736':20,'320x568':20};
+    T=TOP[W+'x'+H]; if(T==null) T=H>=874?62:H>=852?59:H>=812?47:20;
+    var m=document.createElement('div'); m.style.cssText='position:absolute;visibility:hidden;height:100svh;pointer-events:none';
+    document.body.appendChild(m); var S=m.getBoundingClientRect().height; m.remove();
+    if(!S || S>H) S=innerHeight;
+    var B=Math.max(0, Math.round(H-S-T));
+    rt.style.setProperty('--inT',T+'px'); rt.style.setProperty('--inB',B+'px');
+    /* and the floor itself, in px (23 Sep, the user's phone): the CSS re-derives
+       it from 100svh, and on iOS a box sized by it was seen NOT to grow after
+       --inT/--inB were set — the publications canvas stayed laid out for the
+       pre-runway height. The screen's height is the floor, stated outright. */
+    rt.style.setProperty('--floor', H+'px');
+    /* AND the publications stage outright, in px (23 Sep, the user: on the
+       phone the canvas still would not fill the screen). Its height came from
+       `var(--floor)`, itself `max(100lvh, calc(var(--inT) + 100svh + var(--inB)))`
+       — a chain iOS did not re-resolve when the vars were set here, so the box
+       stayed at its pre-runway height and the canvas laid its field out for
+       that. Two inline px values instead: nothing left to invalidate, and the
+       canvas's ResizeObserver sees a real box change and re-lays out. */
+    /* The stage is ordinary page content (position:absolute), the whole screen
+       tall, starting --inT above the window. That is the ONLY thing iOS draws
+       into the two strips: a position:fixed layer is cut at the window's edges
+       whatever its bleed — which is why the crosses, fixed since 23 Sep, do
+       not reach them either (the user, confirming it on the phone). So the
+       photographs have to BE there, in the document's first --inT pixels and
+       its last --inB, which is what the field's footprint below arranges. */
+    var st=document.querySelector('main.page.editorial .stage');
+    if(st){ st.style.top=(-T)+'px'; st.style.height=H+'px'; }
+    if(!document.querySelector('body > .runway')){
+      var r=document.createElement('div'); r.className='runway'; r.setAttribute('aria-hidden','true');
+      document.body.prepend(r);
+    }
+    fit();
+    /* Start past the runway and HOLD there (23 Sep, the user: a pull down on
+       a page that fits the screen moved the whole page and rubber-banded it
+       back). A pull down that starts at rest is swallowed — the page could
+       only reveal the runway — and a scroll that overshoots the runway
+       without a finger on the glass (momentum, a tap on the status bar) is
+       put back on it at once. Never under the landing (the merge owns the
+       gestures there), the Меню panel or the shop's filter pane, and never
+       for a scrollable box of the page's own. A drag that begins further
+       down and runs past the runway is a committed native scroll that no
+       preventDefault can stop; it is put back on the runway when the finger
+       lifts. */
+    var touching=false, y0=0;
+    function locked(){ return rt.classList.contains('landing-on')||rt.classList.contains('menu-lock')||rt.classList.contains('pane-modal'); }
+    function ownScroller(el){
+      for(; el && el!==document.body; el=el.parentElement){
+        var o=getComputedStyle(el).overflowY;
+        if((o==='auto'||o==='scroll') && el.scrollHeight>el.clientHeight+1) return true;
+      }
+      return false;
+    }
+    function hold(){ if(!touching && !locked() && (window.scrollY<T-0.5 || (holdall && window.scrollY>T+0.5))) window.scrollTo(0,T); }
+    addEventListener('touchstart', function(e){ touching=true; y0=e.touches[0].clientY; }, {passive:true});
+    addEventListener('touchmove', function(e){
+      if(locked() || e.touches.length!==1 || !e.cancelable || ownScroller(e.target)) return;
+      if(holdall || (window.scrollY<=T+0.5 && e.touches[0].clientY>y0)) e.preventDefault();
+    }, {passive:false});
+    function up(){ touching=false; hold(); }
+    addEventListener('touchend', up, {passive:true}); addEventListener('touchcancel', up, {passive:true});
+    addEventListener('scroll', hold, {passive:true});
+    if(window.scrollY<T) window.scrollTo(0,T);
+  }
+
+  var layer=document.getElementById('landing');
+  if(layer){
+    var pinned=false;
+    function pin(){
+      if(!mq.matches || layer.style.position) return;
+      layer.style.position='fixed'; layer.style.inset='0'; layer.style.height='auto'; pinned=true;
+    }
+    function unpin(){
+      if(!pinned) return;
+      pinned=false;
+      layer.style.removeProperty('position'); layer.style.removeProperty('inset'); layer.style.removeProperty('height');
+    }
+    new MutationObserver(function(){
+      if(rt.classList.contains('landing-on')){ if(window.scrollY>T+1) pin(); }
+      else unpin();
+    }).observe(rt,{attributes:true, attributeFilter:['class']});
+    addEventListener('scroll', function(){ if(pinned && window.scrollY<=T+1) unpin(); }, {passive:true});
+  }
+})();
+</script>
+
+<script>
+/* THE CROSSES (and the hearts) ARE STILL — 23 Sep, the user: "everything disrupts
+   them". Every page's own alignLattice() centres the tile's phase on the WINDOW
+   (innerWidth/innerHeight) and re-runs on every resize, and on a phone the window
+   resizes all the time: Safari's bar collapses and grows with every scroll, the
+   keyboard comes up, the address bar minimises — and each time the phase jumped by
+   half the change in height. On a phone the phase is pinned to the SCREEN instead
+   (its width, and on iOS its full height — the floor; elsewhere the height seen
+   first), constant for the device, rotation aside. An !important rule beats the
+   inline values the page keeps writing, and lattice_vector.py's place() reads the
+   computed value, so the vector tile follows. The landing's hero shift — its nav
+   letters sit centred in a gutter — is re-derived against the pinned phase, from
+   the page's own result (it runs after the page's handler on the same events). */
+(function(){
+  var mq=matchMedia('(max-width:900px)'), CELL=60, st=null, W=0, Y=0;
+  var ios=(window.CSS && CSS.supports('-webkit-touch-callout','none')) || /[?&]runway/.test(location.search);
+  function ph(v){ return ((v-CELL)/2)%CELL; }
+  function pin(){
+    if(!mq.matches){ if(st){ st.remove(); st=null; W=0; } return; }
+    var w=innerWidth; if(st && w===W) return; W=w;
+    var H=ios ? Math.max(screen.width,screen.height) : innerHeight;
+    Y=ph(H);                                          /* the phase wanted on the SCREEN */
+    if(!st){ st=document.createElement('style'); st.id='latstill'; document.head.appendChild(st); }
+    st.textContent=':root{--lat-x:'+ph(w).toFixed(3)+'px !important; --lat-y:'+Y.toFixed(3)+'px !important}';
+  }
+  var hero=document.getElementById('hero');
+  function shift(){
+    if(!mq.matches || !hero || !st) return;
+    var s=parseFloat(hero.style.getPropertyValue('--shift'))||0;
+    var d=s + ph(innerHeight) - Y;                    /* the page's shift, moved to the pinned phase */
+    d=((d%CELL)+CELL)%CELL; if(d>CELL/2) d-=CELL;
+    hero.style.setProperty('--shift', d.toFixed(3)+'px');
+  }
+  function run(){ pin(); shift(); }
+  run(); addEventListener('resize', run); addEventListener('load', run);
+  if(document.fonts && document.fonts.ready) document.fonts.ready.then(run);
+})();
+</script>
+
+<script>
+/* Safari 26 colours its status bar and the space round its address bar from
+   <meta name="theme-color">: black while the landing or the Меню panel covers
+   the page, the paper otherwise. See _src/mobile.py. */
+(function(){
+  const rt = document.documentElement;
+  let meta = document.querySelector('meta[name="theme-color"]');
+  if(!meta){ meta = document.createElement('meta'); meta.name = 'theme-color'; document.head.appendChild(meta); }
+  function paint(){
+    const dark = rt.classList.contains('landing-on') || rt.classList.contains('menu-lock');
+    const c = dark ? '#000000' : (getComputedStyle(document.body).backgroundColor || '#FFFFFF');
+    if(meta.content !== c) meta.content = c;
+  }
+  new MutationObserver(paint).observe(rt, {attributes:true, attributeFilter:['class']});
+  addEventListener('load', paint);
+  paint();
+})();
+</script>
+<!-- mobile:end -->
+</body>
+</html>

@@ -1,0 +1,714 @@
+<!doctype html><html lang="ru"><head><meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>IQONS + — макеты</title>
+<style>
+/* ------------------------------------------------------------------
+   FONT SLOT — one face per size tier. Put files in ../../assets/fonts/
+   using these names; any single format is enough (woff2/woff/otf/ttf).
+
+     title-regular.*   Т1  22px  заголовки
+     title-bold.*      Т1  bold (optional)
+     mid-regular.*     Т2  12px  основной — навигация, кнопки, названия
+     mid-bold.*        Т2  bold (optional)
+     small-regular.*   Т3  10px  мелкий — счётчики, артикулы, сноски
+     mono-regular.*    ASCII layer (fixed width, must have Cyrillic)
+
+   Each tier falls back to PT Serif on its own, so you can test one
+   face at a time without the others in place.
+   ------------------------------------------------------------------ */
+@font-face{font-family:'IQONS Title';font-weight:400;font-style:normal;font-display:swap;
+  src:url('../../assets/fonts/title-regular.woff2') format('woff2'),
+      url('../../assets/fonts/title-regular.woff')  format('woff'),
+      url('../../assets/fonts/title-regular.otf')   format('opentype'),
+      url('../../assets/fonts/title-regular.ttf')   format('truetype');}
+@font-face{font-family:'IQONS Title';font-weight:700;font-style:normal;font-display:swap;
+  src:url('../../assets/fonts/title-bold.woff2') format('woff2'),
+      url('../../assets/fonts/title-bold.woff')  format('woff'),
+      url('../../assets/fonts/title-bold.otf')   format('opentype'),
+      url('../../assets/fonts/title-bold.ttf')   format('truetype');}
+@font-face{font-family:'IQONS Mid';font-weight:400;font-style:normal;font-display:swap;
+  src:url('../../assets/fonts/mid-regular.woff2') format('woff2'),
+      url('../../assets/fonts/mid-regular.woff')  format('woff'),
+      url('../../assets/fonts/mid-regular.otf')   format('opentype'),
+      url('../../assets/fonts/mid-regular.ttf')   format('truetype');}
+@font-face{font-family:'IQONS Mid';font-weight:700;font-style:normal;font-display:swap;
+  src:url('../../assets/fonts/mid-bold.woff2') format('woff2'),
+      url('../../assets/fonts/mid-bold.woff')  format('woff'),
+      url('../../assets/fonts/mid-bold.otf')   format('opentype'),
+      url('../../assets/fonts/mid-bold.ttf')   format('truetype');}
+@font-face{font-family:'IQONS Small';font-weight:400;font-style:normal;font-display:swap;
+  src:url('../../assets/fonts/small-regular.woff2') format('woff2'),
+      url('../../assets/fonts/small-regular.woff')  format('woff'),
+      url('../../assets/fonts/small-regular.otf')   format('opentype'),
+      url('../../assets/fonts/small-regular.ttf')   format('truetype');}
+@font-face{font-family:'IQONS Mono';font-weight:400;font-style:normal;font-display:swap;
+  src:url('../../assets/fonts/mono-regular.woff2') format('woff2'),
+      url('../../assets/fonts/mono-regular.woff')  format('woff'),
+      url('../../assets/fonts/mono-regular.otf')   format('opentype'),
+      url('../../assets/fonts/mono-regular.ttf')   format('truetype');}
+
+/* ============================================================
+   IQONS +  ·  Template 01 — Shop grid
+   Cross variant: TANEK  (Best Swashed — тонкий)
+   No glass, no rounded corners. Photographs used as they are.
+   Interface text from IQONS_interface_texts_RU_filled.xlsx.
+   ============================================================ */
+
+:root{
+  --paper:#FFFFFF;
+  --ink:#000000;
+  --ink-55:#000000;
+  --ink-30:#000000;
+  --ink-12:#000000;
+
+  /* type — three sizes (spec/type-scale.md, 19.08.2026)
+     Т1 заголовок · Т2 основной · Т3 мелкий                */
+  --t1:clamp(20px,1.8125vw,27.5px);   /* 16 Sep: Title face +25% (was 16/1.45vw/22) */
+  --t2:clamp(13.75px,1.0625vw,15px);  /* 16 Sep: Title face +25% (was 11/.85vw/12) */
+  --t1m:clamp(16px,1.45vw,22px);        /* the Mid face at the OLD Т1 size — hybrids only */
+  --t2m:clamp(11px,.85vw,12px);         /* the Mid face at the OLD Т2 size — hybrids only */
+  --t3:clamp(9.5px,.8vw,10.5px);
+  /* tracking — one knob per tier. Every uppercase interface string in a
+     tier shares its tier's value; the few deliberate variations are
+     expressed as offsets so one change still moves them together. */
+  --tr1:.02em;      /* Т1 headings            */
+  --tr2:-.005em;    /* Т2 interface, capitals — Illustrator −5 */
+  --tr2p:.01em;     /* Т2 paragraphs          */
+  --tr3:-.010em;    /* Т3 small capitals — Illustrator −10 */
+
+  /* each size tier carries its own face */
+  /* EXPERIMENT 23.08.2026 — tiers shifted up one face:
+     Т1 and Т2 both set in Mephisto, Т3 in Century. Corbel is left
+     declared but unused, so this reverts by editing these three lines. */
+  --font-t1:'IQONS Title',"PT Serif",Georgia,serif;
+  --font-t2:'IQONS Title',"PT Serif",Georgia,serif;
+  --font-t3:'IQONS Mid',"PT Serif",Georgia,serif;
+  --font-mono:'IQONS Mono',ui-monospace,"SF Mono",Menlo,monospace;
+  /* the logo is a two-line lockup (IQONS over 2009) — at the Т1 height
+     the date is illegible, so it gets its own size */
+  --logo-h:clamp(26.25px,2.625vw,42.5px);   /* 16 Sep: logo +25% (was 21/2.1vw/34) */
+
+  /* grid — one gutter on both axes, so the module stays
+     square and the lattice can register to it */
+  --margin:clamp(14px,2vw,38px);
+  --gap:clamp(14px,2vw,38px);
+  --cell:60px;         /* lattice pitch — set by JS */
+  --lat-x:center;
+  --lat-y:center;
+  --padT:var(--margin); --padB:14px;
+  --headerH:calc(var(--margin) + var(--logo-h) + 14px);
+  --shotRatio:1.5;                                  /* 1200x1800 on every frame */
+  --pane:min(calc((100svh - var(--headerH) - var(--gapBottom)) / var(--shotRatio)), 36vw);
+  --cols:4;
+  --gapBottom:19px;           /* ≈0.5cm under the preview, at all times */
+  --ease:cubic-bezier(.22,.61,.36,1);
+}
+
+*,*::before,*::after{box-sizing:border-box}
+/* ₽ as artwork rather than a font glyph — it renders identically whatever
+   face Т2 ends up being, and takes its colour and size from the text */
+.rub{height:.72em; width:auto; display:inline-block; vertical-align:-.005em; fill:currentColor}
+/* no faked bold/italic — if a weight is missing, show what exists */
+html{font-synthesis-weight:none; font-synthesis-style:none}
+html,body{margin:0;padding:0}
+html{-webkit-text-size-adjust:100%; overscroll-behavior-y:none}
+body{overscroll-behavior-y:none}
+body{
+  background:var(--paper); color:var(--ink);
+  font-size:var(--t2); font-family:var(--font-t2); line-height:1.4;
+  -webkit-font-smoothing:antialiased; overflow-x:hidden;
+}
+
+/* ---------- background lattice ---------- */
+.lattice{
+  position:fixed; inset:0; z-index:0; pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%2760%27%20height%3D%2760%27%20viewBox%3D%270%200%2060%2060%27%3E%3Cg%20transform%3D%27translate%2830%2C30%29%20scale%280.676%29%20translate%28-12%2C-12%29%27%20fill%3D%27none%27%20stroke%3D%27%23000000%27%20stroke-opacity%3D%271%27%3E%3Cpath%20d%3D%27M12%203.6C12.15%208.4%2012.15%2015.6%2012%2020.4%27%20stroke-width%3D%27.75%27%20stroke-linecap%3D%27round%27%2F%3E%3Cpath%20d%3D%27M3.6%2012C8.4%2011.85%2015.6%2011.85%2020.4%2012%27%20stroke-width%3D%27.75%27%20stroke-linecap%3D%27round%27%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E");
+  background-size:var(--cell) var(--cell);
+  background-position:var(--lat-x) var(--lat-y);
+}
+
+/* ---------- header ---------- */
+header{
+  position:fixed; top:0; left:0; right:0; z-index:200;
+  display:flex; align-items:center;
+  padding:var(--padT) var(--margin) var(--padB);
+  pointer-events:none;
+  /* No band at all — the page runs straight underneath, the way SSENSE does it.
+     The header never changes size and nothing in it answers the pointer: it is
+     a fixed set of marks that the photographs pass behind. --headerH still
+     reserves its height, so the page starts below it and only slides under
+     once you scroll. */
+  background:none;
+}
+header > *{pointer-events:auto}
+
+/* every box on the page has sharp corners */
+.seg{display:flex; border:1px solid var(--ink); background:none}
+.seg a{
+  font-size:var(--t2); font-family:var(--font-t2); letter-spacing:var(--tr2); text-transform:uppercase;
+  color:var(--ink); text-decoration:none; padding:7px 15px 6px; white-space:nowrap;
+  border-right:1px solid var(--ink);
+}
+.seg a:last-child{border-right:0}
+.seg a[aria-current]{background:var(--ink); color:var(--paper)}
+
+.wordmark{
+  position:absolute; left:50%; top:var(--padT); transform:translateX(-50%);
+  font-size:var(--t1); font-family:var(--font-t1); font-weight:400; letter-spacing:calc(var(--tr1) + .10em); line-height:1.2; white-space:nowrap;
+  padding:2px 14px;
+  display:flex; align-items:center;
+}
+.wordmark .cross{font-weight:400; opacity:.7; margin-left:.14em}
+/* PNG wordmark from ../../assets/logo/. Height is tied to the Т1 tier so the
+   logo and the headings stay in proportion; --logo-h overrides it alone.
+   The typed wordmark stays in the markup and comes back if the file is
+   missing, so the header is never empty. */
+.wordmark img{display:block; height:var(--logo-h,var(--t1)); width:auto; max-width:42vw}
+.wordmark .wm-text{display:none}
+.wordmark.no-logo img{display:none}
+.wordmark.no-logo .wm-text{display:inline}
+.right{margin-left:auto; display:flex; gap:10px}
+
+/* ---------- shell ---------- */
+.shell{
+  position:relative; z-index:10;
+  display:grid; grid-template-columns:var(--pane) 1fr; gap:var(--gap);
+  /* no left padding: the photograph runs to the screen edge, the way the
+     product page's stage runs to the right edge */
+  padding:var(--headerH) var(--margin) var(--gapBottom) 0;
+  transition:grid-template-columns .62s var(--ease), padding .62s var(--ease);
+}
+/* closed: the grid takes the margin back so it never sits against the edge */
+.shell.is-closed{grid-template-columns:0px 1fr; --cols:6; padding-left:var(--margin)}
+
+/* ---------- the window ---------- */
+.pane{position:relative}
+.pane-inner{
+  position:fixed; top:var(--headerH); left:0; width:var(--pane);
+  height:calc(100svh - var(--headerH) - var(--gapBottom)); min-height:300px;
+}
+.window{
+  position:relative; height:100%; overflow:hidden;
+  background:none;               /* no plate: the ASCII behind the pane shows around the garment */
+  transform-origin:14% 24%;
+  transition:opacity .42s var(--ease), transform .5s var(--ease);
+}
+.shell.is-closed .window{opacity:0; transform:scale(.96); pointer-events:none}
+
+/* Overlay read-out, same chip language as the product page's frame counter:
+   paper tabs laid on the image, hairline-divided, hugging the bottom-left.
+   Two fixed rows rather than free wrapping — the name alone is wider than half
+   the column, so a single flowing row tore into ragged fragments. */
+.hud{position:absolute; left:0; bottom:0; z-index:4; display:flex; flex-direction:column;
+     align-items:flex-start; max-width:100%; pointer-events:none}
+.hudrow{display:flex; max-width:100%; min-width:0}
+.hudrow > *{font-size:var(--t3); font-family:var(--font-t3); letter-spacing:var(--tr3);
+  text-transform:uppercase; background:var(--paper); color:var(--ink-55);
+  padding:5px 10px 4px; line-height:1.35; margin:0; white-space:nowrap;
+  border-top:1px solid var(--ink-12); border-right:1px solid var(--ink-12)}
+.hudrow > *:last-child{border-right:0}
+.hud .nm{overflow:hidden; text-overflow:ellipsis; min-width:0}
+.hud .sizes{display:flex; gap:8px}
+.hud .sizes i{font-style:normal}
+.hud .sizes i.out{text-decoration:line-through}   /* struck = out of stock */
+.hud .xbtn{pointer-events:auto; cursor:pointer; border-bottom:0; border-left:0;
+  font:inherit; font-size:var(--t3); font-family:var(--font-t3); color:var(--ink);
+  transition:background .18s var(--ease), color .18s var(--ease)}
+.hud .xbtn:hover{background:var(--ink); color:var(--paper)}
+.hud .xbtn:focus-visible{outline:1px solid var(--ink); outline-offset:-3px}
+
+.wstage{position:absolute; inset:0}
+.wstage img{
+  position:absolute; inset:0; width:100%; height:100%;
+  /* whole garment, uncropped — the pane is cut to the shot ratio above, so
+     this normally fills it edge to edge; any slack stays on the right */
+  object-fit:contain; object-position:left center; display:block;
+  opacity:0; transition:opacity .34s var(--ease);
+}
+.wstage img.on{opacity:1}
+/* The datamosh plate. Covers the stage; the shader letterboxes each
+   photograph inside it, so a change of shot ratio never moves the frame. */
+.wstage canvas{position:absolute; inset:0; width:100%; height:100%; display:block;
+  opacity:0; transition:opacity .34s var(--ease)}
+.wstage canvas.on{opacity:1}
+.wstage.gl-on img{display:none}          /* the <img> is the no-WebGL fallback */
+
+
+/* ---------- shop head ---------- */
+.gridwrap{min-width:0; padding-top:14px}
+.gridhead{display:flex; align-items:baseline; gap:22px 22px; flex-wrap:wrap; margin:0 0 18px}
+.sections{display:flex; gap:18px}
+.sections a{
+  font-size:var(--t2); font-family:var(--font-t2); letter-spacing:var(--tr2); text-transform:uppercase;
+  color:var(--ink-55); text-decoration:none; padding-bottom:0; border-bottom:1px solid transparent;
+  transition:color .2s var(--ease), border-color .2s var(--ease);
+}
+.sections a[aria-current]{color:var(--ink); border-bottom-color:var(--ink)}
+.sections a:hover{color:var(--ink)}
+.para{font-size:var(--t2); font-family:var(--font-t2); letter-spacing:var(--tr2p); line-height:1.75; text-transform:none;
+       color:var(--ink-55); max-width:46ch; margin:0}
+.gridhead h1{font-size:var(--t1); font-family:var(--font-t1); font-weight:400; letter-spacing:var(--tr1); margin:0; flex-basis:100%}
+.count{font-size:var(--t3); font-family:var(--font-t3); color:var(--ink-30); font-style:italic}
+.tools{margin-left:auto; display:flex; gap:18px}
+.tool{
+  font:inherit; font-size:var(--t2); font-family:var(--font-t2); letter-spacing:var(--tr2); text-transform:uppercase;
+  border:0; background:none; padding:0; cursor:pointer; color:var(--ink-55);
+  border-bottom:1px solid transparent; transition:color .2s var(--ease), border-color .2s var(--ease);
+}
+.tool:hover{color:var(--ink); border-bottom-color:var(--ink)}
+
+/* ---------- grid ---------- */
+.grid{display:grid; grid-template-columns:repeat(var(--cols),minmax(0,1fr)); gap:var(--gap)}
+.card{display:flex; flex-direction:column; cursor:pointer; background:none; border:0; padding:0;
+      font:inherit; color:inherit; text-align:left}
+.card:focus-visible{outline:1px solid var(--ink); outline-offset:6px}
+
+/* 1:1.5 portrait — the photographs' native ratio, so nothing is cropped */
+.tile{position:relative; width:100%; aspect-ratio:1/1.5; min-height:0; overflow:hidden}
+.tile img{
+  position:absolute; inset:0; width:100%; height:100%;
+  object-fit:cover; object-position:center 42%; display:block;
+  transition:opacity .4s var(--ease);
+}
+.card:hover .tile img{opacity:.86}
+/* outline, not an ::after overlay — the overlay appearing at load left
+   the first card's photo on a stale paint layer and it rendered blank */
+.card.is-active .tile{outline:1px solid var(--ink); outline-offset:-1px}
+.badge{
+  position:absolute; left:0; top:0; z-index:2;
+  font-size:var(--t3); font-family:var(--font-t3); letter-spacing:var(--tr3); text-transform:uppercase;
+  background:var(--ink); color:var(--paper); padding:4px 8px 3px;
+}
+.meta{padding:13px 0 0; display:flex; flex-direction:column; gap:4px}
+.meta .nm{font-size:var(--t2); font-family:var(--font-t2); letter-spacing:var(--tr2); text-transform:uppercase; line-height:1.45}
+.meta .pr{font-size:var(--t2); font-family:var(--font-t2); color:var(--ink-55)}
+.meta .so{font-size:var(--t3); font-family:var(--font-t3); color:var(--ink-30); font-style:italic}
+
+/* ---------- reopen ---------- */
+.reopen{
+  position:fixed; left:var(--margin); bottom:var(--margin); z-index:45;
+  font:inherit; font-size:var(--t3); font-family:var(--font-t3); letter-spacing:calc(var(--tr3) + .02em); text-transform:uppercase; color:var(--ink);
+  cursor:pointer; border:1px solid var(--ink); padding:8px 14px; background:var(--paper);
+  opacity:0; transform:translateY(8px); pointer-events:none;
+  transition:opacity .3s var(--ease), transform .3s var(--ease), background .2s var(--ease);
+}
+.shell.is-closed ~ .reopen{opacity:1; transform:none; pointer-events:auto}
+.reopen:hover{background:var(--ink); color:var(--paper)}
+
+/* ---------- footer ---------- */
+/* out of the layout until stage two, so the page can never scroll past
+   the content and cannot bounce */
+footer{
+  display:none;
+  margin:var(--gapBottom) 0 0; padding:0;   /* nothing under the closing rule: the page ends with the footer */
+  border-top:1px solid var(--ink);
+  flex-wrap:wrap; align-items:baseline;
+  position:relative;
+  z-index:200;
+  background-color:var(--paper);
+  background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%2760%27%20height%3D%2760%27%20viewBox%3D%270%200%2060%2060%27%3E%3Cg%20transform%3D%27translate%2830%2C30%29%20scale%280.676%29%20translate%28-12%2C-12%29%27%20fill%3D%27none%27%20stroke%3D%27%23000000%27%20stroke-opacity%3D%271%27%3E%3Cpath%20d%3D%27M12%203.6C12.15%208.4%2012.15%2015.6%2012%2020.4%27%20stroke-width%3D%27.75%27%20stroke-linecap%3D%27round%27%2F%3E%3Cpath%20d%3D%27M3.6%2012C8.4%2011.85%2015.6%2011.85%2020.4%2012%27%20stroke-width%3D%27.75%27%20stroke-linecap%3D%27round%27%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E");
+  background-size:var(--cell) var(--cell);
+  background-position:var(--lat-x) var(--lat-y);
+  background-attachment:fixed;   /* register to the viewport, like .lattice */
+}
+footer.revealed{display:flex}
+footer nav{
+  flex:1 1 100%; display:flex; flex-wrap:wrap; justify-content:space-between; gap:6px 20px;
+  padding:5px var(--margin) 0;
+}
+footer a{
+  font-size:var(--t2); font-family:var(--font-t2); letter-spacing:var(--tr2); text-transform:uppercase;
+  color:var(--ink-55); text-decoration:none;
+}
+footer a:hover{color:var(--ink)}
+footer .rights{
+  flex:1 1 100%; text-align:center; font-size:var(--t3); font-family:var(--font-t3); color:var(--ink-30);
+  padding:34px var(--margin) 5px; border-bottom:1px solid var(--ink);
+}
+
+/* ---------- breakpoints ---------- */
+@media (max-height:820px){ :root{--margin:clamp(12px,1.4vw,22px); --gap:clamp(12px,1.6vw,26px)} }
+@media (min-width:2100px){ :root{--cols:6} .shell.is-closed{--cols:9} }
+@media (min-width:1700px) and (max-width:2099px){ :root{--cols:5} .shell.is-closed{--cols:8} }
+@media (max-width:1180px){ :root{--pane:min(calc((100svh - var(--headerH) - var(--gapBottom)) / var(--shotRatio)), 32vw); --cols:3} .shell.is-closed{--cols:5} }
+@media (max-width:900px){
+  :root{--cols:3}
+  header{position:static; flex-wrap:wrap; gap:14px; justify-content:center; padding-bottom:6px}
+  .shell{grid-template-columns:1fr; padding-top:var(--margin); padding-left:var(--margin)}
+  .shell.is-closed{grid-template-columns:1fr; --cols:3}
+  .wordmark{position:static; transform:none; order:-1}
+  .right{margin-left:0}
+  .pane{position:fixed; inset:0; z-index:60; display:none; padding:var(--margin)}
+  .pane.modal-open{display:block}
+  .pane::before{content:""; position:absolute; inset:0; background:rgba(0,0,0,.34)}
+  .pane-inner{position:relative; top:0; left:auto; width:auto; height:100%; transform:none !important}
+  .shell.is-closed .window{opacity:1; transform:none; pointer-events:auto}
+  .reopen{display:none}
+  .tools{margin-left:0; flex-basis:100%}
+  footer nav{justify-content:flex-start}
+}
+@media (max-width:560px){ :root{--cols:2} .shell.is-closed{--cols:2} }
+@media (prefers-reduced-motion:reduce){ *{transition-duration:.01ms !important; animation-duration:.01ms !important} }
+
+/* ================= TEST BUILD =================
+   Fixed column counts: 3 while the preview is on screen, 4 when it is closed.
+   The closed block reuses the open state's tile width and centres, so the
+   tiles hold their size instead of ballooning into the reclaimed space. */
+:root{
+  --openGridW:calc(100vw - var(--margin) - var(--pane) - var(--gap));
+  --openCol:calc((var(--openGridW) - 2 * var(--gap)) / 3);
+  --closedW:calc(4 * var(--openCol) + 3 * var(--gap));
+}
+@media (min-width:901px){
+  :root{--cols:3 !important}
+  /* Closed: drop the shell's side padding AND the column gap the collapsed
+     preview leaves behind, otherwise the block centres inside its column
+     rather than on the screen and sits one gap off to the right. */
+  .shell.is-closed{--cols:4 !important; gap:0; padding-left:0; padding-right:0}
+  .shell.is-closed .grid{
+    width:min(calc(100% - 2 * var(--margin)), var(--closedW));
+    margin-inline:auto;
+  }
+}
+
+/* ---------- TEST: product images at 50% ----------
+   The photograph is sized from the tile's WIDTH and its own 1.5 ratio, so it
+   no longer depends on the tile's height. That frees --tileR to control the
+   vertical rhythm on its own: it is the tile box's height as a multiple of its
+   width. 1.5 was the old full-bleed value; 1 closes the vertical distance
+   between rows by roughly half without touching the columns.
+
+   The caption is pulled up to meet the image and the same amount is given back
+   below, so the card height stays a pure function of --tileR. Percentages on
+   margin and padding resolve against WIDTH, which is why these are written as
+   shares of the tile's width rather than its height. */
+:root{--shot:.5; --tileR:1}
+.tile{aspect-ratio:1 / var(--tileR)}
+.tile img{
+  inset:auto; top:50%; left:50%;
+  width:calc(var(--shot) * 100%); height:auto;
+  aspect-ratio:1 / var(--shotRatio);
+  transform:translate(-50%,-50%);
+}
+.badge{
+  left:calc((1 - var(--shot)) * 50%);
+  top:calc((var(--tileR) - var(--shot) * var(--shotRatio)) / 2 / var(--tileR) * 100%);
+}
+.meta{
+  margin-top:calc((var(--tileR) - var(--shot) * var(--shotRatio)) / 2 * -100%);
+  padding-bottom:calc((var(--tileR) - var(--shot) * var(--shotRatio)) / 2 * 100%);
+  /* the caption belongs to the photograph, not to the tile box it sits in:
+     same width, same left edge, so it reads as one object */
+  width:calc(var(--shot) * 100%);
+  margin-inline:auto;
+}
+/* One step down the scale - T3's size, but the T2 face is kept so only the
+   size changes and not the voice. The line boxes stay pinned to the T2 metrics
+   so the caption block reserves exactly the height it did before. */
+.meta .nm{font-size:calc(var(--t3) * 1.25); line-height:calc(1.45 * var(--t2))}   /* 16 Sep: Title face +25% */
+.meta .pr{font-size:calc(var(--t3) * 1.25); line-height:calc(1.4 * var(--t2))}
+/* the hover marker has to hug the photograph, not the tile box around it */
+.card.is-active .tile{outline:0}
+.card.is-active .tile img{outline:1px solid var(--ink); outline-offset:0}
+.card:focus-visible{outline:0}
+.card:focus-visible .tile img{outline:1px solid var(--ink); outline-offset:6px}
+
+/* Lift so the first row's PHOTOGRAPH meets the heading text, rather than the
+   empty top of its tile box; shift so the rightmost photograph lands on the
+   screen edge. Both distances are measured at runtime because they are shares
+   of the tile's width, which CSS cannot reach from margin or height. */
+.grid{transform:translateX(var(--gridShift, 0px))}
+/* The shifted tile boxes hang past the right edge. body{overflow-x:hidden} is
+   already in the base stylesheet and clips them without a scrollbar — do NOT
+   add overflow to html here. Doing so moves overflow propagation from body to
+   the root, which leaves body as its own scroll container carrying
+   overscroll-behavior-y:none; wheel scrolling then dies at body and never
+   chains to the viewport, so the page cannot be scrolled by hand at all
+   (window.scrollTo still works, which makes it easy to miss). */
+
+/* ---------- TEST: single-line shop head ----------
+   The season blurb and the item count are dropped. h1 carried flex-basis:100%,
+   which is what forced the break onto a second line — releasing it lets the
+   heading, the sections and the tools share one row. */
+/* clearance between MAGAZIN's baseline and the top of the first product row */
+:root{--rowsClear:2.8mm}   /* 16 Sep: was 2mm; at the larger type the underline ran into the НОВИНКА badge */
+/* how far ФИЛЬТР / СОРТИРОВАТЬ sit left of the cart frame's border, to put the
+   type's ink on that line rather than its layout box. See the align() pass. */
+:root{--toolsOptical:0.5mm}
+.para{display:none}
+.count{display:none}
+@media (min-width:901px){
+  .gridhead{flex-wrap:nowrap; align-items:center; margin:0}
+  .gridhead h1{flex-basis:auto; white-space:nowrap}
+  .sections, .tools{white-space:nowrap}
+}
+
+/* ---------- TEST: columns placed by hand ----------
+   The tile stops being an oversized box with a small photograph floating in the
+   middle of it and becomes the photograph's own box. That is what lets the
+   column gap BE the gap between photographs — with the old model the smallest
+   achievable gap was a whole half-tile, so "no space at all" was unreachable.
+   Track width and both gaps are written from script: they derive from --photoW,
+   which is itself a share of a column width, and that is circular in CSS. */
+:root{
+  --photoW:calc(var(--shot) * var(--openCol));
+  --rowSpace:150px;                 /* photo bottom to next photo top, as before */
+}
+.grid{justify-content:end}
+.tile{aspect-ratio:1 / var(--shotRatio)}
+.tile img{inset:0; width:100%; height:100%; aspect-ratio:auto; transform:none; object-fit:cover}
+.badge{left:0; top:0}
+.meta{width:100%; margin-top:0; margin-inline:0; padding-bottom:0}
+
+/* The photograph size from the first test build: a full column wide, where the
+   later builds cut it to half. --openCol is that same column, so the size
+   carries over by derivation. Three of them fit across the anchored span. */
+:root{--photoW:calc(var(--openCol) * 0.625); --alignLeft:1}
+@media (min-width:901px){
+  :root{--cols:4 !important}
+  .shell.is-closed{--cols:4 !important}
+}
+
+:root{--photoGap:0px}
+
+.lattice{z-index:100}
+
+/* ---------- header tightened, rows lifted onto the preview's top line -------
+   --headerH is deliberately NOT reduced. It is what positions and sizes the
+   preview, and the preview is settled, so it keeps its original value and is
+   measured with .tight removed. The header just renders smaller inside that
+   reserve, which frees the lower part of the band for the МАГАЗИН row. */
+header{align-items:flex-start}
+header.tight{--padT:8px; --padB:8px; --logo-h:30px}
+header.tight .seg a{padding:4px 12px 3px}
+
+
+/* ---------- TEST: the grid does not react to the pointer ----------
+   The preview on the left already answers every mouse move, so a second
+   reaction on the tile itself is noise. Hover now changes nothing in the
+   grid: no dimming, no outline on the active photograph. The right-hand
+   side scrolls and nothing more until a product is clicked.
+   :focus-visible is deliberately kept — for the keyboard it is the only
+   thing marking position. */
+.card:hover .tile img{opacity:1}
+.card.is-active .tile{outline:0}
+.card.is-active .tile img{outline:0}
+/* the wordmark is the way home; it inherits everything and adds nothing */
+.home{display:contents; color:inherit; text-decoration:none}
+
+/* ---------- site sections in the header --------------------------------------
+   The landing's four destinations, standing at the top of the header slot on
+   every page. What the page used to keep there — the gender filter, its own
+   heading — now sits one row below, inside the same .slot column. The
+   underlined one is the section you are in; a page outside the four
+   (cart, checkout, the text pages) underlines nothing. */
+.sitenav{display:flex; gap:18px; white-space:nowrap; padding-top:8px}
+.sitenav a{font-size:var(--t2); font-family:var(--font-t2); letter-spacing:var(--tr2);
+  text-transform:uppercase; color:var(--ink-55); text-decoration:none;
+  padding-bottom:0; border-bottom:1px solid transparent;
+  transition:color .2s var(--ease), border-color .2s var(--ease)}
+.sitenav a[aria-current]{color:var(--ink); border-bottom-color:var(--ink)}
+.sitenav a:hover{color:var(--ink)}
+
+/* The header's left slot is now a column: the four sections on top, the page's
+   own row (gender filter or heading) beneath. Search and cart on the right
+   drop to that second row so the boxed controls all stand on one line. The
+   band is measured, not computed, so --headerH follows the taller slot. */
+header{align-items:flex-start}
+.slot{display:flex; flex-direction:column; align-items:flex-start; gap:10px; min-width:0; flex:0 1 auto}
+header .right{align-self:flex-end}
+
+/* ---------- filter · search panel ----------------------------------------------
+   One panel, standing in the preview window's frame. The frame on the left is
+   the one part of the page the grid does not need while you narrow it, so the
+   filter takes it over and the grid answers live on the right — no scrim, no
+   second page. Search is the same panel with a line of type in place of the
+   three groups. Закрыть, Esc, or the button that opened it puts the preview
+   back. On the touch layout the frame is already a modal, so the panel fills
+   the screen and Применить is the way out. */
+.fpanel{position:absolute; inset:0; z-index:5; background:var(--paper);
+  border-right:1px solid var(--ink-12);
+  display:flex; flex-direction:column; padding:0 var(--margin);
+  /* the panel is the scroll container; the page behind it never moves.
+     overscroll-behavior stops the chain at either end, and a wheel guard in
+     the script covers the case where the list is shorter than the frame. */
+  overflow-y:auto; overscroll-behavior:contain; scrollbar-width:none;
+  opacity:0; pointer-events:none; transition:opacity .3s var(--ease)}
+.fpanel::-webkit-scrollbar{display:none}
+.fpanel.on{opacity:1; pointer-events:auto}
+/* head and foot ride on top of the scroll, on paper, so Закрыть and
+   Применить are always in reach however long the lists get */
+.fhead{position:sticky; top:0; z-index:2; background:var(--paper);
+  display:flex; align-items:baseline; justify-content:space-between; gap:18px;
+  padding:14px 0 12px}
+.fhead h2{font-size:var(--t1); font-family:var(--font-t1); font-weight:400; letter-spacing:var(--tr1); margin:0}
+.fclose{font:inherit; font-size:var(--t2); font-family:var(--font-t2); letter-spacing:var(--tr2);
+  text-transform:uppercase; background:none; border:1px solid var(--ink); color:var(--ink);
+  padding:7px 15px 6px; cursor:pointer; white-space:nowrap;
+  transition:background .18s var(--ease), color .18s var(--ease)}
+.fclose:hover{background:var(--ink); color:var(--paper)}
+.fsearch{margin-top:26px}
+.fsearch input{width:100%; font:inherit; font-size:var(--t1); font-family:var(--font-t1);
+  letter-spacing:var(--tr1); border:0; border-bottom:1px solid var(--ink); border-radius:0;
+  background:none; color:var(--ink); padding:8px 0 10px; outline:0; -webkit-appearance:none}
+.fsearch input::placeholder{color:var(--ink-30)}
+.fsearch input::-webkit-search-cancel-button{-webkit-appearance:none}
+/* The lists are set the way SSENSE sets its left column: a small capitals
+   heading per group, departments in capitals, everything under them in
+   sentence case and stepped in, the chosen line underlined, one line per
+   value. No boxes, no counts — a line that would leave nothing dims. */
+.fgroup{margin-top:22px}
+.fgroup .lbl{font-size:var(--t3); font-family:var(--font-t3); letter-spacing:calc(var(--tr3) + .02em);
+  text-transform:uppercase; color:var(--ink-55); display:block; margin-bottom:8px}
+.fopt{display:block; width:100%; font:inherit; font-size:var(--t2); font-family:var(--font-t2);
+  letter-spacing:var(--tr2p); text-transform:none; color:var(--ink-55); background:none; border:0;
+  padding:4px 0; cursor:pointer; text-align:left; line-height:1.45; transition:color .2s var(--ease)}
+.fopt .t{border-bottom:1px solid transparent; padding-bottom:1px; transition:border-color .2s var(--ease)}
+.fopt:hover{color:var(--ink)}
+.fopt[aria-pressed="true"]{color:var(--ink)}
+.fopt[aria-pressed="true"] .t{border-bottom-color:var(--ink)}
+.fopt.is-none{color:var(--ink-30); cursor:default}
+/* the category tree: departments in capitals, their subcategories stepped in
+   and shown only while the department is open */
+.fopt.dept{text-transform:uppercase; letter-spacing:var(--tr2); padding:5px 0}
+.fopt.sub{padding-left:14px}
+.subs[hidden]{display:none}
+/* the designers' own search line, as SSENSE has under its list */
+.fmini{width:100%; font:inherit; font-size:var(--t2); font-family:var(--font-t2); letter-spacing:var(--tr2p);
+  border:0; border-bottom:1px solid var(--ink-12); border-radius:0; background:none; color:var(--ink);
+  padding:6px 0 7px; margin:2px 0 6px; outline:0; -webkit-appearance:none}
+.fmini:focus{border-bottom-color:var(--ink)}
+.fmini::placeholder{color:var(--ink-30)}
+.ffoot{position:sticky; bottom:0; z-index:2; background:var(--paper); margin-top:auto;
+  padding:18px 0 var(--margin); display:flex; align-items:center; gap:18px; flex-wrap:wrap}
+.fapply{font:inherit; font-size:var(--t2); font-family:var(--font-t2); letter-spacing:calc(var(--tr2) + .02em);
+  text-transform:uppercase; border:1px solid var(--ink); background:var(--ink); color:var(--paper);
+  padding:12px 18px; cursor:pointer}
+.ffoot .count{margin-left:auto}
+.tool.is-on,.tool[aria-expanded="true"]{color:var(--ink); border-bottom-color:var(--ink)}
+/* the grid's empty line — Т2 paragraph mode, top left of the grid area */
+.empty{font-size:var(--t2); font-family:var(--font-t2); letter-spacing:var(--tr2p); line-height:1.75;
+  color:var(--ink-55); margin:var(--gap) 0 0}
+
+/* ---------- the panel's face ------------------------------------------------------
+   The lines and the two search inputs are set in the second face (IQONS Mid,
+   the Т3 face); the title and the buttons — Закрыть, Применить, Сбросить
+   фильтры — stay in the page's title face. Sort is
+   the same panel in a third mode: SSENSE's five orders as single-choice lines. */
+.fpanel, .fpanel .fopt, .fpanel .fsearch input, .fpanel .fmini{font-family:var(--font-t3)}
+.fpanel .fopt, .fpanel .fmini{font-size:var(--t2m)}
+.fpanel .fsearch input{font-size:var(--t1m)}
+/* the title and the three buttons keep the page's title face */
+.fpanel h2{font-family:var(--font-t1)}
+.fpanel .fclose, .fpanel .fapply, .fpanel .tool{font-family:var(--font-t2)}
+@media (max-width:900px){
+  .fpanel{border-right:0}
+}
+/* ---------- type, +25% (16 Sep) ---------------------------------------------------
+   Every text in the Title face (Т1 and Т2) runs a quarter larger, site-wide —
+   see --t1 / --t2 in :root. The header's own +25% from earlier today is
+   folded into that, so it stays exactly where it was. Text in the Mid face
+   that borrowed a Т1/Т2 size keeps the old size through --t1m / --t2m. */
+
+/* a hidden tile, menu or panel section stays hidden whatever display it has */
+[hidden]{display:none !important}
+
+/* ---------- contents ---------------------------------------------------------
+   The index of the prototype. It borrows the whole of the shop's stylesheet, so
+   the only rules here are the ones the grid of screens needs. */
+/* The site's header is fixed, so the photographs pass behind it. An index has
+   nothing worth passing behind it — the marks would just sit on the screens —
+   so here it stands at the top of the page and scrolls away. --headerH still
+   reserves its height. */
+header{position:absolute}
+main.ix{position:relative; z-index:10; padding:var(--headerH) var(--margin) 72px}
+.ix .intro{max-width:74ch; padding:10px 0 4px}
+.ix h1{font-size:var(--t1); font-family:var(--font-t1); font-weight:400;
+  letter-spacing:var(--tr1); text-transform:uppercase; margin:0 0 10px}
+.ix .lead{font-size:var(--t2); font-family:var(--font-t3); letter-spacing:var(--tr2p);
+  line-height:1.75; margin:0}
+.ix section{margin-top:40px}
+.ix h2{font-size:var(--t3); font-family:var(--font-t3);
+  letter-spacing:calc(var(--tr3) + .04em); text-transform:uppercase; font-weight:400;
+  margin:0 0 var(--gap); padding-bottom:7px; border-bottom:1px solid var(--ink)}
+.ix .cards{display:grid; grid-template-columns:repeat(4, minmax(0,1fr)); gap:var(--gap)}
+.pv{display:block; text-decoration:none; color:inherit}
+/* the screen itself, in a hairline frame at the mockups' own proportion */
+.pv .sh{border:1px solid var(--ink); aspect-ratio:1440/900; overflow:hidden;
+  background:var(--paper)}
+.pv .sh img{display:block; width:100%; height:100%; object-fit:cover;
+  object-position:top center; transition:opacity .2s var(--ease)}
+.pv:hover .sh img{opacity:.78}
+.pv .pn{display:block; margin-top:11px; font-size:var(--t2); font-family:var(--font-t2);
+  letter-spacing:var(--tr2); text-transform:uppercase; line-height:1.45}
+.pv .pd{display:block; margin-top:3px; font-size:var(--t3); font-family:var(--font-t3);
+  letter-spacing:var(--tr3); line-height:1.5}
+/* The path, for whoever opens the file. Set in the system monospace, NOT in
+   var(--font-mono): the stylesheet declares an 'IQONS Mono' face whose four
+   files (assets/fonts/mono-regular.*) were never supplied, so asking for it
+   costs four 404s a load and lands on this same fallback anyway. */
+.pv .pf{display:block; margin-top:5px; font-size:var(--t3);
+  font-family:ui-monospace,"SF Mono",Menlo,monospace; letter-spacing:0; opacity:.55}
+.ix .foot{margin-top:56px; padding-top:14px; border-top:1px solid var(--ink);
+  font-size:var(--t3); font-family:var(--font-t3); line-height:1.8; max-width:74ch}
+@media (max-width:1100px){ .ix .cards{grid-template-columns:repeat(2, minmax(0,1fr))} }
+@media (max-width:640px){ .ix .cards{grid-template-columns:minmax(0,1fr)} }
+/* The mockups themselves are desktop-only, but a link that is sent gets opened
+   on a telephone, and the index at least has to be readable there. The site's
+   header is one row with the wordmark absolutely centred in it, which at this
+   width lands on the nav and on the first paragraph — so here it stops being a
+   band and simply stacks in the flow. */
+@media (max-width:900px){
+  header{position:static; display:block; padding:var(--margin) var(--margin) 14px}
+  header .slot{display:block}
+  header .sitenav{flex-wrap:wrap; gap:14px; padding-top:0}
+  header .wordmark{position:static; transform:none; padding:0; margin:16px 0 14px}
+  header .right{margin:0}
+  main.ix{padding-top:4px}
+}
+</style>
+</head><body>
+<div class="lattice" aria-hidden="true"></div>
+<header>
+  <div class="slot">
+    <nav class="sitenav" aria-label="Разделы сайта">
+      <a href="shop.html">Магазин</a>
+      <a href="../drafts/collections.html?v=202609242027">Коллекции</a>
+      <a href="../drafts/editorial.html?v=202609242027">Публикации</a>
+      <a href="../drafts/about.html?v=202609242027">О нас</a>
+    </nav>
+  </div>
+  <a class="home" href="landing.html?v=202609242027" aria-label="На главную"><div class="wordmark" id="wordmark">
+    <img src="../../assets/logo/LOGO.svg" alt="IQONS +"
+         onerror="this.closest('.wordmark').classList.add('no-logo')">
+    <span class="wm-text">IQONS<span class="cross">+</span></span>
+  </div></a>
+  <div class="right"><nav class="seg"><a href="contents.html?v=202609242027" aria-current="page">Макеты</a></nav></div>
+</header>
+<main class="ix">
+  <div class="intro"><h1>Макеты</h1>
+  <p class="lead">Кликабельный прототип: каждый экран открывается по нажатию, переходы между страницами работают. Свёрстано под десктоп, 1440×900. Тексты — русские заполнители, товарные названия и цены условные.</p></div>
+  <section><h2>Витрина</h2><div class="cards">
+    <a class="pv" href="landing.html?v=202609242027"><div class="sh"><img src="../../assets/preview/final1__landing.webp" alt="" loading="lazy" decoding="async" width="720" height="450"></div><span class="pn">Главная</span><span class="pd">Вход на сайт: ASCII на тёмном, четыре раздела</span><span class="pf">final1/landing.html</span></a>
+    <a class="pv" href="shop.html"><div class="sh"><img src="../../assets/preview/final1__shop.webp" alt="" loading="lazy" decoding="async" width="720" height="450"></div><span class="pn">Магазин</span><span class="pd">Сетка товаров, превью слева, фильтр и поиск в раме</span><span class="pf">final1/shop.html</span></a>
+    <a class="pv" href="product.html?v=202609242027"><div class="sh"><img src="../../assets/preview/final1__product.webp" alt="" loading="lazy" decoding="async" width="720" height="450"></div><span class="pn">Товар</span><span class="pd">Карточка: галерея, размеры, описание, похожее</span><span class="pf">final1/product.html</span></a>
+    <a class="pv" href="../drafts/collections.html?v=202609242027"><div class="sh"><img src="../../assets/preview/drafts__collections.webp" alt="" loading="lazy" decoding="async" width="720" height="450"></div><span class="pn">Коллекции</span><span class="pd">Марки и их лукбуки, раскрывающиеся в строке</span><span class="pf">drafts/collections.html</span></a>
+  </div></section>
+  <section><h2>Публикации и архив</h2><div class="cards">
+    <a class="pv" href="../drafts/editorial.html?v=202609242027"><div class="sh"><img src="../../assets/preview/drafts__editorial.webp" alt="" loading="lazy" decoding="async" width="720" height="450"></div><span class="pn">Публикации</span><span class="pd">Холст съёмок, фильтры по типу, цвету и сезону</span><span class="pf">drafts/editorial.html</span></a>
+    <a class="pv" href="grail.html?v=202609242027"><div class="sh"><img src="../../assets/preview/final1__grail.webp" alt="" loading="lazy" decoding="async" width="720" height="450"></div><span class="pn">Личный архив</span><span class="pd">Вещи владельца: цена по запросу, «предложить цену»</span><span class="pf">final1/grail.html</span></a>
+  </div></section>
+  <section><h2>Покупка</h2><div class="cards">
+    <a class="pv" href="../drafts/cart.html?v=202609242027"><div class="sh"><img src="../../assets/preview/drafts__cart.webp" alt="" loading="lazy" decoding="async" width="720" height="450"></div><span class="pn">Корзина</span><span class="pd">Позиции, итог, переход к оформлению</span><span class="pf">drafts/cart.html</span></a>
+    <a class="pv" href="../drafts/checkout.html?v=202609242027"><div class="sh"><img src="../../assets/preview/drafts__checkout.webp" alt="" loading="lazy" decoding="async" width="720" height="450"></div><span class="pn">Оформление заказа</span><span class="pd">Поля доставки и оплаты в одну колонку</span><span class="pf">drafts/checkout.html</span></a>
+    <a class="pv" href="../drafts/confirmation.html?v=202609242027"><div class="sh"><img src="../../assets/preview/drafts__confirmation.webp" alt="" loading="lazy" decoding="async" width="720" height="450"></div><span class="pn">Подтверждение</span><span class="pd">Спасибо за заказ и номер заказа</span><span class="pf">drafts/confirmation.html</span></a>
+  </div></section>
+  <section><h2>Страницы и состояния</h2><div class="cards">
+    <a class="pv" href="../drafts/about.html?v=202609242027"><div class="sh"><img src="../../assets/preview/drafts__about.webp" alt="" loading="lazy" decoding="async" width="720" height="450"></div><span class="pn">О нас</span><span class="pd">О магазине, адрес и контакты</span><span class="pf">drafts/about.html</span></a>
+    <a class="pv" href="../drafts/text-page.html?v=202609242027"><div class="sh"><img src="../../assets/preview/drafts__text-page.webp" alt="" loading="lazy" decoding="async" width="720" height="450"></div><span class="pn">Доставка и возврат</span><span class="pd">Текстовая страница с боковыми разделами</span><span class="pf">drafts/text-page.html</span></a>
+    <a class="pv" href="../drafts/states.html?v=202609242027"><div class="sh"><img src="../../assets/preview/drafts__states.webp" alt="" loading="lazy" decoding="async" width="720" height="450"></div><span class="pn">Состояния</span><span class="pd">Пустой список, ошибка, страница не найдена</span><span class="pf">drafts/states.html</span></a>
+  </div></section>
+  <p class="foot">12 экранов. Макеты, а не готовый сайт: вёрстку делает разработчик по спецификации. ASCII лежит отдельным слоем и остаётся выделяемым текстом — страницы читаются и без него.</p>
+</main>
+</body></html>

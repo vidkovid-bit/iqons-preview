@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#FFFFFF">
+<title>IQONS — floor probe</title>
+<style>
+  /* A ruler for the phone, not a page of the site. Every way a layer could
+     reach the bottom of the screen, side by side, each with a coloured foot
+     at its bottom edge and a coloured cap at its top edge. On the real device
+     the feet that reach the very bottom of the screen (under Safari's bar)
+     show whole; the ones that are cut stop on the bar's top edge. Screenshot
+     at rest and after a scroll. The numbers are mobile.py's THE FLOOR. */
+  :root{ --bar:0px; --floor:max(100lvh, calc(100svh + var(--bar))) }
+  @supports (-webkit-touch-callout:none){ :root{ --bar:89px } }
+  html{ position:relative }
+  html,body{margin:0;padding:0}
+  body{background:#fff; color:#111; font:13px/1.45 ui-monospace,SFMono-Regular,Menlo,monospace; min-height:260vh;
+       background-image:radial-gradient(circle, #bbb 1px, transparent 1.5px); background-size:24px 24px}
+  html.dark, html.dark body{ background-color:#000; color:#eee }
+
+  /* every candidate: a full-screen box with a cap at the top and a foot at the
+     bottom, the foot in its own column so the four can be told apart */
+  .cand{ pointer-events:none }
+  .cand::before, .cand::after{ position:absolute; left:0; right:0; color:#fff; font:bold 11px/18px ui-monospace,Menlo,monospace;
+     text-align:center; height:18px; white-space:pre }
+  .cand::before{ top:0; content:attr(data-n) ' cap' }
+  .cand::after{ bottom:0; content:attr(data-n) ' FOOT' }
+  .cand[data-col="1"]::before, .cand[data-col="1"]::after{ right:80% }
+  .cand[data-col="2"]::before, .cand[data-col="2"]::after{ left:20%; right:60% }
+  .cand[data-col="3"]::before, .cand[data-col="3"]::after{ left:40%; right:40% }
+  .cand[data-col="4"]::before, .cand[data-col="4"]::after{ left:60%; right:20% }
+  .cand[data-col="5"]::before, .cand[data-col="5"]::after{ left:80% }
+  /* E — PURPLE: fixed, bled by the two strips: top:-inT, bottom:-inB. If its cap
+        shows under the island and its foot under the bar while the page rests on
+        the runway, a fixed layer CAN stand still in the strips. */
+  .runway{ height:var(--inT,0px) }
+  body{ padding-bottom:var(--inB,0px) }
+  .fixbleed{ position:fixed; top:calc(-1 * var(--inT,0px)); bottom:calc(-1 * var(--inB,0px)); left:0; right:0; z-index:5 }
+  .fixbleed::before, .fixbleed::after{ background:#80f }
+
+  /* A — GREEN: the site's layer since 23 Sep. Absolute, document top, --floor tall. */
+  .abs{ position:absolute; top:0; left:0; width:100%; height:var(--floor); z-index:4;
+        background:repeating-linear-gradient(180deg, transparent 0 40px, rgba(0,160,0,.10) 40px 50px) }
+  .abs::before, .abs::after{ background:#0a0 }
+  /* B — MAGENTA: position:fixed inset:0, a solid frame. Where it is cut, fixed is cut. */
+  .fix{ position:fixed; inset:0; z-index:5; border:3px solid #f0f }
+  .fix::before, .fix::after{ background:#f0f }
+  /* C — CYAN: the same fixed box at opacity .99 (edoardolunardi.dev, iOS 26.0:
+        a fixed box that is not fully opaque was NOT cut). */
+  .fix99{ position:fixed; inset:0; z-index:5; opacity:.99 }
+  .fix99::before, .fix99::after{ background:#09c }
+  /* D — ORANGE: the 22 Sep model, a sticky --floor box first in the body. */
+  .sticky{ position:sticky; top:0; height:var(--floor); margin:0 0 calc(-1 * var(--floor)); width:100%; z-index:4 }
+  .sticky::before, .sticky::after{ background:#e60 }
+
+  /* in-flow marks at 100svh (YELLOW) and 100lvh (BLUE) from the top of the document */
+  .mark{position:absolute; left:0; right:0; height:0; border-top:3px solid; z-index:3}
+  .mark span{position:absolute; right:6px; bottom:4px; padding:0 4px; color:#fff; font-weight:bold}
+  .svh{top:100svh; border-color:#e0b000} .svh span{background:#e0b000}
+  .lvh{top:100lvh; border-color:#06f} .lvh span{background:#06f}
+  /* where `main{min-height:var(--floor)}` ends: the footer's first line, RED */
+  .main{position:absolute; left:0; right:0; top:var(--floor); border-top:3px solid #d00; z-index:3}
+  .main span{position:absolute; left:6px; top:4px; background:#d00; color:#fff; padding:0 4px; font-weight:bold}
+
+  /* the tint chips of the site: shown with the button — Safari's chrome should
+     turn black with them and white again without (html.dark also paints the
+     body black, as html.menu-lock does on the site) */
+  .tint{ position:fixed; left:0; width:100%; height:4px; z-index:2000; pointer-events:none; display:none; background:#000 }
+  .tint-t{ top:0 } .tint-b{ bottom:0 }
+  html.dark .tint{ display:block }
+
+  #n{position:relative; z-index:6; margin:60px 16px 0; padding:12px; background:rgba(255,255,255,.92); color:#111;
+     border:1px solid #ccc; white-space:pre-wrap}
+  #n button{ font:inherit; padding:8px 12px; margin-top:8px }
+  .u{position:absolute; visibility:hidden; pointer-events:none}
+</style>
+</head>
+<body>
+<div class="runway" aria-hidden="true"></div>
+<div class="sticky cand" data-n="D sticky" data-col="4" aria-hidden="true"></div>
+<div class="fixbleed cand" data-n="E fixed bleed" data-col="5" aria-hidden="true"></div>
+<div class="abs cand" data-n="A absolute" data-col="1" aria-hidden="true"></div>
+<div class="fix cand" data-n="B fixed" data-col="2" aria-hidden="true"></div>
+<div class="fix99 cand" data-n="C fixed .99" data-col="3" aria-hidden="true"></div>
+<div class="tint tint-t" aria-hidden="true"></div><div class="tint tint-b" aria-hidden="true"></div>
+<div class="mark svh"><span>100svh</span></div>
+<div class="mark lvh"><span>100lvh</span></div>
+<div class="main"><span>main ends / footer starts (--floor)</span></div>
+<div class="u" id="usvh" style="height:100svh"></div>
+<div class="u" id="ulvh" style="height:100lvh"></div>
+<div class="u" id="udvh" style="height:100dvh"></div>
+<div class="u" id="ufloor" style="height:var(--floor)"></div>
+<div class="u" id="ubar" style="height:var(--bar)"></div>
+<div class="u" id="usat" style="height:env(safe-area-inset-top,0px)"></div>
+<div class="u" id="usab" style="height:env(safe-area-inset-bottom,0px)"></div>
+<pre id="n">…</pre>
+<script>
+(function(){
+  const px = id => Math.round(document.getElementById(id).getBoundingClientRect().height * 10) / 10;
+  const n = document.getElementById('n');
+  /* the runway, as on the site (mobile.py FLOOR_JS): --inT from the iPhone table, --inB measured */
+  const rt=document.documentElement; let T=0;
+  if(CSS.supports('-webkit-touch-callout','none') || /runway/.test(location.search)){
+    const W=Math.min(screen.width,screen.height), H=Math.max(screen.width,screen.height);
+    const TOP={'402x874':62,'440x956':62,'420x912':62,'393x852':59,'430x932':59,'390x844':47,'428x926':47,'375x812':44,'414x896':44,'375x667':20,'414x736':20,'320x568':20};
+    T=TOP[W+'x'+H]; if(T==null) T=H>=874?62:H>=852?59:H>=812?47:20;
+    const S=px('usvh'), B=Math.max(0,Math.round(H-S-T));
+    rt.style.setProperty('--inT',T+'px'); rt.style.setProperty('--inB',B+'px');
+    if(scrollY<T) scrollTo(0,T);
+  }
+  function show(){
+    const vv = window.visualViewport || {};
+    n.textContent =
+      'IQONS floor probe (23 Sep) — ' + new Date().toLocaleTimeString() + '\n' +
+      'screen  ' + screen.width + ' x ' + screen.height + '\n' +
+      'window  ' + innerWidth + ' x ' + innerHeight + '   clientH ' + document.documentElement.clientHeight + '\n' +
+      'visual  ' + Math.round(vv.width || 0) + ' x ' + Math.round(vv.height || 0) + '   offsetTop ' + Math.round(vv.offsetTop || 0) + '\n' +
+      'svh ' + px('usvh') + '   lvh ' + px('ulvh') + '   dvh ' + px('udvh') + '\n' +
+      '--bar ' + px('ubar') + '   --floor ' + px('ufloor') + '\n' +
+      'safe-area top ' + px('usat') + '   bottom ' + px('usab') + '\n' +
+      'scrollY ' + Math.round(scrollY) + '   dpr ' + devicePixelRatio + '   runway --inT ' + T + '\n\n' +
+      'Four FEET at the bottom, one per column:\n' +
+      'A GREEN absolute (the site)   B MAGENTA fixed\n' +
+      'C CYAN fixed opacity .99      D ORANGE sticky\n' +
+      'E PURPLE fixed, bled into both strips\n' +
+      'A foot that reaches the very bottom of the screen,\n' +
+      'under the address bar, is a layer that works.\n' +
+      'Caps at the top: which of them sits under the island.\n' +
+      'YELLOW 100svh  BLUE 100lvh  RED footer line.\n';
+    const b = document.createElement('button'); b.type = 'button';
+    b.textContent = document.documentElement.classList.contains('dark') ? 'chips OFF (chrome should go white)' : 'chips ON (chrome should go black)';
+    b.onclick = () => { document.documentElement.classList.toggle('dark'); show(); };
+    n.appendChild(b);
+  }
+  show();
+  addEventListener('resize', show); addEventListener('scroll', show, {passive:true});
+  if(window.visualViewport){ visualViewport.addEventListener('resize', show); visualViewport.addEventListener('scroll', show); }
+})();
+</script>
+</body>
+</html>
