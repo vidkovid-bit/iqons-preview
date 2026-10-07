@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>IQONS — meeting</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=PT+Serif:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#111;--mute:#777;--rule:#d9d9d9;--paper:#fff;--wash:#f4f3f0;--g:40px}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.55 "PT Serif",Georgia,serif;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='84' height='84'%3E%3Cpath d='M42 36v12M36 42h12' stroke='%23d6d6d6' stroke-width='1'/%3E%3C/svg%3E")}
+a{color:inherit}
+.wrap{max-width:1240px;margin:0 auto;padding:56px var(--g) 96px}
+header{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;border-bottom:1px solid var(--ink);padding-bottom:20px}
+.logo{height:46px;width:auto}
+header p{margin:0;color:var(--mute);font-size:13px;letter-spacing:.08em;text-transform:uppercase;text-align:right}
+section{margin-top:72px}
+h2{font-size:13px;font-weight:400;letter-spacing:.14em;text-transform:uppercase;margin:0 0 20px;padding-bottom:10px;border-bottom:1px solid var(--rule);display:flex;justify-content:space-between;gap:16px}
+h2 span{color:var(--mute)}
+.links{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.card{background:var(--paper);border:1px solid var(--ink);padding:22px;display:flex;gap:18px;align-items:flex-start;text-decoration:none}
+.card:hover{background:var(--ink);color:var(--paper)}
+.card:hover img{filter:invert(1)}
+.card img{width:96px;height:96px;flex:none}
+.card b{display:block;font-size:20px;font-weight:400;margin-bottom:6px}
+.card small{display:block;color:var(--mute);font-size:13px;line-height:1.45}
+.card:hover small{color:#bbb}
+ul.news{list-style:none;margin:0;padding:0;columns:2;column-gap:48px}
+ul.news li{break-inside:avoid;padding:12px 0;border-bottom:1px solid var(--rule)}
+ul.news b{font-weight:700}
+.tour{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.tour a{text-decoration:none;background:var(--paper)}
+.tour img{display:block;width:100%;aspect-ratio:16/10;object-fit:cover;object-position:top;border:1px solid var(--rule)}
+.tour a:hover img{border-color:var(--ink)}
+.tour span{display:block;font-size:14px;padding:8px 0 0}
+.tour em{color:var(--mute);font-style:normal;font-size:12px;margin-left:6px}
+.fonts{display:grid;grid-template-columns:repeat(3,1fr);gap:28px 16px}
+.fonts figure{margin:0;background:var(--paper)}
+.fonts a{display:block}
+.fonts img{display:block;width:100%;height:auto;border:1px solid var(--rule)}
+.fonts a:hover img{border-color:var(--ink)}
+.fonts figcaption{padding-top:8px;font-size:14px}
+.fonts figcaption small{display:block;color:var(--mute);font-size:12px}
+.fonts .cur img{border:2px solid var(--ink)}
+.dl{display:inline-block;margin-top:24px;border:1px solid var(--ink);padding:10px 18px;text-decoration:none;background:var(--paper);font-size:14px}
+.dl:hover{background:var(--ink);color:var(--paper)}
+ol.ask{margin:0;padding:0;list-style:none;counter-reset:a}
+ol.ask li{counter-increment:a;display:grid;grid-template-columns:44px 1fr;padding:14px 0;border-bottom:1px solid var(--rule);background:var(--paper)}
+ol.ask li::before{content:counter(a,decimal-leading-zero);color:var(--mute);font-size:13px;padding-top:3px}
+ol.ask small{display:block;color:var(--mute);font-size:13px;margin-top:2px}
+.note{color:var(--mute);font-size:13px;margin:14px 0 0;max-width:760px}
+footer{margin-top:96px;padding-top:16px;border-top:1px solid var(--ink);color:var(--mute);font-size:12px;letter-spacing:.06em}
+@media (max-width:900px){
+  :root{--g:16px}
+  .wrap{padding-top:32px}
+  header{flex-direction:column;align-items:flex-start}
+  header p{text-align:left}
+  .links,.tour,.fonts{grid-template-columns:1fr 1fr}
+  .links{grid-template-columns:1fr}
+  .card img{display:none}
+  ul.news{columns:1}
+  section{margin-top:52px}
+}
+@media (max-width:520px){.fonts{grid-template-columns:1fr}.tour{gap:12px}.tour span{font-size:13px}.tour em{display:block;margin:0}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <img class="logo" src="../assets/logo/LOGO.svg" alt="IQONS">
+  <p>Meeting pack · 2 October 2026<br>Website — where we are</p>
+</header>
+
+<section>
+  <h2>Open the site <span>scan with the phone camera</span></h2>
+  <div class="links">
+    <a class="card" href="../final/">
+      <img src="qr/final.svg" alt="">
+      <div><b>The site</b><small>As a visitor meets it: the landing first, then the shop, archive, cart. Russian.</small></div>
+    </a>
+    <a class="card" href="../en/">
+      <img src="qr/en.svg" alt="">
+      <div><b>English version</b><small>Every page in English. The RU / EN switch is on the landing, top right.</small></div>
+    </a>
+    <a class="card" href="../">
+      <img src="qr/preview.svg" alt="">
+      <div><b>All pages, one by one</b><small>The contents page: every template, including empty and error states.</small></div>
+    </a>
+  </div>
+  <p class="note">The same addresses work on a computer and on a phone; the phone gets its own layout. Not indexed by search engines.</p>
+</section>
+
+<section>
+  <h2>New since we last spoke <span>24 Sep – 2 Oct</span></h2>
+  <ul class="news">
+    <li><b>The whole site in English.</b> Fifteen pages, with a RU / EN flag switch on the landing (desktop and phone).</li>
+    <li><b>Cookie notice</b> on every page, with «Принять» and «Отклонить».</li>
+    <li><b>Phone version finished.</b> Pages hold still under the plus-sign lattice, and Safari's top and bottom bars show the page instead of white strips.</li>
+    <li><b>Publications on the phone</b>, rebuilt as a single screen: your 23 shoots and 167 images, one canvas.</li>
+    <li><b>ASCII drawings on the phone</b> kept only on «Спасибо за заказ» and the error page; everywhere else the photographs lead.</li>
+    <li><b>Thirteen typefaces tried</b> on the shop for the two title levels, all in Russian. See below.</li>
+  </ul>
+</section>
+
+<section>
+  <h2>The pages <span>click any to open it</span></h2>
+  <div class="tour">
+    <a href="../final/"><img src="../assets/preview/final1__landing.webp" alt="" loading="lazy"><span>Главная<em>landing</em></span></a>
+    <a href="../final/shop.html"><img src="fonts/00-current.jpg" alt="" loading="lazy"><span>Магазин<em>shop</em></span></a>
+    <a href="../final/product.html"><img src="../assets/preview/final1__product.webp" alt="" loading="lazy"><span>Товар<em>product</em></span></a>
+    <a href="../final/collections.html"><img src="../assets/preview/drafts__collections.webp" alt="" loading="lazy"><span>Коллекции<em>collections</em></span></a>
+    <a href="../final/editorial.html"><img src="../assets/preview/drafts__editorial.webp" alt="" loading="lazy"><span>Публикации<em>publications</em></span></a>
+    <a href="../final/grail.html"><img src="../assets/preview/final1__grail.webp" alt="" loading="lazy"><span>Личный архив<em>archive</em></span></a>
+    <a href="../final/cart.html"><img src="../assets/preview/drafts__cart.webp" alt="" loading="lazy"><span>Корзина<em>cart</em></span></a>
+    <a href="../final/checkout.html"><img src="../assets/preview/drafts__checkout.webp" alt="" loading="lazy"><span>Оформление<em>checkout</em></span></a>
+    <a href="../final/confirmation.html"><img src="../assets/preview/drafts__confirmation.webp" alt="" loading="lazy"><span>Спасибо за заказ<em>confirmation</em></span></a>
+    <a href="../final/about.html"><img src="../assets/preview/drafts__about.webp" alt="" loading="lazy"><span>О нас<em>about</em></span></a>
+    <a href="../final/text-page.html"><img src="../assets/preview/drafts__text-page.webp" alt="" loading="lazy"><span>Текстовая страница<em>text page</em></span></a>
+    <a href="../final/states.html"><img src="../assets/preview/drafts__states.webp" alt="" loading="lazy"><span>Пустые состояния<em>states</em></span></a>
+  </div>
+</section>
+
+<section>
+  <h2>Typeface for the titles <span>the shop, top of the window, 1440 × 900</span></h2>
+  <div class="fonts">
+    <figure class="cur"><a href="fonts/00-current.jpg"><img src="fonts/00-current.jpg" alt="" loading="lazy"></a><figcaption>01 · Current<small>T1 Mephisto · T2 C059 (Century)</small></figcaption></figure>
+    <figure><a href="fonts/01-old-standard.jpg"><img src="fonts/01-old-standard.jpg" alt="" loading="lazy"></a><figcaption>02 · Old Standard TT<small>early-1900s Russian academic type · free</small></figcaption></figure>
+    <figure><a href="fonts/04-underprint.jpg"><img src="fonts/04-underprint.jpg" alt="" loading="lazy"></a><figcaption>03 · NSD Underprint<small>drawn from an 1869 bond certificate</small></figcaption></figure>
+    <figure><a href="fonts/05-consolas.jpg"><img src="fonts/05-consolas.jpg" alt="" loading="lazy"></a><figcaption>04 · Consolas<small>monospace · Microsoft, needs a web licence</small></figcaption></figure>
+    <figure><a href="fonts/06-plex-mono.jpg"><img src="fonts/06-plex-mono.jpg" alt="" loading="lazy"></a><figcaption>05 · IBM Plex Mono<small>monospace · free</small></figcaption></figure>
+    <figure><a href="fonts/07-ralewe.jpg"><img src="fonts/07-ralewe.jpg" alt="" loading="lazy"></a><figcaption>06 · ZT Neue Ralewe<small>display serif</small></figcaption></figure>
+    <figure><a href="fonts/08-merriweather.jpg"><img src="fonts/08-merriweather.jpg" alt="" loading="lazy"></a><figcaption>07 · Merriweather<small>serif · free</small></figcaption></figure>
+    <figure><a href="fonts/09-playfair.jpg"><img src="fonts/09-playfair.jpg" alt="" loading="lazy"></a><figcaption>08 · Playfair Display<small>high-contrast serif · free</small></figcaption></figure>
+    <figure><a href="fonts/10-inter.jpg"><img src="fonts/10-inter.jpg" alt="" loading="lazy"></a><figcaption>09 · Inter<small>minimal sans · free</small></figcaption></figure>
+    <figure><a href="fonts/11-cormorant.jpg"><img src="fonts/11-cormorant.jpg" alt="" loading="lazy"></a><figcaption>10 · Cormorant Garamond<small>closest free match to the logo</small></figcaption></figure>
+    <figure><a href="fonts/12-pobeda.jpg"><img src="fonts/12-pobeda.jpg" alt="" loading="lazy"></a><figcaption>11 · Pobeda<small>condensed display</small></figcaption></figure>
+    <figure><a href="fonts/13-bebas-neue.jpg"><img src="fonts/13-bebas-neue.jpg" alt="" loading="lazy"></a><figcaption>12 · Bebas Neue<small>condensed capitals · free</small></figcaption></figure>
+    <figure><a href="fonts/14-malevice.jpg"><img src="fonts/14-malevice.jpg" alt="" loading="lazy"></a><figcaption>13 · Malevice<small>shown in English — Russian letters only in the paid Malevice Pro</small></figcaption></figure>
+  </div>
+  <a class="dl" href="fonts/shop-font-mosaic.pdf">All thirteen side by side — PDF, 8.7 MB</a>
+  <p class="note">Only the two title levels change (T1 + T2); body text stays as it is. Fonts marked free can be used on the live site at no cost; the others need a licence before launch.</p>
+</section>
+
+<section>
+  <h2>To decide together <span>today</span></h2>
+  <ol class="ask">
+    <li><div>The title typeface<small>Keep the current pair, or one of the thirteen above.</small></div></li>
+    <li><div>Which landing goes live<small>ASCII drawing (as built), the other ASCII motif, or no ASCII.</small></div></li>
+    <li><div>The English text<small>Someone on your side reads the English site once and marks anything that sounds wrong.</small></div></li>
+    <li><div>Cookie notice and legal pages<small>Your lawyer's wording for the cookie, privacy and sale-terms pages, or our go-ahead to draft from a template.</small></div></li>
+    <li><div>The word «Купить» on the collections page<small>It is not in the approved list of interface texts.</small></div></li>
+    <li><div>Payment provider and delivery options<small>Tick the ones you use on the checkout page; tell us who processes card payments.</small></div></li>
+  </ol>
+</section>
+
+<footer>IQONS · проспект Ленина, 52 · Chelyabinsk — working mockups, not the live shop</footer>
+</div>
+</body>
+</html>

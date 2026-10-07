@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ISLAND TEST — 23 Sep</title>
+<style>
+  html,body{ margin:0; padding:0; background:#f2f1ec; color:#111;
+             font:14px/1.35 ui-monospace,Menlo,Monaco,"Courier New",monospace }
+  body{ position:relative }
+  h1{ font-size:15px; margin:0 0 6px }
+  #panel{ position:relative; z-index:5; padding:52px 8px 8px }
+  table{ border-collapse:collapse; font:13px/1.3 ui-monospace,Menlo,monospace;
+         font-variant-numeric:tabular-nums; width:100% }
+  th,td{ border:1px solid #999; padding:2px 3px; text-align:right }
+  th:first-child,td:first-child{ text-align:left }
+  #head,#ua{ margin:4px 0; word-break:break-all }
+  #ua{ font-size:11px; line-height:1.3 }
+  .band{ left:0; right:0; z-index:9; font:bold 12px/40px ui-monospace,Menlo,monospace;
+         color:#fff; pointer-events:none }
+  /* full-width boxes, as specified — but each paints only its own third, so
+     all three can be read at once wherever they land */
+  .l{ --x1:0%;      --x2:33.34% }
+  .m{ --x1:33.33%;  --x2:66.67% }
+  .r{ --x1:66.66%;  --x2:100% }
+  .band{ background:linear-gradient(to right, transparent var(--x1), var(--c) var(--x1),
+                                    var(--c) var(--x2), transparent var(--x2)) }
+  .red{ --c:#d21e1e } .blue{ --c:#1a3cdc } .green{ --c:#008c3c }
+  .band b{ display:block; width:33.33%; padding:0 6px; box-sizing:border-box;
+           text-shadow:0 1px 2px rgba(0,0,0,.6) }
+  .m b{ margin-left:33.33% } .r b{ margin-left:66.66% }
+  .fx{ position:fixed } .ab{ position:absolute }
+  .h40{ height:40px } .h120{ height:120px; line-height:120px }
+  #ruler{ position:relative; z-index:1 }
+  #ruler div{ height:100px; padding:2px 8px; font-size:12px; color:#555;
+              border-top:1px dotted #bbb; box-sizing:border-box }
+  #m{ position:absolute; visibility:hidden; top:0; left:0; width:1px }
+  #m i{ display:block }
+  #sT{ height:env(safe-area-inset-top,0px) } #sB{ height:env(safe-area-inset-bottom,0px) }
+  #vh{ height:100svh } #vl{ height:100lvh } #vd{ height:100dvh }
+</style>
+</head>
+<body>
+
+<div id="m"><i id="vh"></i><i id="vl"></i><i id="vd"></i><i id="sT"></i><i id="sB"></i></div>
+
+<!-- top bands -->
+<div class="band fx red   h40  l" style="top:0"><b>FIXED top:0</b></div>
+<div class="band fx blue  h120 m" style="top:-80px"><b>FIXED top:-80</b></div>
+<div class="band ab green h40  r" style="top:0"><b>ABS doc y 0</b></div>
+
+<div id="panel">
+  <h1>ISLAND TEST — 23 Sep</h1>
+  <div id="head">measuring…</div>
+  <table>
+    <thead><tr><th>id</th><th>innerH</th><th>svh</th><th>lvh</th><th>dvh</th><th>satT</th><th>satB</th><th>vvH</th></tr></thead>
+    <tbody id="rows"></tbody>
+  </table>
+  <div id="ua"></div>
+</div>
+
+<div id="ruler"></div>
+
+<!-- bottom bands -->
+<div class="band fx red   h40  l" style="bottom:0"><b>FIXED bottom:0</b></div>
+<div class="band fx blue  h120 m" style="bottom:-80px"><b>FIXED bottom:-80</b></div>
+<div class="band ab green h40  r" id="abEnd"><b>ABS doc end</b></div>
+
+<script>
+(function(){
+  var VARIANTS = [
+    ['A','width=device-width, initial-scale=1, viewport-fit=cover'],
+    ['B','width=device-width, initial-scale=1'],
+    ['C','width=device-width, initial-scale=1, viewport-fit=contain'],
+    ['D','width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content'],
+    ['E','initial-scale=1, viewport-fit=cover']
+  ];
+  var meta = document.querySelector('meta[name=viewport]');
+  var rows = document.getElementById('rows');
+
+  /* three screens tall, a line every 100px */
+  var ruler = document.getElementById('ruler'), n = Math.ceil(window.innerHeight * 3 / 100), html = '';
+  for (var i = 0; i < n; i++) html += '<div>' + (i * 100) + ' px down the document</div>';
+  ruler.innerHTML = html;
+
+  function px(id){ return Math.round(parseFloat(getComputedStyle(document.getElementById(id)).height) * 10) / 10; }
+  function measure(){
+    var vv = window.visualViewport;
+    return { iW: window.innerWidth, iH: window.innerHeight,
+             svh: px('vh'), lvh: px('vl'), dvh: px('vd'),
+             satT: px('sT'), satB: px('sB'),
+             vvH: vv ? Math.round(vv.height * 10) / 10 : -1,
+             vvT: vv ? Math.round(vv.offsetTop * 10) / 10 : -1 };
+  }
+  function settle(cb){
+    requestAnimationFrame(function(){ requestAnimationFrame(function(){ setTimeout(cb, 600); }); });
+  }
+  function row(id, m){
+    var tr = document.createElement('tr');
+    tr.innerHTML = '<td>' + id + '</td><td>' + m.iH + '</td><td>' + m.svh + '</td><td>' + m.lvh +
+                   '</td><td>' + m.dvh + '</td><td>' + m.satT + '</td><td>' + m.satB + '</td><td>' + m.vvH + '</td>';
+    rows.appendChild(tr);
+  }
+  function head(m){
+    document.getElementById('head').textContent =
+      'screen ' + screen.width + 'x' + screen.height + '  dpr ' + (window.devicePixelRatio || 1) +
+      '  scrollY ' + Math.round(window.scrollY) + '  innerW ' + m.iW + '  vvTop ' + m.vvT;
+  }
+  document.getElementById('ua').textContent = navigator.userAgent;
+
+  /* the green band at the document's end */
+  function placeEnd(){
+    var e = document.getElementById('abEnd');
+    e.style.top = (document.documentElement.scrollHeight - 40) + 'px';
+  }
+
+  var k = 0;
+  (function step(){
+    if (k >= VARIANTS.length) {
+      meta.setAttribute('content', VARIANTS[0][1]);
+      settle(function(){ head(measure()); placeEnd(); });
+      return;
+    }
+    var v = VARIANTS[k++];
+    meta.setAttribute('content', v[1]);
+    settle(function(){ var m = measure(); row(v[0], m); if (v[0] === 'A') head(m); placeEnd(); step(); });
+  })();
+})();
+</script>
+</body>
+</html>
